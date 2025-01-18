@@ -1,0 +1,122 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+
+
+
+
+
+
+.takes-container {
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+
+}
+
+
+
+
+
+//Placeholders
+
+
+.placeholders {
+border-radius: 8px;
+overflow: hidden;
+}
+
+.placeholder-item {
+  height: 200px;
+  width: 100%;
+  background: white;
+  position: relative;
+  border-bottom: 1px solid #edeff1;
+}
+
+.placeholder-flex , .skeleton-image-right{
+  display: -webkit-box;
+display: -ms-flexbox; display: flex;
+}
+
+.skeleton-image-right {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 5px;
+}
+
+.placeholder-flex {
+  padding: 16px;
+}
+
+.skeleton-image {
+  background: #edeff1;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.placeholders-container{
+  background: #edeff1;
+}
+
+.skeleton-username {
+  height: 9px;
+  width: 60px;
+  background: #edeff1;
+  border-radius: 3px;
+}
+
+.skeleton-username-1 {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin-bottom: 6px;
+  margin-top: 7px;
+}
+
+.skeleton-username-2 {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  width: 40px;
+}
+
+.container-title {
+  position: absolute;
+  left: 16px;
+  bottom: 35px;
+  height: 55px;
+  right: 16px;
+}
+
+
+
+.placeholder-title {
+
+  height: 16px;
+  width: 100%;
+  background: #edeff1;
+  margin-bottom: 8px;
+  border-radius: 3px;
+}
+
+.placeholder-title-1 {
+
+  height: 17px;
+  width: 100%;
+  background: #edeff1;
+  margin-bottom: 8px;
+  border-radius: 3px;
+}
+
+.placeholder-title-2 {
+
+  height: 17px;
+  width: 70%;
+  background: #edeff1;
+  border-radius: 3px;
+}

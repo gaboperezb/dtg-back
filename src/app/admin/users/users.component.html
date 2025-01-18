@@ -1,0 +1,19 @@
+
+<div class="container">
+    <h4>USERS</h4>
+
+    <form (ngSubmit)="submit(usernameForm.value)" [formGroup]="usernameForm" novalidate >
+        <div class="wrap">
+            <div class="search">
+               <input type="text" class="searchTerm" placeholder="Enter a username" formControlName="username">
+               <button type="submit" class="searchButton"[disabled]="!usernameForm.valid">
+                 <i *ngIf="!loading" class="fa fa-search"></i>
+                 <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+              </button>
+            </div>
+         </div>
+    </form>
+    <div *ngFor="let user of users">
+        <user-detail [user]="user"></user-detail>
+    </div>
+</div>

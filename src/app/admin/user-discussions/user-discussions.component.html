@@ -1,0 +1,32 @@
+
+    <div class="container">
+        <h4>Discussions</h4>
+    
+        <div class="timeline" *ngFor="let timeline of discussions">
+            <div class="user-content">
+                <div class="content">          
+                    <div class="user-text">
+    
+                        <div class="info">
+                            <div class="user-info mb-1">
+                                <span class="lighter ago">{{timeline.threadCreated}} {{timeline.typeTime}} ago </span> 
+                                <br>
+                                <span *ngIf="timeline.thread" class="lighter ago">{{timeline?.thread?.title}} - {{timeline?.thread?.user.username}} </span>  
+                                <span *ngIf="timeline.game" class="lighter ago">{{timeline?.game?.awayTeam?.teamName}} @ {{timeline?.game?.homeTeam?.teamName}}</span>          
+                            </div>
+                            <p class="opinion">{{timeline?.discussion}}</p>
+                        </div>
+                        
+                        <div *ngIf="timeline.thread">
+                            <button class="delete" (click)="deleteComment($event, timeline)">DELETE</button>
+                        </div> 
+                        <div *ngIf="timeline.game">
+                            <button class="delete" (click)="deleteGameComment($event, timeline)">DELETE</button>
+                        </div> 
+                        
+                    </div>   
+                </div>
+            </div>
+            
+        </div>
+    </div>

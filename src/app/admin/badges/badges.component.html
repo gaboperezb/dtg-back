@@ -1,0 +1,68 @@
+<div class="badges-container min-height">
+       
+        <h4>BADGES</h4>
+        <button *ngIf="!add" class="btn btn-primary ml-5" (click)="add = true"> Add badge</button>
+        <i *ngIf="add" id="close-add" class="fa fa-times-circle" (click)="add = false"></i>
+        <form  *ngIf="add" (ngSubmit)="submit(badgeForm.value)" [formGroup]="badgeForm" novalidate >
+            <div class="form-group">
+                <label for="picture">Picture:</label>
+                <input id="picture" type="text" placeholder="Enter picture url" formControlName="picture" class="form-control"/>
+            </div>
+            <div class="form-group">
+                    <label for="nextPicture">Next Picture:</label>
+                    <input id="nextPicture" type="text" placeholder="Enter next picture" formControlName="nextPicture" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input id="name" type="text" placeholder="Enter name" formControlName="name" class="form-control"/>
+            </div>
+            <div class="form-group">
+                    <label for="nextName">Next level name:</label>
+                    <input id="nextName" type="text" placeholder="Enter next level name" formControlName="nextName" class="form-control"/>
+                </div>
+            <div class="form-group">
+                <label for="nextPoints">Next level points:</label>
+                <input id="nextPoints" type="number" placeholder="Enter next level points" formControlName="nextPoints" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="previousPoints">Previous level points:</label>
+                <input id="previousPoints" type="number" placeholder="Enter previous level points" formControlName="previousPoints" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="level">Level:</label>
+                <select class="form-control" id="level" formControlName="level">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                  <option>13</option>
+                  <option>14</option>
+                  <option>15</option>
+                  <option>16</option>
+                  <option>17</option>
+                  <option>18</option>
+                  <option>19</option>
+                  <option>20</option>
+                </select>
+            </div>
+            <div *ngIf="updated" class="alert alert-success" role="alert">
+                    The badge has been added to the DB.
+            </div>
+            <!-- <div *ngIf="error" class="alert alert-danger" role="alert">
+                    There was a problem when adding the badge to the DB.
+            </div> -->
+            <button  *ngIf="!loading" type="submit" [disabled]="!badgeForm.valid" class="btn btn-primary block">Add Badge</button>
+            <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+        </form>
+        <ul class="t-detail" *ngIf="!add">
+            <badge-detail *ngFor="let badge of badges" [badge]="badge"></badge-detail>
+        </ul>
+    </div>

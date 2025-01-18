@@ -1,0 +1,11 @@
+// Place your settings in this file to overwrite default and user settings.
+
+{
+    "files.exclude": {
+      "**/app/**/*.js.map": true,
+      "**/app/**/*.js": true,
+      "**/app/**/*.json": true,
+      "**/app/**/*.ngfactory.ts": true
+    },
+    "vsicons.presets.angular": true
+  }

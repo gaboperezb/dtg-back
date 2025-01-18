@@ -1,0 +1,228 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+
+
+$base-blue: #4264d0;
+
+button {
+   background: none;
+   color: inherit;
+   border: none;
+   padding: 0;
+   font: inherit;
+   cursor: pointer;
+   outline: inherit;
+}
+
+.heart {
+
+   width: 19px;
+   margin: 0 5px;
+}
+
+.button-container {
+
+   text-align: center;
+   margin-bottom: 20px;
+
+  
+}
+
+
+.leagues-container {
+   display: -webkit-box;
+   display: -ms-flexbox; display: flex;
+       -ms-flex-wrap: wrap;
+           flex-wrap: wrap;
+       -ms-flex-pack: distribute;
+           justify-content: space-around;
+       -webkit-box-align: center;
+           -ms-flex-align: center;
+               align-items: center
+   
+}
+
+.mma-container {
+   display: -webkit-box;
+display: -ms-flexbox; display: flex;
+   -ms-flex-wrap: wrap;
+       flex-wrap: wrap;
+   -ms-flex-pack: distribute;
+       justify-content: space-around;
+   -webkit-box-align: start;
+       -ms-flex-align: start;
+           align-items: flex-start;
+   margin-bottom: 25px;
+}
+
+
+
+.league-selection {
+   height: 90px;
+   width: 90px;
+   border-radius: 10px;
+   display: -webkit-box;
+display: -ms-flexbox; display: flex;
+   -webkit-box-align: center;
+       -ms-flex-align: center;
+           align-items: center;
+   -webkit-box-pack: space-evenly;
+       -ms-flex-pack: space-evenly;
+           justify-content: space-evenly;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+       -ms-flex-direction: column;
+           flex-direction: column;
+   border: 1px solid rgb(228, 228, 228);
+   margin: 10px;
+   overflow: hidden;
+   position: relative;
+   -webkit-transition: background .2s ease, border .2s ease;
+   -o-transition: background .2s ease, border .2s ease;
+   transition: background .2s ease, border .2s ease;
+   cursor: pointer;
+}
+
+.top-container {
+   display: -webkit-box;
+display: -ms-flexbox; display: flex;
+   -webkit-box-align: center;
+       -ms-flex-align: center;
+           align-items: center;
+   -webkit-box-pack: center;
+       -ms-flex-pack: center;
+           justify-content: center;
+   padding: 16px;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+       -ms-flex-direction: column;
+           flex-direction: column;
+
+   p {
+       font-size: 1.9rem;
+       font-weight: bold;
+   }
+}
+
+.send {
+   font-weight: bold;
+   font-size: 14px;
+}
+
+.heart {
+   font-size: 16px;
+   margin: 0 4px;
+}
+
+.text-league {
+   font-size: 14px;
+}
+
+.img-league {
+   height: 38px;
+   width: 38px;
+   -o-object-fit: contain;
+      object-fit: contain;
+}
+
+.menu-icon__league {
+   height: 50px;
+   width: 45px;
+   -o-object-fit: contain;
+      object-fit: contain;
+}
+
+.active-leagues {
+   border: 2px solid #4264d0;
+   background: #4264d054;
+}
+
+.spinner-border {
+   height: 1.5rem;
+   width: 1.5rem;
+}
+
+.done__container {
+   padding: 16px;
+   height: 83px;
+
+   button {
+      
+       display: block;
+       /* width: 100%; */
+       font-size: 14px;
+       margin: 0 auto;
+       font-weight: 700;
+       letter-spacing: .5px;
+       line-height: 32px;
+       text-transform: uppercase;
+       padding: 2px 16px;
+       text-align: center;
+       background: #4264d0;
+       border-radius: 5px;
+       color: white !important;
+       margin-top: 15px;
+       
+       
+   }
+
+   button:hover {
+       opacity: .5;
+   }
+}
+
+.form__button {
+   display: block;
+   /* width: 100%; */
+   font-size: 14px;
+   margin: 0 auto;
+   font-weight: 700;
+   letter-spacing: .5px;
+   line-height: 32px;
+   text-transform: uppercase;
+   padding: 2px 16px;
+   text-align: center;
+   background: #4264d0;
+   border-radius: 50px;
+   color: white !important;
+   margin-top: 15px;
+
+}
+
+.form__button:hover {
+   background: #93a8ec;
+
+}
+
+.general-img {
+   position: absolute;
+   height: 90px;
+   width: 90px;
+   -o-object-fit: cover;
+      object-fit: cover;
+}
+
+span.general-text {
+   z-index: 20;
+   color: black !important;
+   /* font-weight: 600; */
+   background: #ffffff;
+   padding: 2px 4px;
+   position: absolute;
+   border-radius: 3px;
+   bottom: 10px;
+   border: 1px solid rgb(228, 228, 228);;
+}
+
+.fantasy {
+   position: absolute;
+   height: 90px;
+   width: 75px;
+   -o-object-fit: cover;
+   object-fit: contain;
+}

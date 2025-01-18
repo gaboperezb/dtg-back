@@ -1,0 +1,69 @@
+.teams-container {
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+h4 {
+    border-bottom: 2px solid black;
+    display: inline-block;
+    padding-bottom: 5px;
+    font-size: 1.8rem;
+}
+
+ul.t-detail {
+    list-style-type: none;
+    margin-top: 25px;
+}
+
+#close-add {
+    font-size: 25px;
+    margin-left: 75px;
+    cursor: pointer;
+    
+}
+
+#close-add:hover {
+    color: #505050;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+ul.links {
+    width: 100%;
+    background: #FDFDFF;
+    list-style: none;
+    padding: 0;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    border: 1px solid #E0E3F0;
+    margin-top: 30px;
+    border-radius: 5px;
+          
+}
+
+ul.links li  {
+    
+    font-weight: 400;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    color: #424B5C;
+}
+
+ul.links li:hover {
+    background: rgba(237, 238, 246, 0.90);
+
+}
+
+.active {
+    background: rgba(225, 227, 239, 0.90);
+}

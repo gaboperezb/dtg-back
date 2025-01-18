@@ -1,0 +1,42 @@
+<div class="report">
+        <div [class.reviewed]="report.reviewed" [class.not-reviewed]="!report.reviewed" (click)="review()">
+    
+        </div>
+        <ul>
+            <li *ngIf="report.userReporting">
+                <span class="reporting">Reporting:</span>
+                <div>
+                    <img class="user-image" alt="" [src]="report.userReporting.profilePicture">
+                    <span class="username">{{report.userReporting.username}}</span>
+                    <br>
+                    <button class="btn--info" (click)="posts(report.userReporting._id)">Posts</button>
+                    <button class="btn--info" (click)="comments(report.userReporting._id)">Comments</button>
+                    <button class="btn--info" (click)="replies(report.userReporting._id)">Replies</button>
+                </div>
+            </li>
+            <li *ngIf="report.userReported">
+                <span class="reporting">Reported:</span>
+                <div>
+                    <img class="user-image" alt="" [src]="report.userReported.profilePicture">
+                    <span class="username">{{report.userReported.username}}</span>
+                    <br>
+                    <button class="btn--info" (click)="posts(report.userReported._id)">Posts</button>
+                    <button class="btn--info" (click)="comments(report.userReported._id)">Comments</button>
+                    <button class="btn--info" (click)="replies(report.userReported._id)">Replies</button>
+                </div>
+            </li>
+            <li *ngIf="report.chat">
+                <span class="reporting">Chat Report</span>
+                <div>
+                    <!-- <button class="btn--info" (click)="chats(report.chat)">Go to Chat</button>
+                     -->
+                </div>
+            </li>
+            <li>
+                <span class="reporting">Reason:</span>
+                <div>
+                    <span class="reason">{{report.reason}}</span>
+                </div>
+            </li>
+        </ul>
+    </div>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="91px" height="62px" viewBox="0 0 91 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>sidemenu</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sidemenu" transform="translate(-6.000000, -5.500000)">
+            <rect id="Rectangle" x="0.4" y="0" width="102" height="73"></rect>
+            <g id="Group-49" transform="translate(6.400000, 6.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                <path d="M84.5,10.8 L5.4,10.8 C2.4,10.8 1.56319402e-13,8.4 1.56319402e-13,5.4 L1.56319402e-13,5.4 C1.56319402e-13,2.4 2.4,-2.30926389e-14 5.4,-2.30926389e-14 L84.5,-2.30926389e-14 C87.5,-2.30926389e-14 89.9,2.4 89.9,5.4 L89.9,5.4 C90,8.4 87.5,10.8 84.5,10.8 Z" id="Path"></path>
+                <path d="M43.7,36 L5.4,36 C2.4,36 3.90798505e-14,33.6 3.90798505e-14,30.6 L3.90798505e-14,30.6 C3.90798505e-14,27.6 2.4,25.2 5.4,25.2 L43.7,25.2 C46.7,25.2 49.1,27.6 49.1,30.6 L49.1,30.6 C49.2,33.5 46.8,36 43.7,36 Z" id="Path"></path>
+                <path d="M63.7,60.8 L5.4,60.8 C2.4,60.8 9.9475983e-14,58.4 9.9475983e-14,55.4 L9.9475983e-14,55.4 C9.9475983e-14,52.4 2.4,50 5.4,50 L63.6,50 C66.6,50 69,52.4 69,55.4 L69,55.4 C69.1,58.4 66.7,60.8 63.7,60.8 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

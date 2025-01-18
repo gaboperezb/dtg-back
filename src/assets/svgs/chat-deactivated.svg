@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="63px" viewBox="0 0 64 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>chat</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="chat">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="64" height="63"></rect>
+            <g id="noun_chat_1561009-(1)" transform="translate(32.000000, 31.500000) scale(-1, 1) translate(-32.000000, -31.500000) translate(6.000000, 6.000000)" fill-rule="nonzero">
+                <g id="Group-50">
+                    <path d="M25.9897012,3.11967755e-05 C36.9195359,-0.0112530274 46.6878981,6.6921726 50.4291664,16.7713316 C54.1704347,26.8504906 51.084542,38.1499633 42.7085714,45.0414819 C34.3326009,51.9330006 22.4577469,52.9428197 12.9988745,47.5679484 L2.86061678,50.8882464 C2.08254001,51.1429155 1.22463899,50.9442103 0.644667609,50.3749931 C0.0646962293,49.8057758 -0.137763041,48.9637824 0.121717477,48.2001332 L3.50474527,38.2498641 C-1.1567281,30.3652384 -1.16899452,20.6366465 3.47258175,12.7407219 C8.11415801,4.84479732 16.7016622,-0.0142049744 25.9897012,3.11967755e-05 Z" id="Shape" fill="#A2A4A6"></path>
+                    <circle id="Oval" fill="#FFFFFF" cx="15" cy="26" r="3"></circle>
+                    <circle id="Oval" fill="#FFFFFF" cx="26" cy="26" r="3"></circle>
+                    <circle id="Oval" fill="#FFFFFF" cx="37" cy="26" r="3"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

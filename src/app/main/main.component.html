@@ -1,0 +1,387 @@
+<div class="main" >
+
+    <section [ngStyle]="authService.stickyHeight" class="left-section">
+        <div class="menu" id="left-sticky" [ngStyle]="stickyDimensionsLeft">
+            <h2 class="menu__header menu__header--1" >My Feed</h2>
+            <ul class="menu__ul">
+                <li class="menu__item" [class.menu__item--active]="threadsService.filterBy == 'TOP' && !threadsService.followers && !threadsService.bookmarks" (click)="getAllThreads()">
+                    <button  class="menu__button">
+                        <div class="menu__active--small" [class.menu__active--showsmall]="threadsService.filterBy == 'TOP' && !threadsService.followers && !threadsService.bookmarks"></div>
+                        <div class="menu__active" [class.menu__active--show]="threadsService.filterBy == 'TOP' && !threadsService.followers && !threadsService.bookmarks"></div>
+                        <img class="menu__icon" src="assets/imgs/myfeed.png" alt="">
+                        <span class="menu__text">Main Feed </span>
+                    </button>
+                </li>
+                <li class="menu__item" [class.menu__item--active]="threadsService.followers"  *ngIf="!playService.playToggled"(click)="handlerFollowers('TOP')">
+                    <button  class="menu__button">
+                        <div class="menu__active--small" [class.menu__active--showsmall]="threadsService.followers"></div>
+                        <div class="menu__active" [class.menu__active--show]="threadsService.followers"></div>
+                        <img class="menu__icon" src="assets/imgs/following.png" alt="">
+                        <span class="text menu__text">Following</span>
+                    </button> 
+                </li>
+                <li class="menu__item" [class.menu__item--active]="threadsService.bookmarks" *ngIf="!playService.playToggled" (click)="getSavedPosts()">
+                    <button  class="menu__button">
+                        <div class="menu__active--small" [class.menu__active--showsmall]="threadsService.bookmarks"></div>
+                        <div class="menu__active" [class.menu__active--show]="threadsService.bookmarks"></div>
+                        <svg class="bi bi-bookmark-fill menu__icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V3z"/>
+                        </svg>
+                        <span class="text menu__text">Saved</span>
+                    </button> 
+                </li> 
+             </ul>
+             <h2 class="menu__header menu__header--1 leagues__header">Leagues</h2>
+            <ul class="menu__ul">
+                <li class="menu__item"  [class.menu__item--active]="threadsService.filterBy == league.league && !threadsService.followers" *ngFor="let league of threadsService.menuLeagues" (click)="handleLeagues(league.league)">
+                    <button class="menu__button" href="">
+                        <div class="menu__active--small" [class.menu__active--showsmall]="threadsService.filterBy == league.league && !threadsService.followers"></div>
+                        <div class="menu__active" [class.menu__active--show]="threadsService.filterBy == league.league && !threadsService.followers"></div>
+                        <img [class.menu__icon--league]="league.league == 'NBA' || league.league == 'NFL' || league.league == 'NCAAF' || league.league == 'NCAAB' || league.league == 'MLB' || league.league == 'NHL'" [class.menu__icon]="true" [src]="league?.image" alt="">
+                        <span [class.menu__text--league]="league.league == 'NBA' || league.league == 'NFL' || league.league == 'NCAAF' || league.league == 'NCAAB' || league.league == 'MLB' || league.league == 'NHL'" [class.menu__icon--league]="league.league == 'NBA' || league.league == 'NFL' || league.league == 'NCAAF' || league.league == 'NCAAB' || league.league == 'MLB' || league.league == 'NHL'" class="menu__text">{{league?.league}}</span>
+                    </button>
+                </li>
+             </ul>
+        </div>
+
+
+    </section>
+
+    <section class="posts">
+        <div class="sorting">
+
+            <span class="f-b" *ngIf="threadsService.followers">Following</span>
+            <span class="f-b" *ngIf="threadsService.bookmarks">Saved</span>
+            <span class="f-b" *ngIf="playService.playToggled">Play</span>
+
+            <div class="sorting__container" *ngIf="!threadsService.followers && !threadsService.bookmarks && !playService.playToggled">
+                <span class="sorting__header" (click)="toggleSort = !toggleSort">SORT</span>
+                <button class="sorting__button" (click)="toggleSort = !toggleSort">
+                    <svg  *ngIf="threadsService.hot" class="sorting__icon"  viewBox="0 0 66 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="noun_Flame_129549" transform="translate(-6.000000, -7.000000)">
+                                <rect id="Rectangle-25" x="0" y="0" width="78" height="94"></rect>
+                                <path d="M58.47,30.559 L57.385,29.686 C56.107,28.658 54.173,29.05 53.468,30.531 C53.125,31.251 52.883,38.54 52.883,39.768 C52.883,40.016 52.831,40.423 52.837,40.466 C52.837,41.502 51.91,42.324 50.842,42.148 C50.002,42.01 49.428,41.213 49.424,40.362 C49.37,27.896 45.561,19.203 38.57,12.711 C34.295,8.741 29.24,5.235 27.693,7.972 C27.298,8.67 27.951,10.239 28.609,12.249 C30.071,16.72 25.61,23.86 19.304,30.995 C13.377,37.702 6,46.05 6,58.349 C6,70.389 14.296,81.646 25.444,86.889 C26.444,87.359 27.411,86.115 26.703,85.267 C24.255,82.334 22.847,78.504 23.047,74.34 C23.435,66.275 30.075,59.647 38.14,59.275 C47.244,58.854 54.758,66.111 54.758,75.123 C54.758,78.975 53.383,82.503 51.099,85.249 C50.38,86.114 51.313,87.374 52.331,86.896 C63.485,81.655 71.787,70.395 71.787,58.35 C71.787,47.898 66.808,37.509 58.47,30.559 Z" id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </svg>
+
+                    <svg *ngIf="threadsService.new" class="sorting__icon" viewBox="0 0 87 88" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                 
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="noun_new_258297" transform="translate(-6.000000, -6.000000)">
+                                <rect id="Rectangle-26" x="0" y="0" width="99" height="99"></rect>
+                                <path d="M93,49.475 C93,48.875 92.7,48.375 92.3,48.075 L82,40.775 L87.3,29.275 C87.5,28.775 87.5,28.175 87.2,27.675 C86.9,27.175 86.4,26.875 85.8,26.775 L73.2,25.675 L72.1,13.075 C72,12.475 71.7,11.975 71.2,11.675 C70.7,11.375 70.1,11.375 69.6,11.575 L58.1,16.875 L50.9,6.675 C50.2,5.775 48.7,5.775 48.1,6.675 L40.8,16.975 L29.3,11.675 C28.8,11.475 28.2,11.475 27.7,11.775 C27.2,12.075 26.9,12.575 26.8,13.175 L25.7,25.775 L13.1,26.875 C12.5,26.975 12,27.275 11.7,27.775 C11.4,28.275 11.4,28.875 11.6,29.375 L16.9,40.875 L6.7,48.075 C6.2,48.375 6,48.975 6,49.475 C6,49.975 6.3,50.575 6.7,50.875 L17,58.175 L11.7,69.675 C11.5,70.175 11.5,70.775 11.8,71.275 C12.1,71.775 12.6,72.075 13.2,72.175 L25.8,73.275 L26.9,85.875 C27,86.475 27.3,86.975 27.8,87.275 C28.3,87.575 28.9,87.575 29.4,87.375 L40.9,82.075 L48.2,92.375 C48.5,92.875 49.1,93.075 49.6,93.075 C50.2,93.075 50.7,92.775 51,92.375 L58.3,82.075 L69.8,87.375 C70.3,87.575 70.9,87.575 71.4,87.275 C71.9,86.975 72.2,86.475 72.3,85.875 L73.4,73.275 L86,72.175 C86.6,72.075 87.1,71.775 87.4,71.275 C87.7,70.775 87.7,70.175 87.5,69.675 L82.2,58.175 L92.5,50.875 C92.8,50.575 93,49.975 93,49.475 Z" id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </svg>
+
+                    <svg  *ngIf="threadsService.top" class="sorting__icon" viewBox="0 0 64 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                 
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Group-29" transform="translate(-6.000000, -6.000000)">
+                                <rect id="Rectangle-27" x="0" y="0" width="76" height="88"></rect>
+                                <rect id="Rectangle-15" fill="#4264d0" x="6" y="51" width="18" height="30" rx="3"></rect>
+                                <rect id="Rectangle-15" fill="#4264d0" x="52" y="41" width="18" height="40" rx="3"></rect>
+                                <g id="Group-30" transform="translate(22.000000, 6.000000)" fill="#B5B7B9">
+                                    <path d="M25,25.622289 L25,72 C25,73.6568542 23.6568542,75 22,75 L10,75 C8.34314575,75 7,73.6568542 7,72 L7,25.622289 L2.36204465,25.622289 C1.49020407,25.622289 0.689053271,25.1551552 0.288477869,24.3843844 C-0.135660791,23.6369703 -0.0885342735,22.7027027 0.406294164,22.002002 L14.5442495,0.980980981 C15.4160901,-0.32699366 17.5839099,-0.32699366 18.4557505,0.980980981 L32.5937058,22.002002 C33.0885343,22.7027027 33.1356608,23.6369703 32.7115221,24.3843844 C32.3109467,25.1551552 31.5097959,25.622289 30.6379553,25.622289 L25,25.622289 Z" id="Combined-Shape"></path>
+                                </g>
+                                <g id="noun_Arrow_1966946" transform="translate(22.000000, 6.000000)"></g>
+                            </g>
+                        </g>
+                    </svg>
+
+
+                      <span class="sorting__text">{{sortBy}}</span>
+                      
+                      <svg class="bi bi-caret-down-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z"/>
+                      </svg>
+                </button>
+                <span class="sorting__text" *ngIf="sortBy =='TOP'">Past 24 hrs</span>
+
+
+                <div class="sorting__options" *ngIf="toggleSort">
+                    <ul class="sorting__list">
+                        <li class="sorting__item" (click)="sortPosts('HOT')">
+                            <button class="sorting__button">
+                                <svg  class="sorting__icon" viewBox="0 0 66 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                                    <title>noun_Flame_129549</title>
+                                    <desc>Created with Sketch.</desc>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="noun_Flame_129549" transform="translate(-6.000000, -7.000000)">
+                                            <rect id="Rectangle-25" x="0" y="0" width="78" height="94"></rect>
+                                            <path d="M58.47,30.559 L57.385,29.686 C56.107,28.658 54.173,29.05 53.468,30.531 C53.125,31.251 52.883,38.54 52.883,39.768 C52.883,40.016 52.831,40.423 52.837,40.466 C52.837,41.502 51.91,42.324 50.842,42.148 C50.002,42.01 49.428,41.213 49.424,40.362 C49.37,27.896 45.561,19.203 38.57,12.711 C34.295,8.741 29.24,5.235 27.693,7.972 C27.298,8.67 27.951,10.239 28.609,12.249 C30.071,16.72 25.61,23.86 19.304,30.995 C13.377,37.702 6,46.05 6,58.349 C6,70.389 14.296,81.646 25.444,86.889 C26.444,87.359 27.411,86.115 26.703,85.267 C24.255,82.334 22.847,78.504 23.047,74.34 C23.435,66.275 30.075,59.647 38.14,59.275 C47.244,58.854 54.758,66.111 54.758,75.123 C54.758,78.975 53.383,82.503 51.099,85.249 C50.38,86.114 51.313,87.374 52.331,86.896 C63.485,81.655 71.787,70.395 71.787,58.35 C71.787,47.898 66.808,37.509 58.47,30.559 Z" id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                  <span [class.sort-active]="threadsService.hot" class="sorting__text">HOT</span>
+                                
+                            </button>
+                        </li>
+                        <li class="sorting__item" (click)="sortPosts('NEW')">
+                            <button class="sorting__button">
+                                <svg class="sorting__icon" viewBox="0 0 87 88" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                 
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="noun_new_258297" transform="translate(-6.000000, -6.000000)">
+                                            <rect id="Rectangle-26" x="0" y="0" width="99" height="99"></rect>
+                                            <path d="M93,49.475 C93,48.875 92.7,48.375 92.3,48.075 L82,40.775 L87.3,29.275 C87.5,28.775 87.5,28.175 87.2,27.675 C86.9,27.175 86.4,26.875 85.8,26.775 L73.2,25.675 L72.1,13.075 C72,12.475 71.7,11.975 71.2,11.675 C70.7,11.375 70.1,11.375 69.6,11.575 L58.1,16.875 L50.9,6.675 C50.2,5.775 48.7,5.775 48.1,6.675 L40.8,16.975 L29.3,11.675 C28.8,11.475 28.2,11.475 27.7,11.775 C27.2,12.075 26.9,12.575 26.8,13.175 L25.7,25.775 L13.1,26.875 C12.5,26.975 12,27.275 11.7,27.775 C11.4,28.275 11.4,28.875 11.6,29.375 L16.9,40.875 L6.7,48.075 C6.2,48.375 6,48.975 6,49.475 C6,49.975 6.3,50.575 6.7,50.875 L17,58.175 L11.7,69.675 C11.5,70.175 11.5,70.775 11.8,71.275 C12.1,71.775 12.6,72.075 13.2,72.175 L25.8,73.275 L26.9,85.875 C27,86.475 27.3,86.975 27.8,87.275 C28.3,87.575 28.9,87.575 29.4,87.375 L40.9,82.075 L48.2,92.375 C48.5,92.875 49.1,93.075 49.6,93.075 C50.2,93.075 50.7,92.775 51,92.375 L58.3,82.075 L69.8,87.375 C70.3,87.575 70.9,87.575 71.4,87.275 C71.9,86.975 72.2,86.475 72.3,85.875 L73.4,73.275 L86,72.175 C86.6,72.075 87.1,71.775 87.4,71.275 C87.7,70.775 87.7,70.175 87.5,69.675 L82.2,58.175 L92.5,50.875 C92.8,50.575 93,49.975 93,49.475 Z" id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                  <span [class.sort-active]="threadsService.new" class="sorting__text">NEW</span>
+                                 
+                            </button>
+                        </li>
+                        <li class="sorting__item" (click)="sortPosts('TOP')">
+                            <button class="sorting__button">
+                                <svg class="sorting__icon" viewBox="0 0 64 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                 
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Group-29" transform="translate(-6.000000, -6.000000)">
+                                            <rect id="Rectangle-27" x="0" y="0" width="76" height="88"></rect>
+                                            <rect id="Rectangle-15" fill="#4264d0" x="6" y="51" width="18" height="30" rx="3"></rect>
+                                            <rect id="Rectangle-15" fill="#4264d0" x="52" y="41" width="18" height="40" rx="3"></rect>
+                                            <g id="Group-30" transform="translate(22.000000, 6.000000)" fill="#B5B7B9">
+                                                <path d="M25,25.622289 L25,72 C25,73.6568542 23.6568542,75 22,75 L10,75 C8.34314575,75 7,73.6568542 7,72 L7,25.622289 L2.36204465,25.622289 C1.49020407,25.622289 0.689053271,25.1551552 0.288477869,24.3843844 C-0.135660791,23.6369703 -0.0885342735,22.7027027 0.406294164,22.002002 L14.5442495,0.980980981 C15.4160901,-0.32699366 17.5839099,-0.32699366 18.4557505,0.980980981 L32.5937058,22.002002 C33.0885343,22.7027027 33.1356608,23.6369703 32.7115221,24.3843844 C32.3109467,25.1551552 31.5097959,25.622289 30.6379553,25.622289 L25,25.622289 Z" id="Combined-Shape"></path>
+                                            </g>
+                                            <g id="noun_Arrow_1966946" transform="translate(22.000000, 6.000000)"></g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                  <span [class.sort-active]="threadsService.top" class="sorting__text">TOP</span>
+                                 
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="feed__container">
+                <button (click)="getPostsSegment()" [class.col-active]="underlinedPosts" class="feed__button">Posts</button>
+                <button (click)="getTakesSegment()" [class.col-active]="underlinedTakes" class="feed__button">Discuss</button>
+                <button (click)="getPlaySegment()"  *ngIf="!threadsService.followers && !threadsService.bookmarks" [class.col-active]="underlinedPlay" class="feed__button">Play</button>
+            </div>
+
+        </div>
+        <div *ngIf="threadsService.loaderActive">    
+            <div class="placeholder-item">
+                <div class="placeholder-flex">
+                    <div class="skeleton-image">
+    
+                    </div>
+                    <div class="skeleton-image-right">
+                        <div class="skeleton-username skeleton-username-1">
+                        </div>
+                        <div class="skeleton-username skeleton-username-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-title">
+                    <div class="placeholder-title placeholder-title-1">
+                    </div>
+    
+                    <div class="placeholder-title placeholder-title-2">
+    
+                    </div>
+                </div>
+    
+            </div>
+            <div class="placeholder-item">
+                <div class="placeholder-flex">
+                    <div class="skeleton-image">
+    
+                    </div>
+                    <div class="skeleton-image-right">
+                        <div class="skeleton-username skeleton-username-1">
+                        </div>
+                        <div class="skeleton-username skeleton-username-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-title">
+                    <div class="placeholder-title placeholder-title-1">
+                    </div>
+    
+                    <div class="placeholder-title placeholder-title-2">
+    
+                    </div>
+                </div>
+    
+            </div>
+            <div class="placeholder-item">
+                <div class="placeholder-flex">
+                    <div class="skeleton-image">
+    
+                    </div>
+                    <div class="skeleton-image-right">
+                        <div class="skeleton-username skeleton-username-1">
+                        </div>
+                        <div class="skeleton-username skeleton-username-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-title">
+                    <div class="placeholder-title placeholder-title-1">
+                    </div>
+    
+                    <div class="placeholder-title placeholder-title-2">
+    
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+        <div  *ngIf="!threadsService.loaderActive">
+            <div class="refresh-container" *ngIf="refresh">
+                <button class="refresh-onresume" (click)="refreshContent()">
+                    <svg class="bi bi-arrow-down down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.646 9.646a.5.5 0 01.708 0L8 12.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M8 2.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V3a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                      </svg>
+                    refresh
+                </button>
+            </div>
+            
+            <app-thread *ngFor="let thread of threadsService.threads; let i = index" [thread]="thread" [i]="i" (deleteThread)="deleteThread($event)"></app-thread>
+        </div>
+
+        <div class="takes">
+            <app-takes></app-takes>
+        </div>
+
+        <div class="play">
+            <app-play></app-play>
+        </div>
+
+        <div class="spinner-container" *ngIf="threadsService.showInfiniteSpinner">
+            <div class="spinner-border" role="status">
+            </div>
+        </div>
+        
+        <div *ngIf="!threadsService.hideInfinite"
+        class="search-results"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="150"
+        (scrolled)="doInfinite()"
+      ></div>
+       
+    </section>
+    
+
+    <section class="right-section" [ngStyle]="authService.stickyHeight">
+
+        <div class="hack">
+
+        </div>
+ 
+        <div class="stick" id="right-sticky" [ngStyle]="stickyDimensionsRight">
+            <div class="create aside">
+                <h2 class="menu__header">Create</h2>
+                <div class="create__post create__post--top">
+                    <p class="create__text">Analysis, multi-paragraph opinions, or in-depth sports texts.</p>
+                    <a class="create__button" routerLink="/create-post"  [queryParams]="{type: 'text'}">Write a post</a>
+                </div>
+                <div class="create__post">
+                    <p class="create__text">Brief opinions, debates, breaking news, or sports related content.</p>
+                    <a class="create__button" routerLink="/create-discussion">Create a discussion</a>
+                </div>
+            </div>
+    
+            <div class="featured aside">
+                <div class="menu-header-container">
+                    <h2 class="menu__header">FEATURED</h2>
+                    <a (click)="goToFeatured()" class="see-all">See all</a>
+                </div>
+    
+                <div class="placeholders-featured" *ngIf="threadsService.loaderActive">
+                    <div class="placeholder-featured">
+                        <div class="placeholder-featured-text">
+                            <div class="placeholder-featured-text-1">
+                            
+                            </div>
+                            <div class="placeholder-featured-text-2">
+                            
+                            </div>
+                        </div>
+                        <div class="placeholder-featured-picture"></div>
+                    </div>
+                    <div class="placeholder-featured">
+                        <div class="placeholder-featured-text">
+                            <div class="placeholder-featured-text-1">
+                            
+                            </div>
+                            <div class="placeholder-featured-text-2">
+                            
+                            </div>
+                        </div>
+                        <div class="placeholder-featured-picture"></div>
+                    </div>
+                    <div class="placeholder-featured">
+                        <div class="placeholder-featured-text">
+                            <div class="placeholder-featured-text-1">
+                            
+                            </div>
+                            <div class="placeholder-featured-text-2">
+                            
+                            </div>
+                        </div>
+                        <div class="placeholder-featured-picture"></div>
+                    </div>
+                    <div class="placeholder-featured">
+                        <div class="placeholder-featured-text">
+                            <div class="placeholder-featured-text-1">
+                            
+                            </div>
+                            <div class="placeholder-featured-text-2">
+                            
+                            </div>
+                        </div>
+                        <div class="placeholder-featured-picture"></div>
+                    </div>
+                    <div class="placeholder-featured">
+                        <div class="placeholder-featured-text">
+                            <div class="placeholder-featured-text-1">
+                            
+                            </div>
+                            <div class="placeholder-featured-text-2">
+                            
+                            </div>
+                        </div>
+                        <div class="placeholder-featured-picture"></div>
+                    </div>
+                </div>
+                
+                <ul class="featured__list" *ngIf="!threadsService.loaderActive">
+                    <li class="featured__item" [class.last-featured]="i == 5" *ngFor="let thread of threadsService.featuredThreads; let i = index"> 
+                        <a class="featured__anchor" (click)="itemTapped(thread._id)">
+                            <article class="featured__article">
+                                <span class="featured__numeration">{{i + 1}}</span>
+                                <div class="featured__title-container">
+                                    <h1 class="featured__title">{{thread?.title}}</h1>
+                                </div>
+                                <figure class="featured__picture">
+                                    <img [src]="thread?.picture" alt="">
+                                </figure>   
+                            </article>
+                        </a>
+                    </li>
+                </ul>            
+            </div>
+    
+            <div>
+                <nav class="nav-more">
+                    <a routerLink="/legal/guidelines">Community Guidelines</a>
+                    <a routerLink="/legal/rules">Posting Rules</a>
+                    <a routerLink="/legal/terms-of-use">Terms</a>
+                    <a routerLink="/legal/privacy-policy">Privacy Policy</a>
+                    <a href="mailto:support@discussthegame.com?Subject=Contact" target="_top">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </section> 
+</div>

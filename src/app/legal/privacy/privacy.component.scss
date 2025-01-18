@@ -1,0 +1,28 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.policy {
+  padding: 50px;
+  background: white;
+  margin: 30px;
+  border-radius: 5px;
+  font-size: 1.6rem;
+
+}
+
+p {
+margin: 20px 0;
+}
+
+@media screen and (max-width: 600px) {
+.policy{
+  padding: 16px;
+  background: white;
+  margin: 5px;
+  border-radius: 5px;
+}
+}

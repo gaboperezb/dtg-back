@@ -1,0 +1,192 @@
+<div *ngIf="!!authService.errorMessage" class="alert alert-danger db-error" role="alert">
+    {{authService.errorMessage}}
+</div>
+<div *ngIf="!!authService.successMessage" class="alert alert-success db-error" role="alert">
+    {{authService.successMessage}}
+</div>
+
+
+
+<nav class="navbar">
+
+    <div class="search__inner" *ngIf="toggleSearch">
+        <div class="search-container-sm">
+            <button (click)="toggleSearch = false">
+                <svg class="bi bi-arrow-left-short back-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                  </svg>
+            </button>
+            <form (ngSubmit)="submit(searchFormMobile.value)" [formGroup]="searchFormMobile" novalidate>
+                <input type="text" placeholder="Search" formControlName="search">
+                <button class="search-button" type="submit">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="512" height="512"
+                        viewBox="0 0 512 512">
+                        <title>ionicons-v5-f</title>
+                        <path
+                            d="M456.69,421.39,362.6,327.3a173.81,173.81,0,0,0,34.84-104.58C397.44,126.38,319.06,48,222.72,48S48,126.38,48,222.72s78.38,174.72,174.72,174.72A173.81,173.81,0,0,0,327.3,362.6l94.09,94.09a25,25,0,0,0,35.3-35.3ZM97.92,222.72a124.8,124.8,0,1,1,124.8,124.8A124.95,124.95,0,0,1,97.92,222.72Z" />
+                    </svg>
+                    <span class="tooltiptext">Search</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="navbar__inner" *ngIf="!toggleSearch" >
+        <ul class="navbar-left">
+            <li class="navbar-item-main">
+                <a class="navbar-link" routerLink="/">
+                    <img class="logo" src="assets/imgs/dtg_circ.png" alt="">
+                    <img class="logo-letters" src="assets/imgs/black_letters.png" alt="">
+                </a>
+            </li>
+        </ul>
+
+        <div class="search-container" *appShellNoRender>
+            <form (ngSubmit)="submit(searchFormMobile.value)" [formGroup]="searchFormMobile" novalidate>
+                <input type="text" placeholder="Search" formControlName="search">
+                <button class="search-button" type="submit">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="512" height="512"
+                        viewBox="0 0 512 512">
+                        <title>ionicons-v5-f</title>
+                        <path
+                            d="M456.69,421.39,362.6,327.3a173.81,173.81,0,0,0,34.84-104.58C397.44,126.38,319.06,48,222.72,48S48,126.38,48,222.72s78.38,174.72,174.72,174.72A173.81,173.81,0,0,0,327.3,362.6l94.09,94.09a25,25,0,0,0,35.3-35.3ZM97.92,222.72a124.8,124.8,0,1,1,124.8,124.8A124.95,124.95,0,0,1,97.92,222.72Z" />
+                    </svg>
+                    <span class="tooltiptext">Search</span>
+                </button>
+            </form>
+        </div>
+        <ul class="navbar-right" *appShellNoRender>
+
+            <li class="login" *ngIf="!authService.currentUser" (click)="goAccess('login')">
+                <button class="navbar-link">
+                    <span>LOG IN</span>
+                </button>
+            </li>
+
+            <li class="signup" *ngIf="!authService.currentUser" (click)="goAccess('signup')">
+                <button class="navbar-link">
+                    <span>CREATE ACCOUNT</span>
+                </button>
+            </li>
+
+
+
+            <!-- search small -->
+            <li class="navbar-item notification-item search-sm" (click)="toggleSearch = true">
+                <a class="navbar-link anchor" >
+                    <svg class="search-icon-sm" xmlns="http://www.w3.org/2000/svg" width="512" height="512"
+                        viewBox="0 0 512 512">
+                        <title>ionicons-v5-f</title>
+                        <path
+                            d="M456.69,421.39,362.6,327.3a173.81,173.81,0,0,0,34.84-104.58C397.44,126.38,319.06,48,222.72,48S48,126.38,48,222.72s78.38,174.72,174.72,174.72A173.81,173.81,0,0,0,327.3,362.6l94.09,94.09a25,25,0,0,0,35.3-35.3ZM97.92,222.72a124.8,124.8,0,1,1,124.8,124.8A124.95,124.95,0,0,1,97.92,222.72Z" />
+                    </svg>
+                    <span class="tooltiptext">Search</span>
+                </a>
+            </li>
+
+            <li class="navbar-item" *ngIf="authService.currentUser">
+                <!-- delete -->
+                <div class="sorting__options--nav" *ngIf="toggleCreate">
+                    <ul class="sorting__list">
+                        <li class="sorting__item" (click)="goToCreate($event, '/create-post')" role="link">
+                            <button class="sorting__button">
+                                <span class="sorting__text">Post</span>
+                            </button>
+                        </li>
+                        <li class="sorting__item" (click)="goToCreate($event, '/create-discussion')" role="link">
+                            <button class="sorting__button">
+                                <span class="sorting__text">Discussion</span>
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- delete -->
+                <a class="navbar-link anchor" routerLinkActive="active-item" (click)="toggleCreate = !toggleCreate">
+                    <svg class="nav-icon" width="112px" height="112px" viewBox="0 0 112 112" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                        <title>noun_write_1863753</title>
+                        <desc>Created with Sketch.</desc>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="noun_write_1863753" fill="#A2A4A6" fill-rule="nonzero">
+                                <path
+                                    d="M1.17299782,110.825871 C1.91599234,111.573309 2.9251046,111.995557 3.97900145,112 C4.32206701,111.999823 4.66351264,111.952958 4.99393894,111.860697 C5.31196213,111.947329 5.63951534,111.994122 5.96907495,112 L67.6613534,112 C69.8595279,112 71.6415004,110.218049 71.6415004,108.0199 C71.6415004,105.821752 69.8595279,104.039801 67.6613534,104.039801 L30.4867804,104.039801 L96,38.5074627 L73.4922687,16 L7.64073669,81.8308458 C7.16136535,82.3205868 6.81241703,82.9226866 6.62579921,83.5820896 L0.138159604,106.965174 C-0.234939797,108.34453 0.160025123,109.818035 1.17299782,110.825871 Z"
+                                    id="Shape"></path>
+                                <path
+                                    d="M109.686567,13.5226371 L98.4773629,2.31343297 C95.3853061,-0.771144324 90.3800199,-0.771144324 87.2879631,2.31343297 L80,9.60139606 L102.398604,32 L109.686567,24.7120369 C112.771144,21.6199801 112.771144,16.6146939 109.686567,13.5226371 Z"
+                                    id="Shape"></path>
+                                <path
+                                    d="M107.142857,104 L87.8571429,104 C85.7269017,104 84,105.790861 84,108 C84,110.209139 85.7269017,112 87.8571429,112 L107.142857,112 C109.273098,112 111,110.209139 111,108 C111,105.790861 109.273098,104 107.142857,104 Z"
+                                    id="Shape"></path>
+                                <path
+                                    d="M87.1428571,104 L67.8571429,104 C65.7269017,104 64,105.790861 64,108 C64,110.209139 65.7269017,112 67.8571429,112 L87.1428571,112 C89.2730983,112 91,110.209139 91,108 C91,105.790861 89.2730983,104 87.1428571,104 Z"
+                                    id="Shape"></path>
+                            </g>
+                        </g>
+                    </svg>
+                    <span class="tooltiptext">Create</span>
+                </a>
+            </li>
+            <li class="navbar-item notification-item" *ngIf="authService.currentUser">
+                <a class="navbar-link anchor" routerLink="/notifications" routerLinkActive="active-item">
+                    <svg class="nav-icon" width="48px" height="56px" viewBox="0 0 48 56" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                        <title>noun_notification_1594277</title>
+                        <desc>Created with Sketch.</desc>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="noun_notification_1594277" fill="#000000" fill-rule="nonzero">
+                                <g id="Group">
+                                    <g id="Shape">
+                                        <path
+                                            d="M19.5,7.0667924 C11.7364775,9.064044 6,16.1087382 6,24.4992494 L6,36.4982567 C6,37.603789 5.1017394,38.5 4.0020869,38.5 C1.7917953,38.5 0,40.2953562 0,42.5 C0,44.709139 1.7940525,46.5 4.0098932,46.5 L43.9901068,46.5 C46.2047097,46.5 48,44.7046438 48,42.5 C48,40.290861 46.1998022,38.5 43.9979131,38.5 C42.8944962,38.5 42,37.6107383 42,36.4982567 L42,24.4992494 C42,16.112059 36.2647191,9.0647228 28.5,7.0668673 L28.5,5.0008537 C28.5,2.5092478 26.4852814,0.5 24,0.5 C21.5197757,0.5 19.5,2.5151008 19.5,5.0008537 L19.5,7.0667924 Z M17,48.5 L31,48.5 C31,52.3659932 27.8659932,55.5 24,55.5 C20.1340068,55.5 17,52.3659932 17,48.5 Z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <span class="notification-badge"
+                        *ngIf="authService.notifications > 0">{{authService.notifications}}</span>
+                    <span class="tooltiptext">Notifications</span>
+                </a>
+            </li>
+
+            <li class="navbar-profile" *ngIf="authService.currentUser">
+                <a class="navbar-link" [routerLink]="['/u', authService.currentUser.username]">
+                    <div class="user">
+                        <img [src]="authService.currentUser.profilePicture" alt="">
+                        <span class="username">{{authService.currentUser.username}}</span>
+                    </div>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="transition" *ngIf="threadsService.transition"> </div>
+<div *ngIf="takeService.fullScreen" class="take-image-container" (click)="closeFullScreen()">
+    <div class="take-image-relative" (click)="$event.stopPropagation()">
+        <img [src]="takeService.fullScreenImage" alt="">
+        <button class="close-btn" (click)="closeFullScreen()">
+            <svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z"
+                    clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z"
+                    clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+</div>
+
+<div class="main-padding">
+    <router-outlet></router-outlet>
+</div>
+<app-login *ngIf="authService.toggleAccess"></app-login>
+<app-followers *ngIf="authService.followInfo"></app-followers>
+<app-levels *ngIf="authService.levelsInfo"></app-levels>

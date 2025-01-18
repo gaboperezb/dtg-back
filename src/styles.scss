@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+.db-error {
+    position: fixed !important;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50px, 0px);
+    z-index: 99999999000;
+    font-size: 1.5rem;
+}
+
+html {
+    font-size: 62.5% !important;
+}
+
+
+body {
+    margin-bottom: 80px;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+
+
+
+body {
+    background: #edeef0 !important;
+  
+}
+
+body.white-body {
+    background: white !important;
+}
+
+
+
+a {
+   text-decoration: none; /* no underline */
+   color: inherit;
+}

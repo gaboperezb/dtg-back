@@ -1,0 +1,90 @@
+<div class="teams-container min-height">
+        <h4>GAMES</h4>
+        <button *ngIf="!add" class="btn btn-primary ml-5" (click)="add = true"> Add game</button>
+        <i *ngIf="add" id="close-add" class="fa fa-times-circle" (click)="add = false"></i>
+        <form  *ngIf="add" (ngSubmit)="submit(addTeamForm.value)" [formGroup]="addTeamForm" novalidate >
+            <div class="form-group form-inline game mt-3">
+                <label class="mr-3">Game:</label>
+                <select class="form-control" id="awayTeam" formControlName="awayTeam">
+                    <option *ngFor="let team of teams | teamFilter:league" [value]="team._id">{{team.teamName}}</option>
+                </select>
+                <h3>@</h3>
+                <select class="form-control" id="homeTeam" formControlName="homeTeam">
+                    <option *ngFor="let team of teams | teamFilter:league" [value]="team._id">{{team.teamName}}</option>
+                </select> 
+            </div>
+            <div class="form-group">
+                <label for="gameDate" class="col-form-label">Date:</label>
+                <input class="form-control" type="datetime-local" id="gameDate" formControlName="gameDate">    
+            </div>
+            <div class="form-group">
+                <label for="league">League:</label>
+                <select class="form-control" id="league" formControlName="league" [(ngModel)]="league" >
+                  <option value="NBA">NBA</option>
+                  <option value="NFL">NFL</option>
+                  <option value="NHL">NHL</option>
+                  <option value="Soccer">Soccer</option>
+                  <option value="MLB">MLB</option>
+                  <option value="NCAAB">NCAAB</option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="seasonYear">Season:</label>
+                <select class="form-control" id="seasonYear" formControlName="seasonYear">
+                        <option>2017</option>
+                        <option>2018</option>
+                        <option>2019</option>
+                </select>         
+            </div>
+            <div *ngIf="league == 'NFL'" class="form-group">
+                    <label for="week" class="col-form-label">Week:</label>
+                    <input class="form-control" type="number" id="week" formControlName="week">    
+            </div>
+            <div class="form-group">
+                <label for="seasonType">Type:</label>
+                <select class="form-control" id="seasonType" formControlName="seasonType">
+                        <option>Regular</option>
+                        <option>Pre</option>
+                </select>
+            </div>
+            <div *ngIf="updated" class="alert alert-success" role="alert">
+                    The game has been added to the DB.
+            </div>
+          <!--   <div *ngIf="error" class="alert alert-danger" role="alert">
+                    There was a problem when adding the team to the DB.
+            </div> -->
+            <button  *ngIf="!loading" type="submit" [disabled]="!addTeamForm.valid" class="btn btn-primary block">Add Game</button>
+            <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+        </form>
+        <ul class="links" *ngIf="!add">
+                <li [class.active]="filterBy==='NBA'" (click)="filterGames('NBA')">
+                    NBA
+                </li> 
+                <li [class.active]="filterBy==='NFL'" (click)="getNflGames()">
+                    NFL        
+                </li>
+                <li [class.active]="filterBy==='NHL'" (click)="getNhlGames()">
+                    NHL        
+                </li>
+                <li [class.active]="filterBy==='Soccer'" (click)="getSoccerGames()">
+                    Soccer      
+                </li> 
+                <li [class.active]="filterBy==='MLB'" (click)="getMLBGames()">
+                    MLB      
+                </li> 
+                <li [class.active]="filterBy==='NCAAB'" (click)="getNCAABGames()">
+                    NCAAB      
+                </li>       
+            </ul>
+        <ul *ngIf="!add">
+            <game-detail *ngFor="let game of visibleGames" [game]="game" (removeGame)="deleteGame($event)"></game-detail>
+        </ul>
+        <div class="button-wrapper">
+                <a class="btn btn-primary" (click)="fetchMoreGames()">
+                    <i *ngIf="fetchingDiscussions" id="fetching-discussions"class="fa fa-circle-o-notch fa-spin fa-fw fa-lg"></i>
+                    <span  id="button-text" *ngIf="!fetchingDiscussions">Load more</span>
+                </a>
+        </div>
+    
+    </div>
+    

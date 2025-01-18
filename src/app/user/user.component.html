@@ -1,0 +1,289 @@
+<div class="main-container">
+
+    <div class="user-container">
+        <section class="user">
+
+            <div class="background-container header-image" [ngStyle]="userBackground">
+            </div>
+
+            <div class="pic-username">
+                <img id="user-pic" [src]="user?.profilePicture" alt="">
+                <br>
+                <h1 id="username">{{user?.username}}</h1>
+
+
+                <div class="user-options">
+                    <div class="report"
+                        *ngIf="authService.currentUser && user.username !== authService.currentUser.username"
+                        (click)="toggleMore()">
+                        <svg class="bi bi-three-dots more-icon" width="1em" height="1em" viewBox="0 0 16 16"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                        </svg>
+                    </div>
+
+                    <!-- delete -->
+
+                    <div class="sorting__options" *ngIf="toggleEdit">
+                        <ul class="sorting__list">
+                            <li class="sorting__item" (click)="report()">
+                                <button class="sorting__button">
+                                    <svg class="bi bi-flag sorting__icon" width="1em" height="1em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M3.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd"
+                                            d="M3.762 2.558C4.735 1.909 5.348 1.5 6.5 1.5c.653 0 1.139.325 1.495.562l.032.022c.391.26.646.416.973.416.168 0 .356-.042.587-.126a8.89 8.89 0 0 0 .593-.25c.058-.027.117-.053.18-.08.57-.255 1.278-.544 2.14-.544a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5c-.638 0-1.18.21-1.734.457l-.159.07c-.22.1-.453.205-.678.287A2.719 2.719 0 0 1 9 9.5c-.653 0-1.139-.325-1.495-.562l-.032-.022c-.391-.26-.646-.416-.973-.416-.833 0-1.218.246-2.223.916a.5.5 0 1 1-.515-.858C4.735 7.909 5.348 7.5 6.5 7.5c.653 0 1.139.325 1.495.562l.032.022c.391.26.646.416.973.416.168 0 .356-.042.587-.126.187-.068.376-.153.593-.25.058-.027.117-.053.18-.08.456-.204 1-.43 1.64-.512V2.543c-.433.074-.83.234-1.234.414l-.159.07c-.22.1-.453.205-.678.287A2.719 2.719 0 0 1 9 3.5c-.653 0-1.139-.325-1.495-.562l-.032-.022c-.391-.26-.646-.416-.973-.416-.833 0-1.218.246-2.223.916a.5.5 0 0 1-.554-.832l.04-.026z" />
+                                    </svg>
+                                    <span class="sorting__text">Report</span>
+                                </button>
+                            </li>
+                            <li class="sorting__item" (click)="block()">
+                                <button class="sorting__button">
+                                    <svg class="bi bi-slash-circle sorting__icon" width="1em" height="1em"
+                                        viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                        <path fill-rule="evenodd"
+                                            d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z" />
+                                    </svg>
+                                    <span class="sorting__text">{{blocked ? 'Unblock' : 'Block'}}</span>
+                                </button>
+                            </li>
+                            <li class="sorting__item" (click)="toggleMore()">
+                                <button class="sorting__button">
+                                    <span class="sorting__text">Cancel</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <!-- delete -->
+
+
+                    <div class="follow-btn" *ngIf="!authService.currentUser" [class.follow]="!user?.provFollowing"
+                        [class.following]="user?.provFollowing" (click)="followUser()">
+                        <span *ngIf="!user?.provFollowing && !user?.loadingFollow">Follow</span>
+                    </div>
+
+                    <div class="follow-btn"
+                        *ngIf="authService.currentUser && user.username !== authService.currentUser.username"
+                        [class.follow]="!user?.provFollowing" [class.following]="user?.provFollowing"
+                        (click)="followUser()">
+                        <span *ngIf="!user?.provFollowing && !user?.loadingFollow">Follow</span>
+                        <span *ngIf="user?.provFollowing && !user?.loadingFollow">Following</span>
+                        <span *ngIf="user?.loadingFollow">Loading..</span>
+                    </div>
+
+                    <div class="follow-btn"
+                        *ngIf="authService.currentUser && user.username === authService.currentUser.username"
+                        [class.follow]="!user?.provFollowing" [class.following]="user?.provFollowing"
+                        (click)="settings()">
+                        <span>Settings</span>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="user-info user-header">
+                <div class="info">
+
+
+                    <div *ngIf="authService.currentUser && authService.currentUser.username == user.username && !user.verified"
+                        class="level-container">
+                        <img id="level-bar" [src]="authService?.currentUser?.badge.picture.replace('.png', 'L.png')"
+                            alt="" (click)="levelsInfo()">
+                        <div (click)="levelsInfo()"
+                            *ngIf="authService.currentUser.totalPoints <= authService.currentUser.badge.nextPoints"
+                            class="progress-outer">
+                            <span class="points-bar"
+                                *ngIf="authService.currentUser.totalPoints <= authService.currentUser.badge.nextPoints">{{commaPoints}}
+                                PTS</span>
+                            <div class="progress-inner" [style.width]="displayBar() + '%'">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="user?.verified" class="level-container">
+                        <img id="level" src="assets/imgs/verified.png" alt="">
+                    </div>
+
+                    <div *ngIf="(!authService.currentUser && !user.verified) || (authService.currentUser && authService.currentUser.username != user.username && !user.verified)"
+                        class="level-container">
+                        <img id="level" [src]="user?.badge?.picture.replace('.png', 'L.png')" alt="">
+                        <div *ngIf="user.favAllTeams && user.favAllTeams.length" [class.line-breaker]="true"
+                            [class.star]="user?.badge?.level <= 5"
+                            [class.trophy]="user?.badge?.level <= 10 && user?.badge?.level > 5"
+                            [class.diamond]="user?.badge?.level <= 15 && user?.badge?.level > 10"
+                            [class.crown]="user?.badge?.level <= 19  && user?.badge?.level > 15"
+                            [class.twenty]="user?.badge?.level == 20">
+                        </div>
+                        <div scrollY="false" scrollX="true" class="scroll-padding-teams">
+                            <img *ngFor="let team of teamsToShow" class="fav-team-logo" [src]="team.logo" alt="">
+                            <span (click)="addMoreTeams()" *ngIf="extraTeams" class="more-teams">{{extraTeams}}+</span>
+                        </div>
+                    </div>
+
+                    <p *ngIf="user?.bio" class="bio">{{user?.bio}}</p>
+                    <p class="joined">
+                        <svg class="joined-icon" viewBox="0 0 95 84" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                            <title>noun_Calendar_1757900</title>
+                            <desc>Created with Sketch.</desc>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="noun_Calendar_1757900" transform="translate(-6.000000, -6.000000)">
+                                    <g id="Group">
+                                        <rect id="Rectangle" x="0" y="0" width="107" height="96"></rect>
+                                        <path
+                                            d="M90.6,6.1 L79.7,6.1 L66.2,6 L40.8,6 L27.3,6 L16.4,6 C10.6,6 6,10.7 6,16.4 L6,79.4 C6,85.2 10.7,89.8 16.4,89.8 L90.5,89.8 C96.3,89.8 100.9,85.1 100.9,79.4 L100.9,16.4 C101,10.8 96.3,6.1 90.6,6.1 Z M90.6,84 L16.4,84 C13.9,84 11.9,82 11.9,79.5 L11.9,30.4 L95,30.4 L95,79.5 C95.1,82 93,84 90.6,84 Z"
+                                            id="Shape" fill="#939697" fill-rule="nonzero"></path>
+                                        <path
+                                            d="M34.7,39.5 L23.7,39.5 C22.2,39.5 21,40.7 21,42.2 L21,50.5 C21,52 22.2,53.2 23.7,53.2 L34.7,53.2 C36.2,53.2 37.4,52 37.4,50.5 L37.4,42.2 C37.4,40.7 36.2,39.5 34.7,39.5 Z"
+                                            id="Path" fill="#939697" fill-rule="nonzero"></path>
+                                        <path
+                                            d="M59.1,39.5 L48.1,39.5 C46.6,39.5 45.4,40.7 45.4,42.2 L45.4,50.5 C45.4,52 46.6,53.2 48.1,53.2 L59.1,53.2 C60.6,53.2 61.8,52 61.8,50.5 L61.8,42.2 C61.8,40.7 60.6,39.5 59.1,39.5 Z"
+                                            id="Path" fill="#939697" fill-rule="nonzero"></path>
+                                        <path
+                                            d="M83.6,39.5 L72.6,39.5 C71.1,39.5 69.9,40.7 69.9,42.2 L69.9,50.5 C69.9,52 71.1,53.2 72.6,53.2 L83.6,53.2 C85.1,53.2 86.3,52 86.3,50.5 L86.3,42.2 C86.3,40.7 85.1,39.5 83.6,39.5 Z"
+                                            id="Path" fill="#939697" fill-rule="nonzero"></path>
+                                        <path
+                                            d="M34.7,61.5 L23.7,61.5 C22.2,61.5 21,62.7 21,64.2 L21,72.5 C21,74 22.2,75.2 23.7,75.2 L34.7,75.2 C36.2,75.2 37.4,74 37.4,72.5 L37.4,64.2 C37.4,62.7 36.2,61.5 34.7,61.5 Z"
+                                            id="Path" fill="#939697" fill-rule="nonzero"></path>
+                                        <path
+                                            d="M59.1,61.5 L48.1,61.5 C46.6,61.5 45.4,62.7 45.4,64.2 L45.4,72.5 C45.4,74 46.6,75.2 48.1,75.2 L59.1,75.2 C60.6,75.2 61.8,74 61.8,72.5 L61.8,64.2 C61.8,62.7 60.6,61.5 59.1,61.5 Z"
+                                            id="Path" fill="#939697" fill-rule="nonzero"></path>
+                                        <path
+                                            d="M83.6,61.5 L72.6,61.5 C71.1,61.5 69.9,62.7 69.9,64.2 L69.9,72.5 C69.9,74 71.1,75.2 72.6,75.2 L83.6,75.2 C85.1,75.2 86.3,74 86.3,72.5 L86.3,64.2 C86.3,62.7 85.1,61.5 83.6,61.5 Z"
+                                            id="Path" fill="#939697" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        Joined {{user?.createdAt | date}}
+                    </p>
+                    <div class="foll-info">
+                        <button fill="clear" class="foll-btn foll-m" (click)="following()">
+                            <span class="foll-no">{{user?.followingNumber}}</span><span
+                                class="foll-txt">Following</span>
+                        </button>
+                        <button fill="clear" class="foll-btn" (click)="followers()">
+                            <span class="foll-no">{{user?.followersNumber}}</span><span
+                                class="foll-txt">Followers</span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="segment-container">
+                <div [class.col-selection]="true" [class.col-active]="postsBoolean" (click)="getPostsSegment()">
+                    Posts
+                </div>
+                <div [class.col-selection]="true" [class.col-active]="takesBoolean" (click)="getTakesSegment()">
+                    Discussions
+                </div>
+                <div [class.col-selection]="true"
+                    *ngIf="authService.currentUser && user.username === authService.currentUser.username"
+                    [class.col-active]="commentsBoolean" (click)="getCommentsSegment()">
+                    Comments
+                </div>
+                <div [class.col-selection]="true"
+                    *ngIf="authService.currentUser && user.username === authService.currentUser.username"
+                    [class.col-active]="answersBoolean" (click)="getAnswersSegment()">
+                    Replies
+                </div>
+            </div>
+
+        </section>
+
+        <div class="user-content">
+            <section class="content" [class.full]="commentsBoolean || answersBoolean">
+                <div class="spinner-container" *ngIf="wait">
+                    <div class="spinner-border" role="status">
+
+                    </div>
+                </div>
+
+                <div class="no-posts" *ngIf="threads.length == 0 && !wait && postsBoolean">
+                    <span *ngIf="filterBy =='TOP'">{{user?.username}} has not posted anything about your favorite
+                        sports</span>
+                    <span *ngIf="filterBy != 'TOP'">{{user?.username}} has not posted {{filterBy}} posts</span>
+                </div>
+
+                <div class="no-posts" *ngIf="takes.length == 0 && !wait && takesBoolean">
+                    <span *ngIf="filterBy =='TOP'">{{user?.username}} has not posted anything about your favorite
+                        sports</span>
+                    <span *ngIf="filterBy !='TOP'">{{user?.username}} has not posted {{filterBy}} discussions</span>
+                </div>
+
+                <div class="content__posts" *ngIf="!wait && postsBoolean">
+                    <app-thread *ngFor="let thread of threads" [thread]="thread" (deleteThread)="deleteThread($event)">
+                    </app-thread>
+                </div>
+                <div class="content__posts" *ngIf="!wait && takesBoolean">
+                    <app-take *ngFor="let take of takes" [take]="take" (deleteTakeEmitter)="deleteTake($event)">
+                    </app-take>
+                </div>
+                <!-- Comments -->
+
+
+                <div *ngIf="commentsBoolean && !wait">
+                    <app-user-comment-item *ngFor="let timeline of comments" [timeline]="timeline"
+                        [discussionOrAnswer]="'discussion'" (deleteComment)="deleteComment($event)">
+                    </app-user-comment-item>
+                </div>
+
+                <!-- Answers -->
+                <div *ngIf="answersBoolean && !wait">
+                    <app-user-comment-item *ngFor="let timeline of answers" [timeline]="timeline.answers"
+                        [parent]="timeline" [discussionOrAnswer]="'answer'" (deleteComment)="deleteAnswer($event)">
+                    </app-user-comment-item>
+                </div>
+
+                <div class="i-test">
+
+                </div>
+
+                <div class="spinner-container-bottom" *ngIf="showInfiniteSpinner">
+                    <div class="spinner-border" role="status">
+                    </div>
+                </div>
+
+                <div *ngIf="enableInfinite" class="search-results" infiniteScroll [infiniteScrollDistance]="1.5"
+                    [infiniteScrollThrottle]="150" (scrolled)="doInfinite()"></div>
+            </section>
+
+            <section class="filter" *ngIf="postsBoolean || takesBoolean">
+                <div class="menu">
+
+                    <h2 class="menu__header">Filter</h2>
+                    <ul class="menu__ul">
+                        <li class="menu__item" [class.menu__item--active]="filterBy == 'TOP'"
+                            (click)="handlePosts('TOP')">
+                            <button class="menu__button">
+                                <div class="menu__active" [class.menu__active--show]="filterBy == 'TOP'"></div>
+                                <img class="menu__icon" src="assets/imgs/myfeed.png" alt="">
+                                <span class="menu__text">ALL</span>
+                            </button>
+                        </li>
+                        <li class="menu__item" [class.menu__item--active]="filterBy == league.league"
+                            *ngFor="let league of threadsService.menuLeagues" (click)="handlePosts(league.league)">
+                            <button class="menu__button" href="">
+                                <div class="menu__active" [class.menu__active--show]="filterBy == league.league"></div>
+                                <img class="menu__icon" [src]="league?.image" alt="">
+                                <span class="menu__text">{{league?.league}}</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+
+
+</div>

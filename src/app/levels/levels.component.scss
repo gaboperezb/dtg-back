@@ -1,0 +1,308 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+ }
+
+.min-height {
+	background: #00000085;
+    position: fixed;
+    top: 0;
+    z-index: 100000;
+    left: 0;
+   	height: 100%;
+   	width: 100%;
+}
+
+.relative-hack {
+	width: 100%;
+    height: 100%;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+	padding: 60px 0 20px 0;
+	overflow: auto;
+}
+
+.close-hack {
+    position: relative;
+}
+
+.close {
+	position: absolute;
+	top: -2px;
+	right: -35px;
+	color: white;
+    z-index: 9999999999999999;
+	font-size: 24px;
+	opacity: 1;
+	
+	.close__icon {
+
+        path {
+            fill: white;
+            stroke: white;
+        }
+        
+    }
+}
+
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+
+
+.container-form {
+	
+	border-radius: 5px;
+    width: 580px;
+    background-color: white;
+    border: 1px solid #EFEEF3;
+    padding: 16px;
+    overflow: scroll;
+ 	
+}
+
+.spinner-container {
+    text-align: center;
+    padding-top: 20px;
+
+    div {
+        height: 25px;
+        width: 25px;
+    }
+
+}
+
+ .title {
+    font-size: 1.7rem;
+    font-weight: bold;
+ }
+
+
+
+
+ .point {
+    height: 60px;
+    width: 60px;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
+
+.user-points-info ul li img  {
+    height: 30px;
+    width: 30px;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
+.info {
+    color: white;
+text-align: center;
+font-weight: 500;
+font-style: italic;
+}
+
+.row {
+    margin: 0;
+}
+
+
+
+.user-points-info {
+    
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    padding: 16px;
+
+
+}
+
+.ul-points {
+    margin-top: 20px !important;
+    padding-top: 20px !important;
+}
+
+.center {
+    display: block;
+    margin: 3px auto;
+    text-align: center;
+    color: #22263c;
+}
+
+
+
+
+.user-points-info ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    margin-bottom: 0;
+    text-align: left;
+    border-top: 1px solid #d0d0d0;
+    padding-top: 15px;
+
+}
+
+.info-level {
+    
+    display: inline-block;
+}
+
+ion-content {
+    --background: #343a56;
+}
+
+.how-text {
+    color: white;
+    /* text-align: center; */
+    background: #4264d0;
+    border-radius: 15px;
+    /* text-align: center; */
+    padding: 10px;
+    width: auto;
+    display: block;
+    text-align: center;
+    /* width: 70%; */
+    margin-bottom: 30px
+}
+
+
+
+
+.content-popout ul {
+    list-style-type: none;
+    width: 100%;
+    list-style: none;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.content-popout ul li {
+    margin-bottom: 3px;
+}
+
+.content-popout ul.how li span {
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+.information {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #65737F;
+    font-weight: lighter;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.content-popout span {
+    font-size: 18px;
+font-weight: 600;
+color: #22263c;
+}
+
+.points-text {
+    font-weight: 600;
+    color: #65737F;
+}
+
+.how {
+    padding: 16px;
+
+  
+}
+
+li {
+    margin-bottom: 20px !important;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.banner {
+    width: 80%;
+    text-align: center;
+    margin: 20px auto;
+    display: block;
+    height: 30px;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
+#user-pic {
+    height: 52px;
+    width: 52px;
+    -o-object-fit: cover;
+       object-fit: cover;
+    border-radius: 50px;
+    display: block;
+    margin: 0 auto;
+}
+.first-top {
+    margin-bottom: 12px !important;
+}
+
+.col-10 {
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+@media (max-width: 700px) {
+    .container-form {
+        width: 100%;
+    }
+
+    .close {
+        top: 5px;
+        right: 5px;
+    }
+
+    .close-hack {
+        position: static;
+    } 
+
+    .point {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+        -o-object-fit: contain;
+           object-fit: contain;
+    }
+
+    .col-10 span {
+        font-size: 1.6rem !important;
+    }
+
+    .how {
+        padding: 0px;
+    }
+    
+}
+

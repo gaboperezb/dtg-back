@@ -1,0 +1,41 @@
+<div class="min-height" (click)="goBack()">
+    <div class="relative-hack">
+
+        <div class="close-hack">
+            <div class="container-form">
+                <div class="close">
+                    <button class="close__button" (click)="goBack()">
+                        <svg class="bi bi-x close__icon" width="1em" height="1em" viewBox="0 0 16 16"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z"
+                                clip-rule="evenodd" />
+                            <path fill-rule="evenodd"
+                                d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="spinner-container" *ngIf="wait">
+                    <div class="spinner-border" role="status">
+
+                    </div>
+                </div>
+                <div class="header" *ngIf="!wait">
+                    <p class="title">{{title}}</p>
+                </div>
+                <ul class="user-list">
+                    <li *ngFor="let user of users">
+                        <app-followers-item [user]="user"></app-followers-item>
+                    </li>
+                    <div class="spinner-container-bottom" *ngIf="showInfiniteSpinner">
+                        <div class="spinner-border" role="status">
+                        </div>
+                    </div>
+                    <div class="search-results" infiniteScroll [infiniteScrollDistance]="1.5"
+                        [infiniteScrollThrottle]="150" (scrolled)="doInfinite()"></div>
+                </ul>     
+            </div>    
+        </div>
+    </div>
+</div>

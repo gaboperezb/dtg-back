@@ -1,0 +1,42 @@
+
+<div>
+    <div class="top-container">
+        <p class="create">Create your feed</p>
+        <div class="button-container">
+            <button id="love" class="form__button" (click)="selectAll()">
+                <span>I</span>
+                <span>
+                    <svg  class="heart" viewBox="0 0 81 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                        <title>Group 53</title>
+                        <desc>Created with Sketch.</desc>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Group-53" transform="translate(-6.000000, -6.000000)">
+                                <rect id="Rectangle-20" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="93" height="87"></rect>
+                                <g id="heart" transform="translate(6.000000, 6.000000)" fill="#EB4B59" fill-rule="nonzero">
+                                    <path d="M58.725,0 C51.6375,0 44.9553894,3.26992188 40.5,8.58339844 C36.0444159,3.26992188 29.3625,0 22.275,0 C9.71961058,0 0,9.80878906 0,22.4794922 C0,38.0099609 13.7696106,50.4771484 34.6267212,69.6853516 L40.5,75 L46.3732788,69.6853516 C67.2301947,50.4769531 81,38.0097656 81,22.4794922 C81,9.80878906 71.2803894,0 58.725,0 Z" id="Combined-Shape"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </span>
+                <span>SPORTS, SELECT ALL!</span>
+            </button>
+        </div>
+    </div>
+    
+	<div class="leagues-container">
+		<div *ngFor="let league of leagues" (click)="addLeague(league)" [class.league-selection]="true" [class.active-leagues]="league.selected">
+			<img [class.general-img]="league.league == 'General'" [class.img-league]="true" [class.menu__icon--league]="league.league == 'NBA' || league.league == 'NFL' || league.league == 'NCAAF' || league.league == 'NCAAB' || league.league == 'MLB' || league.league == 'NHL'" [src]="league.image">
+			<span [class.general-text]="league.league == 'General'" [class.text-league]="true">{{league.league}}</span>
+		</div>	
+    </div>
+    
+    <div class="done__container">
+        <button (click)="done()" *ngIf="selectedLeagues.length > 0 && !loading">DONE</button>
+     
+        <button *ngIf="loading" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>

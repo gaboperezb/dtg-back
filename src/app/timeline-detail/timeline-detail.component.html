@@ -1,0 +1,163 @@
+<div class="main-container">
+
+    <div class="comment-container">
+        <div class="comment">
+          
+            <section class="comment__post">
+                <a *ngIf="thread">
+                    <div class="post" (click)="goToPost()">
+                        <div class="post__info">
+                            <span class="type">POST</span>
+                            <span class="thread-title">{{thread?.title}}</span>
+                            <span class="by">By {{thread?.user?.username}}</span>
+                        </div>
+                        <div class="post__actions">
+                            <div class="thread-info-count">
+                                <div class="thread-info-count__action--like">
+                                    <button class="thread-info__button">
+            
+                                        <!-- Heart Fill -->    
+                                        <svg  class="thread-info-icon" viewBox="0 0 88 81" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g id="heart-outline" transform="translate(-6.000000, -6.000000)">
+                                                    <polygon id="Rectangle-21" points="0 0 100 0 100 93 0 93"></polygon>
+                                                    <path
+                                                        d="M69.8,6 C62.1,6 54.8404231,9.53151563 50,15.2700703 C45.1593654,9.53151563 37.9,6 30.2,6 C16.5595769,6 6,16.5934922 6,30.2778516 C6,47.0507578 20.9595769,60.5153203 43.6191538,81.2601797 L50,87 L56.3808462,81.2601797 C79.0402115,60.5151094 94,47.0505469 94,30.2778516 C94,16.5934922 83.4404231,6 69.8,6 Z M52.7153077,75.4526484 L51.8228269,76.2696094 L50,77.9092266 L48.1773846,76.2698203 L47.2859615,75.4537031 C36.6206154,65.6910937 27.4095962,57.2595 21.3204615,49.7205937 C15.4064808,42.3983203 12.7692308,36.402 12.7692308,30.2778516 C12.7692308,25.4547656 14.5508077,21.0111562 17.7858654,17.7658828 C21.0101346,14.5313672 25.4188077,12.75 30.2,12.75 C35.7283462,12.75 41.1936538,15.3164766 44.8194231,19.6149609 L50,25.7566172 L55.1803654,19.6149609 C58.8063462,15.3164766 64.2714423,12.75 69.8,12.75 C74.5814038,12.75 78.9898654,14.5313672 82.2143462,17.7656719 C85.4491923,21.0111562 87.2307692,25.4545547 87.2307692,30.2778516 C87.2307692,36.402 84.5935192,42.3981094 78.6799615,49.7201719 C72.5910385,57.2590781 63.3804423,65.6900391 52.7153077,75.4526484 Z"
+                                                        id="Shape" fill="#A2A4A6" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+            
+                                        <span class="thread-info__text">{{thread?.likers.length}}</span>
+                                    
+                                    </button>
+                                </div>
+                                <div class="thread-info-count__action--comments">
+                                    <button class="thread-info__button">
+                                        <svg class="thread-info-icon" viewBox="0 0 79 78" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                                            <title>comment</title>
+                                            <desc>Created with Sketch.</desc>
+                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g id="comment" transform="translate(-6.000000, -6.000000)">
+                                                    <rect id="Rectangle-22" x="0" y="0" width="91" height="90"></rect>
+                                                    <path
+                                                        d="M8.517,83.161 C8.167,83.161 7.816,83.089 7.485,82.94 C6.581,82.534 6,81.634 6,80.643 L6,28.518 C6,16.102 16.102,6 28.518,6 L62.331,6 C74.747,6 84.849,16.102 84.849,28.518 L84.849,43.518 C84.849,55.934 74.747,66.036 62.331,66.036 L28.764,66.036 L10.189,82.526 C9.718,82.943 9.121,83.161 8.517,83.161 Z M29.0091478,12.036 C19.6491899,12.036 12.035,19.5369093 12.035,28.7554818 L12.035,73.2492727 L26.7351829,60.3954896 C27.2051227,59.9842451 27.8148793,59.7681026 28.4440549,59.789143 C28.5625108,59.7939249 28.6790248,59.801576 28.7965098,59.8092271 C28.8673891,59.8149654 28.9382685,59.82166 29.0101188,59.82166 L61.840851,59.82166 C71.2008089,59.82166 78.8149988,52.3207508 78.8149988,43.1021782 L78.8149988,28.7564382 C78.8149988,19.5369093 71.199838,12.0369564 61.840851,12.0369564 L29.0091478,12.0369564 L29.0091478,12.036 Z"
+                                                        id="Shape" fill="#A2A4A6" fill-rule="nonzero"
+                                                        transform="translate(45.424500, 44.580500) scale(-1, 1) translate(-45.424500, -44.580500) ">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        <span class="thread-info__text">{{thread?.replies}}</span>
+                                    </button>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a *ngIf="take">
+                    <div class="post" (click)="goToDiscussion()">
+                        <div class="post__info">
+                            <span class="type">DISCUSSION</span>
+                            <span class="thread-title">{{take.take}}</span>
+                            <span class="by">By {{take?.user?.username}}</span>
+                        </div>
+                        <div class="post__actions">
+                            <div class="thread-info-count">
+                                <div class="thread-info-count__action--like">
+                                    <button class="thread-info__button">
+            
+                                        <!-- Heart Fill -->    
+                                        <svg  class="thread-info-icon" viewBox="0 0 88 81" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g id="heart-outline" transform="translate(-6.000000, -6.000000)">
+                                                    <polygon id="Rectangle-21" points="0 0 100 0 100 93 0 93"></polygon>
+                                                    <path
+                                                        d="M69.8,6 C62.1,6 54.8404231,9.53151563 50,15.2700703 C45.1593654,9.53151563 37.9,6 30.2,6 C16.5595769,6 6,16.5934922 6,30.2778516 C6,47.0507578 20.9595769,60.5153203 43.6191538,81.2601797 L50,87 L56.3808462,81.2601797 C79.0402115,60.5151094 94,47.0505469 94,30.2778516 C94,16.5934922 83.4404231,6 69.8,6 Z M52.7153077,75.4526484 L51.8228269,76.2696094 L50,77.9092266 L48.1773846,76.2698203 L47.2859615,75.4537031 C36.6206154,65.6910937 27.4095962,57.2595 21.3204615,49.7205937 C15.4064808,42.3983203 12.7692308,36.402 12.7692308,30.2778516 C12.7692308,25.4547656 14.5508077,21.0111562 17.7858654,17.7658828 C21.0101346,14.5313672 25.4188077,12.75 30.2,12.75 C35.7283462,12.75 41.1936538,15.3164766 44.8194231,19.6149609 L50,25.7566172 L55.1803654,19.6149609 C58.8063462,15.3164766 64.2714423,12.75 69.8,12.75 C74.5814038,12.75 78.9898654,14.5313672 82.2143462,17.7656719 C85.4491923,21.0111562 87.2307692,25.4545547 87.2307692,30.2778516 C87.2307692,36.402 84.5935192,42.3981094 78.6799615,49.7201719 C72.5910385,57.2590781 63.3804423,65.6900391 52.7153077,75.4526484 Z"
+                                                        id="Shape" fill="#A2A4A6" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+            
+                                        <span class="thread-info__text">{{take?.likers.length}}</span>
+                                    
+                                    </button>
+                                </div>
+                                <div class="thread-info-count__action--comments">
+                                    <button class="thread-info__button">
+                                        <svg class="thread-info-icon" viewBox="0 0 79 78" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                                            <title>comment</title>
+                                            <desc>Created with Sketch.</desc>
+                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g id="comment" transform="translate(-6.000000, -6.000000)">
+                                                    <rect id="Rectangle-22" x="0" y="0" width="91" height="90"></rect>
+                                                    <path
+                                                        d="M8.517,83.161 C8.167,83.161 7.816,83.089 7.485,82.94 C6.581,82.534 6,81.634 6,80.643 L6,28.518 C6,16.102 16.102,6 28.518,6 L62.331,6 C74.747,6 84.849,16.102 84.849,28.518 L84.849,43.518 C84.849,55.934 74.747,66.036 62.331,66.036 L28.764,66.036 L10.189,82.526 C9.718,82.943 9.121,83.161 8.517,83.161 Z M29.0091478,12.036 C19.6491899,12.036 12.035,19.5369093 12.035,28.7554818 L12.035,73.2492727 L26.7351829,60.3954896 C27.2051227,59.9842451 27.8148793,59.7681026 28.4440549,59.789143 C28.5625108,59.7939249 28.6790248,59.801576 28.7965098,59.8092271 C28.8673891,59.8149654 28.9382685,59.82166 29.0101188,59.82166 L61.840851,59.82166 C71.2008089,59.82166 78.8149988,52.3207508 78.8149988,43.1021782 L78.8149988,28.7564382 C78.8149988,19.5369093 71.199838,12.0369564 61.840851,12.0369564 L29.0091478,12.0369564 L29.0091478,12.036 Z"
+                                                        id="Shape" fill="#A2A4A6" fill-rule="nonzero"
+                                                        transform="translate(45.424500, 44.580500) scale(-1, 1) translate(-45.424500, -44.580500) ">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        <span class="thread-info__text">{{take?.replies}}</span>
+                                    </button>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a *ngIf="trivia">
+                    <div class="post">
+                        <div class="post__info">
+                            <span class="type">Trivia</span>
+                            <span class="thread-title">{{trivia.question}}</span>
+                        </div>
+                    </div>
+                </a>
+            </section>
+
+
+            <section class="comment__replies">
+                <div class="timeline-list" *ngIf="thread">
+                    <app-timeline-item  (deleteComment)="deleteComment($event)" [timeline]="timeline" [thread]="thread" [hideReplies]="true"></app-timeline-item>
+                </div>
+
+                <div class="timeline-list" *ngIf="take">
+                    <app-take-timeline-item  (deleteComment)="deleteComment($event)" [timeline]="timeline" [take]="take" [hideReplies]="true"></app-take-timeline-item>
+                </div>
+
+                <div class="timeline-list" *ngIf="trivia">
+                    <app-play-trivia-timeline-item  (deleteComment)="deleteComment($event)" [timeline]="timeline" [trivia]="trivia" [hideReplies]="true"></app-play-trivia-timeline-item>
+                </div>
+
+
+                <div class="answers-list" *ngIf="thread && answers.length">
+                    <span class="replies-header">Replies</span>
+                    <app-answer-item *ngFor="let answer of answers"  (filterAnswer)="filterAnswers($event)" (addAnswer)="addAnswer($event)" (imageVisible)="emitterImages()" [answer]="answer" [timeline]="timeline" [thread]="thread"></app-answer-item>
+                </div>
+
+                <div class="answers-list" *ngIf="take && answers.length">
+                    <span  class="replies-header">Replies</span>
+                    <app-take-answer-item *ngFor="let answer of answers"  (filterAnswer)="filterAnswers($event)" (addAnswer)="addAnswer($event)" (imageVisible)="emitterImages()" [answer]="answer" [timeline]="timeline" [take]="take"></app-take-answer-item>
+                </div>
+            
+                <div class="answers-list" *ngIf="trivia && answers.length">
+                    <span  class="replies-header">Replies</span>
+                    <app-play-trivia-answer-item *ngFor="let answer of answers"  (filterAnswer)="filterAnswers($event)" (addAnswer)="addAnswer($event)" (imageVisible)="emitterImages()" [answer]="answer" [timeline]="timeline" [trivia]="trivia"></app-play-trivia-answer-item>
+                </div>
+                
+
+            </section>
+        </div>
+    </div>
+
+</div>

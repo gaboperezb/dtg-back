@@ -1,0 +1,171 @@
+<div class="ion-item-btn">
+
+    <div *ngIf="editComment">
+        <app-edit-comment [comment]="timeline.discussion" [timelineId]="timeline._id" (destroyComponent)="destroyChild($event)"></app-edit-comment>
+    </div>
+    <div class="top-thread">
+        <div class="header-link user-info white ion-padding" (click)="goToUser()">
+            <span class="span-userimage">
+                <img [src]="timeline?.user?.profilePictureThumbnail " class="profile-picture">
+            </span>
+            <span class="transparent" style="color: transparent;">::</span>
+            <span class="by-username">
+                <span class="username">{{timeline?.user?.username}}</span>
+                <br>
+                <span class="name">{{timeline?.created}} ago</span>
+            </span>
+
+        </div>
+
+         <!-- delete -->
+    
+    <div class="delete-thread" (click)="toggleMoreOptions()" *ngIf="authService.currentUser && (authService.currentUser.isAdmin || timeline.user.username === authService.currentUser.username)">
+        <svg class="bi bi-three-dots more-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+        </svg>
+    </div>
+    <div class="sorting__options" *ngIf="toggleEdit">
+        <ul class="sorting__list">
+            <li class="sorting__item" (click)="editTimeline()">
+                <button class="sorting__button" >
+                    <svg class="bi bi-pencil sorting__icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+                        <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+                      </svg>
+                      <span class="sorting__text">Edit</span> 
+                </button>
+            </li>
+            <li class="sorting__item" (click)="deleteTimeline()">
+                <button class="sorting__button">
+                    <svg class="bi bi-trash sorting__icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                      </svg>
+                      <span class="sorting__text">Delete</span> 
+                </button>
+            </li>
+            <li class="sorting__item" (click)="toggleMoreOptions()">
+                <button class="sorting__button" >
+                      <span class="sorting__text">Cancel</span> 
+                </button>
+            </li>
+        </ul>
+    </div>
+
+
+  <!-- delete -->
+
+
+    </div>
+    <p class="discussion">{{timeline?.discussion}}</p>
+    <div class="post-actions">
+        <div class="post-actions__action like-div">
+            <button class="icon-div heart-div" (click)="like()">
+                <!-- Heart Fill -->
+                <svg class="take-actions-icon" *ngIf="timeline?.likedByUser" viewBox="0 0 81 75" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Group-53" transform="translate(-6.000000, -6.000000)">
+                            <rect id="Rectangle-20" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="93" height="87">
+                            </rect>
+                            <g id="heart" transform="translate(6.000000, 6.000000)" fill="#EB4B59" fill-rule="nonzero">
+                                <path
+                                    d="M58.725,0 C51.6375,0 44.9553894,3.26992188 40.5,8.58339844 C36.0444159,3.26992188 29.3625,0 22.275,0 C9.71961058,0 0,9.80878906 0,22.4794922 C0,38.0099609 13.7696106,50.4771484 34.6267212,69.6853516 L40.5,75 L46.3732788,69.6853516 C67.2301947,50.4769531 81,38.0097656 81,22.4794922 C81,9.80878906 71.2803894,0 58.725,0 Z"
+                                    id="Combined-Shape"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                <svg *ngIf="!timeline?.likedByUser" class="take-actions-icon" viewBox="0 0 88 81" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="heart-outline" transform="translate(-6.000000, -6.000000)">
+                            <polygon id="Rectangle-21" points="0 0 100 0 100 93 0 93"></polygon>
+                            <path
+                                d="M69.8,6 C62.1,6 54.8404231,9.53151563 50,15.2700703 C45.1593654,9.53151563 37.9,6 30.2,6 C16.5595769,6 6,16.5934922 6,30.2778516 C6,47.0507578 20.9595769,60.5153203 43.6191538,81.2601797 L50,87 L56.3808462,81.2601797 C79.0402115,60.5151094 94,47.0505469 94,30.2778516 C94,16.5934922 83.4404231,6 69.8,6 Z M52.7153077,75.4526484 L51.8228269,76.2696094 L50,77.9092266 L48.1773846,76.2698203 L47.2859615,75.4537031 C36.6206154,65.6910937 27.4095962,57.2595 21.3204615,49.7205937 C15.4064808,42.3983203 12.7692308,36.402 12.7692308,30.2778516 C12.7692308,25.4547656 14.5508077,21.0111562 17.7858654,17.7658828 C21.0101346,14.5313672 25.4188077,12.75 30.2,12.75 C35.7283462,12.75 41.1936538,15.3164766 44.8194231,19.6149609 L50,25.7566172 L55.1803654,19.6149609 C58.8063462,15.3164766 64.2714423,12.75 69.8,12.75 C74.5814038,12.75 78.9898654,14.5313672 82.2143462,17.7656719 C85.4491923,21.0111562 87.2307692,25.4545547 87.2307692,30.2778516 C87.2307692,36.402 84.5935192,42.3981094 78.6799615,49.7201719 C72.5910385,57.2590781 63.3804423,65.6900391 52.7153077,75.4526484 Z"
+                                id="Shape" fill="#A2A4A6" fill-rule="nonzero"></path>
+                        </g>
+                    </g>
+                </svg>
+
+                <span *ngIf="timeline.count > 0" [class.liked]="timeline?.likedByUser"
+                    class="post-actions__text">{{timeline?.count}}</span>
+                <span *ngIf="timeline.count == 0" class="post-actions__text cero-likes">Like</span>
+            </button>
+        </div>
+        <div class="post-actions__action post-actions__action--share">
+            <button class="icon-div share-div" (click)="toggleComment = !toggleComment">
+
+                <span class="post-actions__text">Reply</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="login-comment" *ngIf="toggleComment && !authService.currentUser">
+        <span class="login-text">Log in or create an account to leave a comment</span>
+        <div class="login-buttons">
+            <button class="login" (click)="goAccess('login')">Log in</button>
+            <button class="signup" (click)="goAccess('signup')">Create account</button>
+        </div>
+    </div>
+    <div *ngIf="toggleComment && authService.currentUser">
+        <div class="add-comment-container">
+
+            <div class="add-comment-user">
+                <img [src]="authService?.currentUser?.profilePicture" alt="">
+            </div>
+            <div class="add-comment" [class.focused]="textareaFocused">
+                <div class="add-comment__textarea-container">
+    
+                    <div class="mid-textarea">
+                        <textarea [(ngModel)]="comment" (blur)="commentUnfocused()" (focus)="commentFocused()"
+                            class="add-comment__textarea" placeholder="Add a comment" id="" [ngModelOptions]="{standalone:
+                                true}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="send-comment">
+            <button class="cancel-comment__button" (click)="toggleComment = false"><span
+                >Cancel</span></button>
+            <button *ngIf="!sendingComment" class="send-comment__button" (click)="sendComment()"><span
+                    [class.disabled]="comment.length == 0">Reply</span></button>
+            <button *ngIf="sendingComment" class="send-comment__button loading-button" type="button" disabled>
+                <div class="spinner-border" role="status">
+    
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="timeline?.numberOfAnswers > 0 && !hideReplies" class="replies-div">
+        <button class="more-replies" (click)="getAnswers()">
+            <svg *ngIf="!toggleReplies" class="bi bi-chevron-down caret" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z" clip-rule="evenodd"/>
+              </svg> 
+              <svg *ngIf="toggleReplies" class="bi bi-chevron-up caret" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
+              </svg>
+              
+            <span><span *ngIf="!toggleReplies">View</span><span *ngIf="toggleReplies">Hide</span> {{timeline?.numberOfAnswers}} <span *ngIf="timeline?.numberOfAnswers == 1">reply</span><span *ngIf="timeline?.numberOfAnswers > 1">replies</span></span>
+        </button>
+    </div>
+
+    <div class="spinner-border spinner" role="status" *ngIf="loadingAnswers && toggleReplies">
+
+    </div>
+
+    <div *ngIf="toggleReplies || replied " class="replies-container">
+       
+    </div>
+
+    <div *ngIf="toggleReplies || replied " class="replies-container">
+        <app-play-trivia-answer-item *ngFor="let answer of answers"  (filterAnswer)="filterAnswers($event)" (addAnswer)="addAnswer($event)" (imageVisible)="emitterImages()" [answer]="answer" [timeline]="timeline" [trivia]="trivia"></app-play-trivia-answer-item> 
+    </div>
+
+
+</div>
+

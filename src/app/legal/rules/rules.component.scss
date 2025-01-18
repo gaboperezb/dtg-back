@@ -1,0 +1,22 @@
+.guidelines {
+    padding: 50px;
+    background: white;
+    margin: 30px auto;
+    border-radius: 5px;
+    font-size: 1.6rem;
+    width: 80%;
+
+    h1 {
+        margin-bottom: 40px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+  .guidelines{
+        padding: 16px;
+        background: white;
+        margin: 5px;
+        border-radius: 5px;
+    }
+}

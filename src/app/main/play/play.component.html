@@ -1,0 +1,90 @@
+
+
+<div class="placeholders-container" *ngIf="playService.loaderActive">
+
+    <div class="placeholder-item">
+        <div class="placeholder-flex">
+            
+            <div class="skeleton-image-right">
+                <div class="skeleton-username skeleton-username-1">
+                </div>
+            </div>
+        </div>
+
+        <div class="placeholder-trivias-container">
+            <div class="trivia-container" >
+                <div class="trivia-container-title">
+            
+                </div>
+             </div>
+             <div class="trivia-container" >
+                <div class="trivia-container-title">
+            
+                </div>
+             </div>
+             <div class="trivia-container" >
+                <div class="trivia-container-title">
+            
+                </div>
+             </div>
+             <div class="trivia-container" >
+                <div class="trivia-container-title">
+            
+                </div>
+             </div>
+             <div class="trivia-container" >
+                <div class="trivia-container-title">
+            
+                </div>
+             </div>
+             <div class="trivia-container" >
+                <div class="trivia-container-title">
+            
+                </div>
+             </div>
+         </div>
+     
+    </div>
+    <div class="placeholder-item">
+        <div class="placeholder-flex">
+            
+            <div class="skeleton-image-right">
+                <div class="skeleton-username skeleton-username-1">
+                </div>
+            </div>
+        </div>
+        <div class="play-container-title">
+            
+        </div>
+        <div class="play-container-title">
+            
+        </div>
+        <div class="play-container-title">
+            
+        </div>
+        
+
+    </div>
+    
+</div>
+
+ <div class="trivias" *ngIf="!playService.loaderActive && playService.playToggled">
+     <div class="section-header">
+        <span>Trivia</span>
+     </div>
+     <div class="coming-soon" *ngIf="playService.trivias.length == 0">
+        No {{threadsService.filterBy}} trivia available for today
+     </div>
+
+     <div class="trivias-container">
+        <div class="trivia-container" *ngFor="let trivia of playService.trivias">
+            <play-trivia-item  [trivia]="trivia"></play-trivia-item>
+         </div>
+     </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,109 @@
+
+.blocked {
+    background-color: rgb(213, 40, 28);
+  }
+
+  .user {
+    display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox; display: flex;
+    height: 380px;
+    border-radius: 10px;
+    background: #343a56;
+    border: 2px solid #22263c;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+    
+    .user__picture {
+      display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox; display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      flex-basis: 20%;
+      align-items: center;
+      padding: 0 20px;
+      border-right: 2px solid #22263c;
+      background: #4c5375;
+    }
+    
+    .user__picture img {
+      height: 70px;
+      width: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      font-size: 1.5rem;
+    }
+    
+    .user__info {
+      display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox; display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 1.5rem;
+    }
+    
+    .user__leagues {
+      display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox; display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    
+    .user__league {
+        margin-right: 10px;
+        background: #2C62F5;
+        border-radius: 3px;
+        padding: 6px;
+        color: white;
+    }
+  
+    #account {
+      margin: 10px 0;
+    }
+    
+    
+    
+    .block-btn {
+        text-transform: uppercase;
+        color: white !important;
+        background: #43b581;
+        padding: 10px;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 4px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+    
+    .username {
+        font-size: 1.6rem;
+    }
+    .block {
+        display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox; display: flex;
+        flex-direction: column;
+        box-align: center;
+        justify-content: center;
+        border-top: 2px solid #22263c;
+    }
+    
+    .block-btn:active,
+    .block-btn:focus {
+        outline: none;
+        box-shadow: 0 .5rem 1rem rgba(black,.2);
+    }
+    
+    .block-btn:hover {
+        background: #2a51bd;
+    }

@@ -1,0 +1,33 @@
+
+    <div class="container">
+        <h4>POSTS</h4>
+    
+            <div class="post" *ngFor="let thread of threads">
+                <div class="user-info"> 
+                    <div class="user-info__text-container"> 
+                        <div class="user-info__created-container">
+                            <span class="user-info__created">
+                                {{thread.threadCreated}} {{thread.typeTime}} ago
+                            </span>
+                        </div>
+                    </div>
+                    <!-- <i [ngClass]="iconClass" (mouseover)="over()"
+                        (mouseout)="out()" (click)="deletePost($event)"></i> -->
+                </div>
+            
+                <div class="post__content">
+                    <img *ngIf="thread.type == 'Link'" class="link"  src="/assets/imgs/link.png" aria-hidden="true" alt="Poll">
+                    <img *ngIf="thread.type == 'Poll'" class="poll" src="/assets/imgs/poll.png" aria-hidden="true" alt="Link">
+                    <p class="post__title" [routerLink]="['/threads', thread._id]">{{thread?.title}}</p>
+                    <br>
+                    <p class="post__title">{{thread?._id}}</p>
+                    <br>
+                    <p class="post__title">{{thread?.picture}}</p>
+                </div>
+    
+                <div>
+                    <button class="delete" (click)="deletePost($event, thread)">DELETE</button>
+                    <button class="delete" *ngIf="thread.fromWeb" (click)="edit(thread)">EDIT</button>
+                </div>     
+            </div>
+    </div>

@@ -1,0 +1,23 @@
+<div class="container-form min-height">
+    <div *ngIf="errorMessage != null" class="alert alert-danger" role="alert">
+        {{errorMessage}}
+    </div>
+    <div *ngIf="successMessage != null" class="alert alert-success" role="alert">
+        {{successMessage}}
+    </div>
+    <h2 class="mb-2 mt-3">Reset password</h2>
+    <h5>Enter your email and we'll send you a link to reset your password.</h5>
+    <hr>
+    <form (ngSubmit)="submit(forgotForm.value)" [formGroup]="forgotForm" novalidate>
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input id="email" type="email" placeholder="Enter email" formControlName="email" class="form-control" />
+            <div class="alert alert-danger"
+                [hidden]="forgotForm.controls['email'].untouched || forgotForm.controls['email'].valid">Please enter a
+                valid email</div>
+        </div>
+        <br>
+        <button type="submit" [disabled]="!forgotForm.valid" class="btn btn-primary btn-block mt-3">Send link
+            </button>
+    </form>
+</div>

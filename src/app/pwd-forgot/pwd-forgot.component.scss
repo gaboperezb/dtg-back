@@ -1,0 +1,25 @@
+.container-form {
+    padding: 10px;
+    border-radius: 5px;
+    width: 35%;
+    margin: 90px auto;
+    background-color: white;
+    border: 1px solid #EFEEF3; ;
+    font-size: 1.6rem;
+    
+    
+}
+
+.already-account {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+@media screen and (max-width: 900px) {
+
+        .container-form {
+            width: 60%;
+        }
+}

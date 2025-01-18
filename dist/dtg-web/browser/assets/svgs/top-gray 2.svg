@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="75px" viewBox="0 0 64 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Group 29</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-29" transform="translate(-6.000000, -6.000000)">
+            <rect id="Rectangle-27" x="0" y="0" width="76" height="88"></rect>
+            <rect id="Rectangle-15" fill="#B5B7B9" x="6" y="51" width="18" height="30" rx="3"></rect>
+            <rect id="Rectangle-15" fill="#B5B7B9" x="52" y="41" width="18" height="40" rx="3"></rect>
+            <g id="Group-30" transform="translate(22.000000, 6.000000)" fill="#B5B7B9">
+                <path d="M25,25.622289 L25,72 C25,73.6568542 23.6568542,75 22,75 L10,75 C8.34314575,75 7,73.6568542 7,72 L7,25.622289 L2.36204465,25.622289 C1.49020407,25.622289 0.689053271,25.1551552 0.288477869,24.3843844 C-0.135660791,23.6369703 -0.0885342735,22.7027027 0.406294164,22.002002 L14.5442495,0.980980981 C15.4160901,-0.32699366 17.5839099,-0.32699366 18.4557505,0.980980981 L32.5937058,22.002002 C33.0885343,22.7027027 33.1356608,23.6369703 32.7115221,24.3843844 C32.3109467,25.1551552 31.5097959,25.622289 30.6379553,25.622289 L25,25.622289 Z" id="Combined-Shape"></path>
+            </g>
+            <g id="noun_Arrow_1966946" transform="translate(22.000000, 6.000000)"></g>
+        </g>
+    </g>
+</svg>

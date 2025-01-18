@@ -1,0 +1,97 @@
+<div class="notification">
+    <div class="noti">
+        <img (click)="goToUser()" [src]="notification.user.profilePictureThumbnail"
+            class="user-picture">
+
+        <div class="flex-helper" *ngIf="notification.typeOf == 'follow'">
+            <p class="n-text follow-text">
+                <span class="username"
+                    (click)="goToUser()">{{notification?.user?.username}}</span>
+                is now following you
+                <span class="date">{{notification?.created}}</span>
+            </p>
+        </div>
+
+        <div class="flex-helper" *ngIf="notification.typeOf == 'comment' && notification.thread">
+            <p class="n-text">
+                <span class="username"
+                    (click)="goToUser()">{{notification?.user?.username}}</span>
+                commented on your post
+                <span (click)="goToThread(notification, $event)" class="username">{{notification?.titleToShow}}
+                </span>{{notification?.notification?.discussion}} <span
+                    class="date">{{notification?.notification?.created}}</span></p>
+        </div>
+
+
+        <div class="flex-helper" *ngIf="notification.typeOf == 'comment' && notification.take">
+            <p class="n-text">
+                <span class="username"
+                    (click)="goToUser()">{{notification?.user?.username}}</span>
+                commented on your discussion
+                <span (click)="goToTake(notification, $event)" class="username">{{notification?.titleToShow}}
+                </span>{{notification?.notification?.discussion}} <span
+                    class="date">{{notification?.notification?.created}}</span></p>
+        </div>
+
+        <div *ngIf="notification.typeOf == 'mention'" class="flex-helper">
+            <p class="n-text">
+                <span class="username"
+                    (click)="goToUser()">{{notification?.user?.username}}</span>
+                replied to your comment
+                <i
+                    class="discussions-text">"{{notification?.replyTextToShow}}"</i>&nbsp;{{notification?.notification?.discussion}}
+                <span class="date">{{notification?.notification?.created}}</span>
+            </p>
+        </div>
+
+    </div>
+    <div class="reply-div" *ngIf="notification.typeOf != 'follow'">
+        <button (click)="goToContext()">
+            <div class="reply">Context</div>
+        </button>
+        <button (click)="toggleComment = !toggleComment">
+            <div class="reply">REPLY</div>
+        </button>
+
+    </div>
+
+    <div class="login-comment" *ngIf="toggleComment && !authService.currentUser">
+        <span class="login-text">Log in or create an account to leave a comment</span>
+        <div class="login-buttons">
+            <button class="login" (click)="goAccess('login')">Log in</button>
+            <button class="signup" (click)="goAccess('signup')">Create account</button>
+        </div>
+    </div>
+
+    <div *ngIf="toggleComment && authService.currentUser" class="reply-box">
+        <div class="add-comment-container">
+
+            <div class="add-comment-user">
+                <img [src]="authService?.currentUser?.profilePicture" alt="">
+            </div>
+            <div class="add-comment" [class.focused]="textareaFocused">
+                <div class="add-comment__textarea-container">
+    
+                    <div class="mid-textarea">
+                        <textarea [(ngModel)]="comment" (blur)="commentUnfocused()" (focus)="commentFocused()"
+                            class="add-comment__textarea" placeholder="Add a comment" id="" [ngModelOptions]="{standalone:
+                                true}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="send-comment">
+            <button class="cancel-comment__button" (click)="toggleComment = false"><span
+                >Cancel</span></button>
+            <button *ngIf="!sendingComment" class="send-comment__button" (click)="replyTo()"><span
+                    [class.disabled]="comment.length == 0">Reply</span></button>
+            <button *ngIf="sendingComment" class="send-comment__button loading-button" type="button" disabled>
+                <div class="spinner-border" role="status">
+    
+                </div>
+            </button>
+        </div>
+    </div>
+    
+</div>

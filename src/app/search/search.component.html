@@ -1,0 +1,54 @@
+<div class="main-container">
+
+    <div class="search-container">
+
+        <div class="sorry" *ngIf="!searching && (!threads.length && !users.length)">
+            Sorry, there were no results for {{searchTerm}}
+        </div>
+
+        <div  *ngIf="!searching && (threads.length || users.length)">
+            <section class="users" *ngIf="users.length">
+                <span class="results">Users</span>
+            
+                <div>
+                    <app-followers-item *ngFor="let user of users" [user]="user"></app-followers-item>
+                </div>
+                <a  *ngIf="!allUsers" routerLink="/search" [queryParams]="{q: searchTerm, type: 'users'}" class="view-more">View all</a>
+                <div class="spinner-container" *ngIf="showInfiniteSpinnerUsers && allUsers">
+                    <div class="spinner-border" role="status">
+                    </div>
+                </div>
+                <div *ngIf="enableInfiniteUsers && allUsers"
+                    class="search-results"
+                    infiniteScroll
+                    [infiniteScrollDistance]="1.5"
+                    [infiniteScrollThrottle]="150"
+                    (scrolled)="doInfiniteUsers()"
+                  ></div>
+              
+            </section>
+    
+            <section class="posts" *ngIf="threads.length">
+                <div class="results-container">
+                    <span class="results">Posts</span>
+                </div>
+                
+                <app-thread *ngFor="let thread of threads" [thread]="thread"  (deleteThread)="deleteThread($event)"></app-thread>
+                <div class="spinner-container" *ngIf="showInfiniteSpinner">
+                    <div class="spinner-border" role="status">
+                    </div>
+                </div>
+                <div *ngIf="enableInfinite"
+                    class="search-results"
+                    infiniteScroll
+                    [infiniteScrollDistance]="1.5"
+                    [infiniteScrollThrottle]="150"
+                    (scrolled)="doInfinite()"
+                  ></div>
+            </section>
+        </div>
+      
+       
+    </div>
+
+</div>

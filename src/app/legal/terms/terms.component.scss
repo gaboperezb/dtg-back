@@ -1,0 +1,20 @@
+.terms{
+    padding: 50px;
+    background: white;
+    margin: 30px;
+    border-radius: 5px;
+    font-size: 1.6rem;
+}
+
+p {
+  margin: 20px 0;
+}
+
+@media screen and (max-width: 600px) {
+    .terms{
+      padding: 16px;
+      margin: 5px;
+      background: white;
+      border-radius: 5px;
+  }
+}

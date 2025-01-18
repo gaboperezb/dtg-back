@@ -1,0 +1,97 @@
+.report {
+  display: -webkit-box;
+  display: -ms-flexbox; display: flex;
+      border-radius: 10px;
+      background: #343a56;
+      border: 2px solid #22263c;
+      color: white;
+      margin-bottom: 20px;
+      position: relative;
+  
+  }
+
+  .reviewed {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: -2px;
+    height: 25px;
+    width: 60px;
+    background: green;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .not-reviewed {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: -2px;
+    height: 25px;
+    width: 60px;
+    background: yellow;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .reporting {
+        display: inline-block;
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        font-weight: 600;
+  }
+
+  .user-image {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+  }
+
+  .username {
+      font-size: 1.6rem;
+      display: inline-block;
+      margin-left: 4px;
+      cursor: pointer;
+  }
+
+  .username:hover {
+      color: darkgray;
+  }
+
+  .reason {
+    font-size: 1.6rem;
+    display: inline-block;
+}
+
+
+ul {
+    padding: 16px;
+    list-style: none;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.line {
+    height: 5px;
+    width: 3px;
+    background: white;
+}
+
+.btn--info {
+    background: #2C62F5;
+    color: white;
+    padding: .6rem 1.5rem;
+    font-size: 1.4rem;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-top: 10px;
+  }
+  
+  .btn--info:hover {
+    background: #2a51bd;
+  }

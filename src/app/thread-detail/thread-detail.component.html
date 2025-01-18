@@ -1,0 +1,633 @@
+<div class="main-container">
+
+    <div class="aside" [class.show-aside]="showAside">
+        <div class="aside-flex">
+            <div class="aside-inside">
+
+                <div class="aside-content">
+                    <div class="aside-top">
+
+                        <div class="aside-user" (click)="goToUser()">
+                            <img [src]="thread.user.profilePicture" alt="">
+                            <h2>{{thread?.user?.username}}</h2>
+                        </div>
+                        <div *ngIf="thread.user.bio" class="bio" [class.hide-follow]="sameUser">{{thread?.user?.bio}}
+                        </div>
+                        <button (click)="followUser()" class="follow"
+                            *ngIf="!followingUser && !sameUser">Follow</button>
+                        <button (click)="followUser()" class="following"
+                            *ngIf="followingUser && !sameUser">Following</button>
+
+
+
+                    </div>
+                    <div class="aside-bottom">
+                        <div class="thread-info-count--aside">
+                            <div class="thread-info-count__action--aside thread-info-count__action--aside-first">
+                                <button (click)="like()" class="thread-info__button--aside">
+
+                                    <!-- Heart Fill -->
+                                    <svg class="thread-info-icon--aside-liked thread-info-icon--aside"
+                                        *ngIf="thread?.likedByUser" viewBox="0 0 81 75" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="Group-53" transform="translate(-6.000000, -6.000000)">
+                                                <rect id="Rectangle-20" fill-opacity="0" fill="#D8D8D8" x="0" y="0"
+                                                    width="93" height="87"></rect>
+                                                <g id="heart" transform="translate(6.000000, 6.000000)" fill="#EB4B59"
+                                                    fill-rule="nonzero">
+                                                    <path
+                                                        d="M58.725,0 C51.6375,0 44.9553894,3.26992188 40.5,8.58339844 C36.0444159,3.26992188 29.3625,0 22.275,0 C9.71961058,0 0,9.80878906 0,22.4794922 C0,38.0099609 13.7696106,50.4771484 34.6267212,69.6853516 L40.5,75 L46.3732788,69.6853516 C67.2301947,50.4769531 81,38.0097656 81,22.4794922 C81,9.80878906 71.2803894,0 58.725,0 Z"
+                                                        id="Combined-Shape"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+
+                                    <svg *ngIf="!thread?.likedByUser" class="thread-info-icon--aside"
+                                        viewBox="0 0 88 81" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="heart-outline" transform="translate(-6.000000, -6.000000)">
+                                                <polygon id="Rectangle-21" points="0 0 100 0 100 93 0 93"></polygon>
+                                                <path
+                                                    d="M69.8,6 C62.1,6 54.8404231,9.53151563 50,15.2700703 C45.1593654,9.53151563 37.9,6 30.2,6 C16.5595769,6 6,16.5934922 6,30.2778516 C6,47.0507578 20.9595769,60.5153203 43.6191538,81.2601797 L50,87 L56.3808462,81.2601797 C79.0402115,60.5151094 94,47.0505469 94,30.2778516 C94,16.5934922 83.4404231,6 69.8,6 Z M52.7153077,75.4526484 L51.8228269,76.2696094 L50,77.9092266 L48.1773846,76.2698203 L47.2859615,75.4537031 C36.6206154,65.6910937 27.4095962,57.2595 21.3204615,49.7205937 C15.4064808,42.3983203 12.7692308,36.402 12.7692308,30.2778516 C12.7692308,25.4547656 14.5508077,21.0111562 17.7858654,17.7658828 C21.0101346,14.5313672 25.4188077,12.75 30.2,12.75 C35.7283462,12.75 41.1936538,15.3164766 44.8194231,19.6149609 L50,25.7566172 L55.1803654,19.6149609 C58.8063462,15.3164766 64.2714423,12.75 69.8,12.75 C74.5814038,12.75 78.9898654,14.5313672 82.2143462,17.7656719 C85.4491923,21.0111562 87.2307692,25.4545547 87.2307692,30.2778516 C87.2307692,36.402 84.5935192,42.3981094 78.6799615,49.7201719 C72.5910385,57.2590781 63.3804423,65.6900391 52.7153077,75.4526484 Z"
+                                                    id="Shape" fill="#A2A4A6" fill-rule="nonzero"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+
+                                    <span *ngIf="thread.count > 0" [class.heart]="thread?.likedByUser"
+                                        class="thread-info__text--aside">{{thread?.count}}</span>
+                                    <span *ngIf="thread.count == 0" [class.heart]="thread?.likedByUser"
+                                        class="thread-info__text--aside">Like</span>
+                                </button>
+                            </div>
+                            <div class="thread-info-count__action--aside ">
+                                <button class="thread-info__button--aside">
+                                    <svg class="thread-info-icon--aside" viewBox="0 0 79 78" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                                        <title>comment</title>
+                                        <desc>Created with Sketch.</desc>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="comment" transform="translate(-6.000000, -6.000000)">
+                                                <rect id="Rectangle-22" x="0" y="0" width="91" height="90"></rect>
+                                                <path
+                                                    d="M8.517,83.161 C8.167,83.161 7.816,83.089 7.485,82.94 C6.581,82.534 6,81.634 6,80.643 L6,28.518 C6,16.102 16.102,6 28.518,6 L62.331,6 C74.747,6 84.849,16.102 84.849,28.518 L84.849,43.518 C84.849,55.934 74.747,66.036 62.331,66.036 L28.764,66.036 L10.189,82.526 C9.718,82.943 9.121,83.161 8.517,83.161 Z M29.0091478,12.036 C19.6491899,12.036 12.035,19.5369093 12.035,28.7554818 L12.035,73.2492727 L26.7351829,60.3954896 C27.2051227,59.9842451 27.8148793,59.7681026 28.4440549,59.789143 C28.5625108,59.7939249 28.6790248,59.801576 28.7965098,59.8092271 C28.8673891,59.8149654 28.9382685,59.82166 29.0101188,59.82166 L61.840851,59.82166 C71.2008089,59.82166 78.8149988,52.3207508 78.8149988,43.1021782 L78.8149988,28.7564382 C78.8149988,19.5369093 71.199838,12.0369564 61.840851,12.0369564 L29.0091478,12.0369564 L29.0091478,12.036 Z"
+                                                    id="Shape" fill="#7b7b7b" fill-rule="nonzero"
+                                                    transform="translate(45.424500, 44.580500) scale(-1, 1) translate(-45.424500, -44.580500) ">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span *ngIf="thread.replies > 0"
+                                        class="thread-info__text--aside">{{thread?.replies}}</span>
+                                    <span *ngIf="thread.replies == 0" class="thread-info__text--aside">Comment</span>
+                                </button>
+                            </div>
+                            <div class="thread-info-count__action--aside " >
+                                <button class="thread-info__button--aside" (click)="savePost()" *ngIf="!saved">
+                                    <svg class="bi bi-bookmark thread-info-icon--aside aside-save"  viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 12l5 3V3a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V3a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10.234z"/>
+                                      </svg>
+                                    <span  class="thread-info__text--aside">Save</span>
+                                </button>
+                                <button class="thread-info__button--aside" (click)="savePost()" *ngIf="saved">
+                                    <svg class="bi bi-bookmark-fill thread-info-icon--aside aside-save" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" d="M3 3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V3z"/>
+                                    </svg>
+                                  <span  class="thread-info__text--aside">Unsave</span>
+                              </button>
+                            </div>
+                            <div class="share-post--aside">
+                                <button class="icon-div share-div" (click)="toggleShareAside = !toggleShareAside">
+                                    <svg class="share-actions-icon" viewBox="0 0 16 16"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z" />
+                                    </svg>
+                                    <span class="thread-info__text--aside">Share</span>
+                                </button>
+
+                                <div class="sorting__options--aside" *ngIf="toggleShareAside">
+                                    <ul class="sorting__list">
+                                        <li class="sorting__item" (click)="sharePost('link')">
+                                            <button class="sorting__button">
+                                                <div class="share-icon-container">
+                                                    <svg class="atom icon svg link" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                                        <path d="M5.712 6.96l.167-.167a1.99 1.99 0 0 1 .896-.518 1.99 1.99 0 0 1 .518-.896l.167-.167A3.004 3.004 0 0 0 6 5.499c-.22.46-.316.963-.288 1.46z"/>
+                                                        <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
+                                                        <path d="M10 9.5a2.99 2.99 0 0 0 .288-1.46l-.167.167a1.99 1.99 0 0 1-.896.518 1.99 1.99 0 0 1-.518.896l-.167.167A3.004 3.004 0 0 0 10 9.501z"/>
+                                                      </svg>
+                                                </div>
+                                                <span class="sorting__text">Copy link to post</span>
+                                            </button>
+                                        </li>
+                                        <li class="sorting__item" (click)="sharePost('twitter')">
+                                            <a [href]="'https://twitter.com/intent/tweet?text=' + thread.title + '&url=https://www.discussthegame.com/posts/' + thread._id"  class="sorting__button" target="_blank">
+                                                <div class="share-icon-container">
+                                                    <svg class="atom icon svg twitter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14"><title>Twitter Logo</title><path d="M5.042 13.504c6.01 0 9.3-4.985 9.3-9.3 0-.14 0-.28-.006-.42.638-.46 1.192-1.04 1.632-1.697-.586.262-1.217.434-1.88.517.675-.402 1.192-1.046 1.44-1.81-.63.375-1.332.643-2.078.79C12.85.946 12.003.55 11.066.55c-1.804 0-3.27 1.467-3.27 3.27 0 .256.032.505.083.747-2.717-.134-5.126-1.44-6.74-3.417C.86 1.635.7 2.196.7 2.795c0 1.134.58 2.135 1.455 2.722-.536-.02-1.04-.166-1.48-.408v.043c0 1.58 1.13 2.907 2.62 3.207-.273.076-.56.115-.86.115-.21 0-.414-.02-.612-.058.414 1.3 1.626 2.244 3.053 2.27-1.12.88-2.53 1.402-4.06 1.402-.26 0-.523-.014-.778-.046 1.44.918 3.162 1.46 5.004 1.46"></path></svg>
+                                                </div>       
+                                                <span class="sorting__text">Share to Twitter</span>
+                                            </a>
+                                        </li>
+                                        <li class="sorting__item" (click)="sharePost('facebook')">
+                                            <a [href]="'https://www.facebook.com/sharer/sharer.php?u=https://www.discussthegame.com/posts/' + thread._id"  class="sorting__button" target="_blank">
+                                                <div class="share-icon-container">
+                                                    <svg class="atom icon svg facebook" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 16"><title>Facebook Logo</title><path d="M6.24 16V8.7h2.45l.365-2.842H6.24V4.04c0-.822.227-1.384 1.41-1.384h1.5V.112C8.42.035 7.686-.002 6.953 0 4.79 0 3.3 1.325 3.3 3.76v2.098H.846V8.7H3.3V16h2.94z"></path></svg>
+                                                </div>
+                                                <span class="sorting__text">Share to Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li class="sorting__item" (click)="toggleShareAside = false">
+                                            <button class="sorting__button">
+                                                <span class="sorting__text">Cancel</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="thread-container">
+        <article class="thread">
+            <header class="thread__header">
+                <h1 class="thread__title">
+                    {{thread?.title}}
+                </h1>
+            </header>
+
+            <figure class="thread__cover-photo-container">
+                <div>
+                    <img *ngIf="!thread.webPicture" class="thread__cover-photo" [src]="thread?.picture" alt="">
+                    <img *ngIf="thread.webPicture" class="thread__cover-photo" [src]="thread?.webPicture" alt="">
+                </div>
+            </figure>
+
+            <div class="thread-info">
+                <div class="user" (click)="goToUser()">
+                    <img class="user__pfp" [src]="thread?.user?.profilePictureThumbnail" alt="">
+                    <div class="user__text">
+                        <span class="user__username">{{thread?.user?.username}}</span>
+                        <span class="user__post-date">{{thread?.created}} · {{thread?.league}} <span class="viewss"
+                                *ngIf="authService.currentUser && (thread?.user?.username === authService.currentUser.username) || (authService.currentUser && authService.currentUser.isAdmin)">·
+                                {{thread?.views}} views</span></span>
+                    </div>
+                </div>
+
+
+                <div class="thread-info-count">
+                    <div class="thread-info-count__action--like">
+                        <button (click)="like()" class="thread-info__button">
+
+                            <!-- Heart Fill -->
+                            <svg class="thread-info-icon--liked" *ngIf="thread?.likedByUser" viewBox="0 0 81 75"
+                                version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Group-53" transform="translate(-6.000000, -6.000000)">
+                                        <rect id="Rectangle-20" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="93"
+                                            height="87"></rect>
+                                        <g id="heart" transform="translate(6.000000, 6.000000)" fill="#EB4B59"
+                                            fill-rule="nonzero">
+                                            <path
+                                                d="M58.725,0 C51.6375,0 44.9553894,3.26992188 40.5,8.58339844 C36.0444159,3.26992188 29.3625,0 22.275,0 C9.71961058,0 0,9.80878906 0,22.4794922 C0,38.0099609 13.7696106,50.4771484 34.6267212,69.6853516 L40.5,75 L46.3732788,69.6853516 C67.2301947,50.4769531 81,38.0097656 81,22.4794922 C81,9.80878906 71.2803894,0 58.725,0 Z"
+                                                id="Combined-Shape"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <svg *ngIf="!thread?.likedByUser" class="thread-info-icon" viewBox="0 0 88 81" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="heart-outline" transform="translate(-6.000000, -6.000000)">
+                                        <polygon id="Rectangle-21" points="0 0 100 0 100 93 0 93"></polygon>
+                                        <path
+                                            d="M69.8,6 C62.1,6 54.8404231,9.53151563 50,15.2700703 C45.1593654,9.53151563 37.9,6 30.2,6 C16.5595769,6 6,16.5934922 6,30.2778516 C6,47.0507578 20.9595769,60.5153203 43.6191538,81.2601797 L50,87 L56.3808462,81.2601797 C79.0402115,60.5151094 94,47.0505469 94,30.2778516 C94,16.5934922 83.4404231,6 69.8,6 Z M52.7153077,75.4526484 L51.8228269,76.2696094 L50,77.9092266 L48.1773846,76.2698203 L47.2859615,75.4537031 C36.6206154,65.6910937 27.4095962,57.2595 21.3204615,49.7205937 C15.4064808,42.3983203 12.7692308,36.402 12.7692308,30.2778516 C12.7692308,25.4547656 14.5508077,21.0111562 17.7858654,17.7658828 C21.0101346,14.5313672 25.4188077,12.75 30.2,12.75 C35.7283462,12.75 41.1936538,15.3164766 44.8194231,19.6149609 L50,25.7566172 L55.1803654,19.6149609 C58.8063462,15.3164766 64.2714423,12.75 69.8,12.75 C74.5814038,12.75 78.9898654,14.5313672 82.2143462,17.7656719 C85.4491923,21.0111562 87.2307692,25.4545547 87.2307692,30.2778516 C87.2307692,36.402 84.5935192,42.3981094 78.6799615,49.7201719 C72.5910385,57.2590781 63.3804423,65.6900391 52.7153077,75.4526484 Z"
+                                            id="Shape" fill="#A2A4A6" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <span *ngIf="thread.count > 0" [class.heart]="thread?.likedByUser"
+                                class="thread-info__text">{{thread?.count}}</span>
+                            <span *ngIf="thread.count == 0" [class.heart]="thread?.likedByUser"
+                                class="thread-info__text">Like</span>
+                        </button>
+                    </div>
+                    <div class="thread-info-count__action--comments">
+                        <button class="thread-info__button">
+                            <svg class="thread-info-icon" viewBox="0 0 79 78" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                                <title>comment</title>
+                                <desc>Created with Sketch.</desc>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="comment" transform="translate(-6.000000, -6.000000)">
+                                        <rect id="Rectangle-22" x="0" y="0" width="91" height="90"></rect>
+                                        <path
+                                            d="M8.517,83.161 C8.167,83.161 7.816,83.089 7.485,82.94 C6.581,82.534 6,81.634 6,80.643 L6,28.518 C6,16.102 16.102,6 28.518,6 L62.331,6 C74.747,6 84.849,16.102 84.849,28.518 L84.849,43.518 C84.849,55.934 74.747,66.036 62.331,66.036 L28.764,66.036 L10.189,82.526 C9.718,82.943 9.121,83.161 8.517,83.161 Z M29.0091478,12.036 C19.6491899,12.036 12.035,19.5369093 12.035,28.7554818 L12.035,73.2492727 L26.7351829,60.3954896 C27.2051227,59.9842451 27.8148793,59.7681026 28.4440549,59.789143 C28.5625108,59.7939249 28.6790248,59.801576 28.7965098,59.8092271 C28.8673891,59.8149654 28.9382685,59.82166 29.0101188,59.82166 L61.840851,59.82166 C71.2008089,59.82166 78.8149988,52.3207508 78.8149988,43.1021782 L78.8149988,28.7564382 C78.8149988,19.5369093 71.199838,12.0369564 61.840851,12.0369564 L29.0091478,12.0369564 L29.0091478,12.036 Z"
+                                            id="Shape" fill="#A2A4A6" fill-rule="nonzero"
+                                            transform="translate(45.424500, 44.580500) scale(-1, 1) translate(-45.424500, -44.580500) ">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span *ngIf="thread.replies > 0" class="thread-info__text">{{thread?.replies}}</span>
+                            <span *ngIf="thread.replies == 0" class="thread-info__text">Comment</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="thread-description-container white" *ngIf="thread?.description">
+                <div *ngIf="thread?.fromWeb" class="thread-description" [innerHtml]="thread?.description | safeHtml">
+                </div>
+
+                <p *ngIf="!thread?.fromWeb" class="thread-description mobile">{{thread?.description}}</p>
+
+                <!-- Poll -->
+                <div class="poll-container" *ngIf="options.length > 1">
+                    <div *ngIf="!voted && !showResults">
+                        <div *ngFor="let option of options" class="threed-btn">
+                            <a class="button-3d" (click)="toggleVote(option)">{{option}}</a>
+                        </div>
+                    </div>
+                    <div *ngIf="voted || showResults" class="poll-results">
+                        <div *ngFor="let option of optionsWithPercentage" class="progress-outer">
+                            <span class="absolut-container">
+                                <span class="percentage">{{option?.flooredPercentage}}%</span>
+                                <span class="percentage-option">{{option?.option}}</span>
+                                <!-- <ion-icon *ngIf="option.userInOption" name="checkmark-circle-outline" class="checked">
+                                    </ion-icon> -->
+                            </span>
+                            <div [style.width]="option?.flooredPercentage + '%'" class="inner">
+                                <div [class.no-effect]="!pollEffect" [class.progress-inner]="pollEffect"
+                                    [class.user-in-option]="option.userInOption"></div>
+                            </div>
+                        </div>
+                        <span class="total-votes">{{totalVotes}} votes</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+
+        <div class="post-actions">
+            <div class="post-actions__action like-div">
+                <button class="icon-div heart-div" (click)="like()">
+
+                    <!-- Heart Fill -->
+                    <svg class="thread-actions-icon" *ngIf="thread?.likedByUser" viewBox="0 0 81 75" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Group-53" transform="translate(-6.000000, -6.000000)">
+                                <rect id="Rectangle-20" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="93"
+                                    height="87"></rect>
+                                <g id="heart" transform="translate(6.000000, 6.000000)" fill="#EB4B59"
+                                    fill-rule="nonzero">
+                                    <path
+                                        d="M58.725,0 C51.6375,0 44.9553894,3.26992188 40.5,8.58339844 C36.0444159,3.26992188 29.3625,0 22.275,0 C9.71961058,0 0,9.80878906 0,22.4794922 C0,38.0099609 13.7696106,50.4771484 34.6267212,69.6853516 L40.5,75 L46.3732788,69.6853516 C67.2301947,50.4769531 81,38.0097656 81,22.4794922 C81,9.80878906 71.2803894,0 58.725,0 Z"
+                                        id="Combined-Shape"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+
+                    <svg *ngIf="!thread?.likedByUser" class="thread-actions-icon" viewBox="0 0 88 81" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="heart-outline" transform="translate(-6.000000, -6.000000)">
+                                <polygon id="Rectangle-21" points="0 0 100 0 100 93 0 93"></polygon>
+                                <path
+                                    d="M69.8,6 C62.1,6 54.8404231,9.53151563 50,15.2700703 C45.1593654,9.53151563 37.9,6 30.2,6 C16.5595769,6 6,16.5934922 6,30.2778516 C6,47.0507578 20.9595769,60.5153203 43.6191538,81.2601797 L50,87 L56.3808462,81.2601797 C79.0402115,60.5151094 94,47.0505469 94,30.2778516 C94,16.5934922 83.4404231,6 69.8,6 Z M52.7153077,75.4526484 L51.8228269,76.2696094 L50,77.9092266 L48.1773846,76.2698203 L47.2859615,75.4537031 C36.6206154,65.6910937 27.4095962,57.2595 21.3204615,49.7205937 C15.4064808,42.3983203 12.7692308,36.402 12.7692308,30.2778516 C12.7692308,25.4547656 14.5508077,21.0111562 17.7858654,17.7658828 C21.0101346,14.5313672 25.4188077,12.75 30.2,12.75 C35.7283462,12.75 41.1936538,15.3164766 44.8194231,19.6149609 L50,25.7566172 L55.1803654,19.6149609 C58.8063462,15.3164766 64.2714423,12.75 69.8,12.75 C74.5814038,12.75 78.9898654,14.5313672 82.2143462,17.7656719 C85.4491923,21.0111562 87.2307692,25.4545547 87.2307692,30.2778516 C87.2307692,36.402 84.5935192,42.3981094 78.6799615,49.7201719 C72.5910385,57.2590781 63.3804423,65.6900391 52.7153077,75.4526484 Z"
+                                    id="Shape" fill="#A2A4A6" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </svg>
+
+                    <span *ngIf="thread.count > 0" [class.heart]="thread?.likedByUser"
+                        class="post-actions__text">{{thread?.count}}</span>
+                    <span *ngIf="thread.count == 0" [class.heart]="thread?.likedByUser"
+                        class="post-actions__text">Like</span>
+                </button>
+            </div>
+            <div class="post-actions__action comment-div">
+                <a class="icon-div comments-div">
+                    <svg class="thread-actions-icon" viewBox="0 0 79 78" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                        <title>comment</title>
+                        <desc>Created with Sketch.</desc>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="comment" transform="translate(-6.000000, -6.000000)">
+                                <rect id="Rectangle-22" x="0" y="0" width="91" height="90"></rect>
+                                <path
+                                    d="M8.517,83.161 C8.167,83.161 7.816,83.089 7.485,82.94 C6.581,82.534 6,81.634 6,80.643 L6,28.518 C6,16.102 16.102,6 28.518,6 L62.331,6 C74.747,6 84.849,16.102 84.849,28.518 L84.849,43.518 C84.849,55.934 74.747,66.036 62.331,66.036 L28.764,66.036 L10.189,82.526 C9.718,82.943 9.121,83.161 8.517,83.161 Z M29.0091478,12.036 C19.6491899,12.036 12.035,19.5369093 12.035,28.7554818 L12.035,73.2492727 L26.7351829,60.3954896 C27.2051227,59.9842451 27.8148793,59.7681026 28.4440549,59.789143 C28.5625108,59.7939249 28.6790248,59.801576 28.7965098,59.8092271 C28.8673891,59.8149654 28.9382685,59.82166 29.0101188,59.82166 L61.840851,59.82166 C71.2008089,59.82166 78.8149988,52.3207508 78.8149988,43.1021782 L78.8149988,28.7564382 C78.8149988,19.5369093 71.199838,12.0369564 61.840851,12.0369564 L29.0091478,12.0369564 L29.0091478,12.036 Z"
+                                    id="Shape" fill="#A2A4A6" fill-rule="nonzero"
+                                    transform="translate(45.424500, 44.580500) scale(-1, 1) translate(-45.424500, -44.580500) ">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+
+                    <span *ngIf="thread.replies > 0" class="post-actions__text">{{thread?.replies}}</span>
+                    <span *ngIf="thread.replies == 0" class="post-actions__text">Comment</span>
+                </a>
+            </div>
+            <div class="post-actions__action save-div">
+                <button class="icon-div save-div" (click)="savePost()" *ngIf="!saved">
+                    <svg class="save-actions-icon--bottom-unfilled" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 12l5 3V3a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V3a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10.234z"/>
+                      </svg>
+                    <span class="post-actions__text">Save</span>
+                </button>
+                <button class="icon-div save-div" (click)="savePost()" *ngIf="saved">
+                    <svg class="save-actions-icon--bottom" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3 3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V3z"/>
+                      </svg>
+                    <span class="post-actions__text">Unsave</span>
+                </button>
+            </div>
+            <div class="post-actions__action post-actions__action--share">
+                <button class="icon-div share-div" (click)="toggleShareBottom = true">
+                    <svg class="share-actions-icon--bottom" viewBox="0 0 16 16" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z" />
+                    </svg>
+                    <span class="post-actions__text">Share</span>
+                </button>
+
+                <div class="sorting__options--aside" *ngIf="toggleShareBottom">
+                    <ul class="sorting__list">
+                        <li class="sorting__item" (click)="sharePost('link')">
+                            <button class="sorting__button">
+                                <div class="share-icon-container">
+                                    <svg class="atom icon svg link" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                        <path d="M5.712 6.96l.167-.167a1.99 1.99 0 0 1 .896-.518 1.99 1.99 0 0 1 .518-.896l.167-.167A3.004 3.004 0 0 0 6 5.499c-.22.46-.316.963-.288 1.46z"/>
+                                        <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
+                                        <path d="M10 9.5a2.99 2.99 0 0 0 .288-1.46l-.167.167a1.99 1.99 0 0 1-.896.518 1.99 1.99 0 0 1-.518.896l-.167.167A3.004 3.004 0 0 0 10 9.501z"/>
+                                      </svg>
+                                </div>
+                                <span class="sorting__text">Copy link to post</span>
+                            </button>
+                        </li>
+                        <li class="sorting__item" (click)="sharePost('twitter')">
+                            <a [href]="'https://twitter.com/intent/tweet?text=' + thread.title + '&url=https://www.discussthegame.com/posts/' + thread._id"  class="sorting__button" target="_blank">
+                                <div class="share-icon-container">
+                                    <svg class="atom icon svg twitter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14"><title>Twitter Logo</title><path d="M5.042 13.504c6.01 0 9.3-4.985 9.3-9.3 0-.14 0-.28-.006-.42.638-.46 1.192-1.04 1.632-1.697-.586.262-1.217.434-1.88.517.675-.402 1.192-1.046 1.44-1.81-.63.375-1.332.643-2.078.79C12.85.946 12.003.55 11.066.55c-1.804 0-3.27 1.467-3.27 3.27 0 .256.032.505.083.747-2.717-.134-5.126-1.44-6.74-3.417C.86 1.635.7 2.196.7 2.795c0 1.134.58 2.135 1.455 2.722-.536-.02-1.04-.166-1.48-.408v.043c0 1.58 1.13 2.907 2.62 3.207-.273.076-.56.115-.86.115-.21 0-.414-.02-.612-.058.414 1.3 1.626 2.244 3.053 2.27-1.12.88-2.53 1.402-4.06 1.402-.26 0-.523-.014-.778-.046 1.44.918 3.162 1.46 5.004 1.46"></path></svg>
+                                </div>       
+                                <span class="sorting__text">Share to Twitter</span>
+                            </a>
+                        </li>
+                        <li class="sorting__item" (click)="sharePost('facebook')">
+                            <a [href]="'https://www.facebook.com/sharer/sharer.php?u=https://www.discussthegame.com/posts/' + thread._id"  class="sorting__button" target="_blank">
+                                <div class="share-icon-container">
+                                    <svg class="atom icon svg facebook" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 16"><title>Facebook Logo</title><path d="M6.24 16V8.7h2.45l.365-2.842H6.24V4.04c0-.822.227-1.384 1.41-1.384h1.5V.112C8.42.035 7.686-.002 6.953 0 4.79 0 3.3 1.325 3.3 3.76v2.098H.846V8.7H3.3V16h2.94z"></path></svg>
+                                </div>
+                                <span class="sorting__text">Share to Facebook</span>
+                            </a>
+                        </li>
+                        <li class="sorting__item" (click)="toggleShareBottom = false">
+                            <button class="sorting__button">
+                                <span class="sorting__text">Cancel</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="login-comment" *ngIf="!authService.currentUser">
+            <span class="login-text">Log in or create an account to leave a comment</span>
+            <div class="login-buttons">
+                <button class="login" (click)="goAccess('login')">Log in</button>
+                <button class="signup" (click)="goAccess('signup')">Create account</button>
+            </div>
+        </div>
+
+        <div *ngIf="authService.currentUser">
+            <div class="add-comment-container">
+
+                <div class="add-comment-user">
+                    <img [src]="authService?.currentUser?.profilePicture" alt="">
+                </div>
+                <div class="add-comment" [class.focused]="textareaFocused">
+                    <div class="add-comment__textarea-container">
+
+                        <div class="mid-textarea">
+                            <textarea [(ngModel)]="comment" (blur)="commentUnfocused()" (focus)="commentFocused()"
+                                class="add-comment__textarea" placeholder="Add a comment" id="" 
+                                [ngModelOptions]="{standalone:
+                                    true}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="send-comment">
+                <button *ngIf="!sendingComment" class="send-comment__button" (click)="sendComment()"><span
+                        [class.disabled]="comment.length == 0">Comment</span></button>
+                <button *ngIf="sendingComment" class="send-comment__button loading-button" type="button" disabled>
+                    <div class="spinner-border" role="status">
+
+                    </div>
+                </button>
+            </div>
+        </div>
+
+
+
+        <div class="sorting">
+
+            <div class="sorting__container">
+                <span class="sorting__header" (click)="toggleSort = !toggleSort">SORT</span>
+                <button class="sorting__button" (click)="toggleSort = !toggleSort">
+
+
+                    <svg *ngIf="hot" class="sorting__icon" viewBox="0 0 66 80" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="noun_Flame_129549" transform="translate(-6.000000, -7.000000)">
+                                <rect id="Rectangle-25" x="0" y="0" width="78" height="94"></rect>
+                                <path
+                                    d="M58.47,30.559 L57.385,29.686 C56.107,28.658 54.173,29.05 53.468,30.531 C53.125,31.251 52.883,38.54 52.883,39.768 C52.883,40.016 52.831,40.423 52.837,40.466 C52.837,41.502 51.91,42.324 50.842,42.148 C50.002,42.01 49.428,41.213 49.424,40.362 C49.37,27.896 45.561,19.203 38.57,12.711 C34.295,8.741 29.24,5.235 27.693,7.972 C27.298,8.67 27.951,10.239 28.609,12.249 C30.071,16.72 25.61,23.86 19.304,30.995 C13.377,37.702 6,46.05 6,58.349 C6,70.389 14.296,81.646 25.444,86.889 C26.444,87.359 27.411,86.115 26.703,85.267 C24.255,82.334 22.847,78.504 23.047,74.34 C23.435,66.275 30.075,59.647 38.14,59.275 C47.244,58.854 54.758,66.111 54.758,75.123 C54.758,78.975 53.383,82.503 51.099,85.249 C50.38,86.114 51.313,87.374 52.331,86.896 C63.485,81.655 71.787,70.395 71.787,58.35 C71.787,47.898 66.808,37.509 58.47,30.559 Z"
+                                    id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </svg>
+
+                    <svg *ngIf="new" class="sorting__icon" viewBox="0 0 87 88" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="noun_new_258297" transform="translate(-6.000000, -6.000000)">
+                                <rect id="Rectangle-26" x="0" y="0" width="99" height="99"></rect>
+                                <path
+                                    d="M93,49.475 C93,48.875 92.7,48.375 92.3,48.075 L82,40.775 L87.3,29.275 C87.5,28.775 87.5,28.175 87.2,27.675 C86.9,27.175 86.4,26.875 85.8,26.775 L73.2,25.675 L72.1,13.075 C72,12.475 71.7,11.975 71.2,11.675 C70.7,11.375 70.1,11.375 69.6,11.575 L58.1,16.875 L50.9,6.675 C50.2,5.775 48.7,5.775 48.1,6.675 L40.8,16.975 L29.3,11.675 C28.8,11.475 28.2,11.475 27.7,11.775 C27.2,12.075 26.9,12.575 26.8,13.175 L25.7,25.775 L13.1,26.875 C12.5,26.975 12,27.275 11.7,27.775 C11.4,28.275 11.4,28.875 11.6,29.375 L16.9,40.875 L6.7,48.075 C6.2,48.375 6,48.975 6,49.475 C6,49.975 6.3,50.575 6.7,50.875 L17,58.175 L11.7,69.675 C11.5,70.175 11.5,70.775 11.8,71.275 C12.1,71.775 12.6,72.075 13.2,72.175 L25.8,73.275 L26.9,85.875 C27,86.475 27.3,86.975 27.8,87.275 C28.3,87.575 28.9,87.575 29.4,87.375 L40.9,82.075 L48.2,92.375 C48.5,92.875 49.1,93.075 49.6,93.075 C50.2,93.075 50.7,92.775 51,92.375 L58.3,82.075 L69.8,87.375 C70.3,87.575 70.9,87.575 71.4,87.275 C71.9,86.975 72.2,86.475 72.3,85.875 L73.4,73.275 L86,72.175 C86.6,72.075 87.1,71.775 87.4,71.275 C87.7,70.775 87.7,70.175 87.5,69.675 L82.2,58.175 L92.5,50.875 C92.8,50.575 93,49.975 93,49.475 Z"
+                                    id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </svg>
+
+                    <svg *ngIf="top" class="sorting__icon" viewBox="0 0 64 75" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Group-29" transform="translate(-6.000000, -6.000000)">
+                                <rect id="Rectangle-27" x="0" y="0" width="76" height="88"></rect>
+                                <rect id="Rectangle-15" fill="#4264d0" x="6" y="51" width="18" height="30" rx="3">
+                                </rect>
+                                <rect id="Rectangle-15" fill="#4264d0" x="52" y="41" width="18" height="40" rx="3">
+                                </rect>
+                                <g id="Group-30" transform="translate(22.000000, 6.000000)" fill="#B5B7B9">
+                                    <path
+                                        d="M25,25.622289 L25,72 C25,73.6568542 23.6568542,75 22,75 L10,75 C8.34314575,75 7,73.6568542 7,72 L7,25.622289 L2.36204465,25.622289 C1.49020407,25.622289 0.689053271,25.1551552 0.288477869,24.3843844 C-0.135660791,23.6369703 -0.0885342735,22.7027027 0.406294164,22.002002 L14.5442495,0.980980981 C15.4160901,-0.32699366 17.5839099,-0.32699366 18.4557505,0.980980981 L32.5937058,22.002002 C33.0885343,22.7027027 33.1356608,23.6369703 32.7115221,24.3843844 C32.3109467,25.1551552 31.5097959,25.622289 30.6379553,25.622289 L25,25.622289 Z"
+                                        id="Combined-Shape"></path>
+                                </g>
+                                <g id="noun_Arrow_1966946" transform="translate(22.000000, 6.000000)"></g>
+                            </g>
+                        </g>
+                    </svg>
+
+
+                    <span class="sorting__text">{{sortBy}}</span>
+                    <svg class="bi bi-caret-down-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z" />
+                    </svg>
+                </button>
+
+                <div *ngIf="loadingDiscussions" class="spinner-border sort-spinner" role="status">
+
+                </div>
+
+
+                <div class="sorting__options" *ngIf="toggleSort">
+                    <ul class="sorting__list">
+                        <li class="sorting__item" (click)="sortDiscussions('HOT')">
+                            <button class="sorting__button">
+                                <svg class="sorting__icon" viewBox="0 0 66 80" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                                    <title>noun_Flame_129549</title>
+                                    <desc>Created with Sketch.</desc>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="noun_Flame_129549" transform="translate(-6.000000, -7.000000)">
+                                            <rect id="Rectangle-25" x="0" y="0" width="78" height="94"></rect>
+                                            <path
+                                                d="M58.47,30.559 L57.385,29.686 C56.107,28.658 54.173,29.05 53.468,30.531 C53.125,31.251 52.883,38.54 52.883,39.768 C52.883,40.016 52.831,40.423 52.837,40.466 C52.837,41.502 51.91,42.324 50.842,42.148 C50.002,42.01 49.428,41.213 49.424,40.362 C49.37,27.896 45.561,19.203 38.57,12.711 C34.295,8.741 29.24,5.235 27.693,7.972 C27.298,8.67 27.951,10.239 28.609,12.249 C30.071,16.72 25.61,23.86 19.304,30.995 C13.377,37.702 6,46.05 6,58.349 C6,70.389 14.296,81.646 25.444,86.889 C26.444,87.359 27.411,86.115 26.703,85.267 C24.255,82.334 22.847,78.504 23.047,74.34 C23.435,66.275 30.075,59.647 38.14,59.275 C47.244,58.854 54.758,66.111 54.758,75.123 C54.758,78.975 53.383,82.503 51.099,85.249 C50.38,86.114 51.313,87.374 52.331,86.896 C63.485,81.655 71.787,70.395 71.787,58.35 C71.787,47.898 66.808,37.509 58.47,30.559 Z"
+                                                id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <span [class.sort-active]="hot" class="sorting__text">HOT</span>
+
+                            </button>
+                        </li>
+                        <li class="sorting__item" (click)="sortDiscussions('NEW')">
+                            <button class="sorting__button">
+                                <svg class="sorting__icon" viewBox="0 0 87 88" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="noun_new_258297" transform="translate(-6.000000, -6.000000)">
+                                            <rect id="Rectangle-26" x="0" y="0" width="99" height="99"></rect>
+                                            <path
+                                                d="M93,49.475 C93,48.875 92.7,48.375 92.3,48.075 L82,40.775 L87.3,29.275 C87.5,28.775 87.5,28.175 87.2,27.675 C86.9,27.175 86.4,26.875 85.8,26.775 L73.2,25.675 L72.1,13.075 C72,12.475 71.7,11.975 71.2,11.675 C70.7,11.375 70.1,11.375 69.6,11.575 L58.1,16.875 L50.9,6.675 C50.2,5.775 48.7,5.775 48.1,6.675 L40.8,16.975 L29.3,11.675 C28.8,11.475 28.2,11.475 27.7,11.775 C27.2,12.075 26.9,12.575 26.8,13.175 L25.7,25.775 L13.1,26.875 C12.5,26.975 12,27.275 11.7,27.775 C11.4,28.275 11.4,28.875 11.6,29.375 L16.9,40.875 L6.7,48.075 C6.2,48.375 6,48.975 6,49.475 C6,49.975 6.3,50.575 6.7,50.875 L17,58.175 L11.7,69.675 C11.5,70.175 11.5,70.775 11.8,71.275 C12.1,71.775 12.6,72.075 13.2,72.175 L25.8,73.275 L26.9,85.875 C27,86.475 27.3,86.975 27.8,87.275 C28.3,87.575 28.9,87.575 29.4,87.375 L40.9,82.075 L48.2,92.375 C48.5,92.875 49.1,93.075 49.6,93.075 C50.2,93.075 50.7,92.775 51,92.375 L58.3,82.075 L69.8,87.375 C70.3,87.575 70.9,87.575 71.4,87.275 C71.9,86.975 72.2,86.475 72.3,85.875 L73.4,73.275 L86,72.175 C86.6,72.075 87.1,71.775 87.4,71.275 C87.7,70.775 87.7,70.175 87.5,69.675 L82.2,58.175 L92.5,50.875 C92.8,50.575 93,49.975 93,49.475 Z"
+                                                id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <span [class.sort-active]="new" class="sorting__text">NEW</span>
+
+                            </button>
+                        </li>
+                        <li class="sorting__item" (click)="sortDiscussions('TOP')">
+                            <button class="sorting__button">
+                                <svg class="sorting__icon" viewBox="0 0 64 75" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Group-29" transform="translate(-6.000000, -6.000000)">
+                                            <rect id="Rectangle-27" x="0" y="0" width="76" height="88"></rect>
+                                            <rect id="Rectangle-15" fill="#4264d0" x="6" y="51" width="18" height="30"
+                                                rx="3"></rect>
+                                            <rect id="Rectangle-15" fill="#4264d0" x="52" y="41" width="18" height="40"
+                                                rx="3"></rect>
+                                            <g id="Group-30" transform="translate(22.000000, 6.000000)" fill="#B5B7B9">
+                                                <path
+                                                    d="M25,25.622289 L25,72 C25,73.6568542 23.6568542,75 22,75 L10,75 C8.34314575,75 7,73.6568542 7,72 L7,25.622289 L2.36204465,25.622289 C1.49020407,25.622289 0.689053271,25.1551552 0.288477869,24.3843844 C-0.135660791,23.6369703 -0.0885342735,22.7027027 0.406294164,22.002002 L14.5442495,0.980980981 C15.4160901,-0.32699366 17.5839099,-0.32699366 18.4557505,0.980980981 L32.5937058,22.002002 C33.0885343,22.7027027 33.1356608,23.6369703 32.7115221,24.3843844 C32.3109467,25.1551552 31.5097959,25.622289 30.6379553,25.622289 L25,25.622289 Z"
+                                                    id="Combined-Shape"></path>
+                                            </g>
+                                            <g id="noun_Arrow_1966946" transform="translate(22.000000, 6.000000)"></g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <span [class.sort-active]="top" class="sorting__text">TOP</span>
+
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-list">
+            <app-timeline-item *ngFor="let timeline of timelines" [timeline]="timeline" [thread]="thread"
+                (deleteComment)="deleteComment($event)" [hideReplies]="false"></app-timeline-item>
+        </div>
+        <div class="no-comments" *ngIf="timelines.length == 0 && !loadingDiscussions">
+            <svg class="no-comments__icon" width="79px" height="78px" viewBox="0 0 79 78" version="1.1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                <title>comment</title>
+                <desc>Created with Sketch.</desc>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="comment" transform="translate(-6.000000, -6.000000)">
+                        <rect id="Rectangle-22" x="0" y="0" width="91" height="90"></rect>
+                        <path
+                            d="M8.517,83.161 C8.167,83.161 7.816,83.089 7.485,82.94 C6.581,82.534 6,81.634 6,80.643 L6,28.518 C6,16.102 16.102,6 28.518,6 L62.331,6 C74.747,6 84.849,16.102 84.849,28.518 L84.849,43.518 C84.849,55.934 74.747,66.036 62.331,66.036 L28.764,66.036 L10.189,82.526 C9.718,82.943 9.121,83.161 8.517,83.161 Z M29.0091478,12.036 C19.6491899,12.036 12.035,19.5369093 12.035,28.7554818 L12.035,73.2492727 L26.7351829,60.3954896 C27.2051227,59.9842451 27.8148793,59.7681026 28.4440549,59.789143 C28.5625108,59.7939249 28.6790248,59.801576 28.7965098,59.8092271 C28.8673891,59.8149654 28.9382685,59.82166 29.0101188,59.82166 L61.840851,59.82166 C71.2008089,59.82166 78.8149988,52.3207508 78.8149988,43.1021782 L78.8149988,28.7564382 C78.8149988,19.5369093 71.199838,12.0369564 61.840851,12.0369564 L29.0091478,12.0369564 L29.0091478,12.036 Z"
+                            id="Shape" fill="#A2A4A6" fill-rule="nonzero"
+                            transform="translate(45.424500, 44.580500) scale(-1, 1) translate(-45.424500, -44.580500) ">
+                        </path>
+                    </g>
+                </g>
+            </svg>
+            <span class="no-comments__header">No Comments Yet</span>
+            <span class="no-comments__opinion">Be the first to leave an opinion!</span>
+        </div>
+        <div class="spinner-container" *ngIf="showInfiniteSpinner">
+            <div class="spinner-border" role="status">
+            </div>
+        </div>
+
+        <div *ngIf="enableInfinite" class="search-results" infiniteScroll [infiniteScrollDistance]="1.5"
+            [infiniteScrollThrottle]="150" (scrolled)="doInfinite()"></div>
+    </div>
+
+
+</div>

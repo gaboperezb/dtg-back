@@ -1,0 +1,332 @@
+<div class="join-container" *ngIf="i == 3 && !authService.currentUser">
+    <div class="join__content">
+        <div class="join__top">
+            <img class="logo" src="assets/imgs/dtg_circ.png" alt="">
+            <h2 class="header-1">Discuss the Game is the best place for die-hard sports fans.</h2>
+            <h3 class="header-2">Create your account to talk sports, create content, and get involved with the
+                community.</h3>
+        </div>
+
+        <button (click)="goAccess('signup')" class="join-button">
+            <span>Join Now</span>
+        </button>
+    </div>
+
+
+    <div class="layer">
+    </div>
+
+</div>
+
+<div class="take" role="link" (click)="itemTapped()">
+    <!-- delete -->
+    <div class="delete-thread" (click)="toggleMoreOptions($event)"
+        *ngIf="authService.currentUser && (authService.currentUser.isAdmin || take.user.username === authService.currentUser.username)">
+        <svg class="bi bi-three-dots more-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+        </svg>
+    </div>
+    <div class="sorting__options" *ngIf="toggleEdit">
+        <ul class="sorting__list">
+            <li class="sorting__item" (click)="editTake($event)">
+                <button class="sorting__button">
+                    <svg class="bi bi-pencil sorting__icon" width="1em" height="1em" viewBox="0 0 16 16"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" />
+                        <path fill-rule="evenodd"
+                            d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z" />
+                    </svg>
+                    <span class="sorting__text">Edit</span>
+                </button>
+            </li>
+            <li class="sorting__item" (click)="deleteTake($event)">
+                <button class="sorting__button">
+                    <svg class="bi bi-trash sorting__icon" width="1em" height="1em" viewBox="0 0 16 16"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                        <path fill-rule="evenodd"
+                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
+                    <span class="sorting__text">Delete</span>
+                </button>
+            </li>
+            <li class="sorting__item" (click)="toggleMoreOptions($event)">
+                <button class="sorting__button">
+                    <span class="sorting__text">Cancel</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- delete -->
+    <article>
+        <div class="top-thread">
+            <div class="user" (click)="goToUser($event)">
+                <img class="user__pfp" [src]="take?.user?.profilePictureThumbnail" alt="">
+                <div class="user__text">
+                    <span class="user__username">{{take?.user?.username}}</span>
+                    <span class="user__post-date">{{take?.created}} · {{take?.league}}</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="discussion">
+            <p [id]="'text-' + take._id">{{take?.take}}</p>
+        </div>
+
+        <!-- Poll -->
+        <div class="poll-container" *ngIf="take.type == 'Poll'">
+            <div *ngIf="!take.voted && !showResults">
+                <div *ngFor="let option of options" class="threed-btn">
+                    <a class="button-3d" (click)="toggleVote(option, $event)">{{option}}</a>
+                </div>
+            </div>
+            <div *ngIf="take.voted || showResults">
+                <div *ngFor="let option of take.optionsWithPercentage" class="progress-outer">
+                    <div class="percentage-option">
+                        <span>{{option?.option}}</span>
+                        <svg *ngIf="option.userInOption" viewBox="0 0 16 16" class="bi bi-check-circle checked"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path fill-rule="evenodd"
+                                d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
+                        </svg>
+                    </div>
+                    <span class="percentage">{{option?.flooredPercentage}}%</span>
+                    <div [style.width]="option?.flooredPercentage + '%'" class="inner">
+                        <div [class.no-effect]="!pollEffect" [class.progress-inner]="pollEffect"
+                            [class.user-in-option]="option.userInOption"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Link -->
+        <div class="link-container" role="link"
+            *ngIf="take.type == 'Link' && take.urlType != 'video' && take.thumbnail_width > 500 && take.provider_name != 'Twitter'"
+            (click)="openLink($event)">
+            <div class="image-placeholder" *ngIf="!largeLink">
+
+            </div>
+            <img class="thumbnail-link" [defaultImage]="'assets/imgs/placeholder-light.png'"
+                [lazyLoad]="take?.thumbnail_url" alt="">
+            <div class="link-info">
+                <span class="url-title">{{take.reducedTitle}}</span>
+                <span class="url-provider">{{take.provider_name}}</span>
+            </div>
+        </div>
+
+        <!-- Small Link -->
+        <div class="small-link-container" role="link"
+            *ngIf="take.type == 'Link' && (take.thumbnail_width < 500 || take.provider_name == 'Twitter' || take.urlType == 'video' || !take.thumbnail_url) "
+            (click)="openLink($event)">
+            <img *ngIf="take.thumbnail_url" class="thumbnail-link" [src]="take.thumbnail_url" alt="">
+            <div *ngIf="!take.thumbnail_url" class="alt-thumbnail-link">
+                <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                    <path
+                        d="M5.712 6.96l.167-.167a1.99 1.99 0 0 1 .896-.518 1.99 1.99 0 0 1 .518-.896l.167-.167A3.004 3.004 0 0 0 6 5.499c-.22.46-.316.963-.288 1.46z" />
+                    <path
+                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
+                    <path
+                        d="M10 9.5a2.99 2.99 0 0 0 .288-1.46l-.167.167a1.99 1.99 0 0 1-.896.518 1.99 1.99 0 0 1-.518.896l-.167.167A3.004 3.004 0 0 0 10 9.501z" />
+                </svg>
+            </div>
+
+            <div class="link-info">
+                <span *ngIf="take.reducedTitle" class="url-title">{{take.reducedTitle}}</span>
+                <span class="url-provider">{{take.provider_name}}</span>
+            </div>
+        </div>
+
+        <!-- Image -->
+
+        <figure class="take-image-container" (click)="fullSizePicture($event)" *ngIf="take.picture">
+            <img [defaultImage]="'assets/imgs/placeholder-light.png'" [lazyLoad]="take?.picture" alt="">
+        </figure>
+
+        <div class="top-video-container" *ngIf="take.video">
+            <div *ngIf="takeService.destroyDiscussions" class="fake-video-container">
+                <img class="video-thumb" [src]="take?.videoThumbnail" alt="">
+            </div>
+            <div class="video-container" *ngIf="!takeService.destroyDiscussions" [ngStyle]="videoStyle"
+                (click)="changeVideoAudio(take?._id, $event)">
+
+                <video #videoTake inViewport [inViewportOptions]="{ threshold: [0, 0.02], partial: true }"
+                    (pause)="onPause($event)" (play)="onPlay($event)" (loadedmetadata)="onMetadata($event)"
+                    (loadeddata)="onData($event)" (inViewportAction)="onIntersection($event)" controls loop
+                    [muted]="'muted'" preload="metadata" muted="muted" [poster]="take?.videoThumbnail"
+                    [id]="'media-' + take?._id" class="video-media">
+                    <source [src]="take.video" type="video/mp4">
+                </video>
+
+                <img src="assets/imgs/play.png" (click)="playIconClicked(take?._id, $event)" class="play-img" alt=""
+                    *ngIf="videoPaused || notLoaded">
+
+            </div>
+        </div>
+
+
+
+    </article>
+
+    <!-- Video -->
+
+
+    <div class="post-actions">
+        <div class="post-actions__action like-div">
+            <button class="icon-div heart-div" (click)="like($event)">
+                <!-- Heart Fill -->
+                <svg class="take-actions-icon" *ngIf="take?.likedByUser" viewBox="0 0 81 75" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Group-53" transform="translate(-6.000000, -6.000000)">
+                            <rect id="Rectangle-20" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="93" height="87">
+                            </rect>
+                            <g id="heart" transform="translate(6.000000, 6.000000)" fill="#EB4B59" fill-rule="nonzero">
+                                <path
+                                    d="M58.725,0 C51.6375,0 44.9553894,3.26992188 40.5,8.58339844 C36.0444159,3.26992188 29.3625,0 22.275,0 C9.71961058,0 0,9.80878906 0,22.4794922 C0,38.0099609 13.7696106,50.4771484 34.6267212,69.6853516 L40.5,75 L46.3732788,69.6853516 C67.2301947,50.4769531 81,38.0097656 81,22.4794922 C81,9.80878906 71.2803894,0 58.725,0 Z"
+                                    id="Combined-Shape"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                <svg *ngIf="!take?.likedByUser" class="take-actions-icon" viewBox="0 0 88 81" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="heart-outline" transform="translate(-6.000000, -6.000000)">
+                            <polygon id="Rectangle-21" points="0 0 100 0 100 93 0 93"></polygon>
+                            <path
+                                d="M69.8,6 C62.1,6 54.8404231,9.53151563 50,15.2700703 C45.1593654,9.53151563 37.9,6 30.2,6 C16.5595769,6 6,16.5934922 6,30.2778516 C6,47.0507578 20.9595769,60.5153203 43.6191538,81.2601797 L50,87 L56.3808462,81.2601797 C79.0402115,60.5151094 94,47.0505469 94,30.2778516 C94,16.5934922 83.4404231,6 69.8,6 Z M52.7153077,75.4526484 L51.8228269,76.2696094 L50,77.9092266 L48.1773846,76.2698203 L47.2859615,75.4537031 C36.6206154,65.6910937 27.4095962,57.2595 21.3204615,49.7205937 C15.4064808,42.3983203 12.7692308,36.402 12.7692308,30.2778516 C12.7692308,25.4547656 14.5508077,21.0111562 17.7858654,17.7658828 C21.0101346,14.5313672 25.4188077,12.75 30.2,12.75 C35.7283462,12.75 41.1936538,15.3164766 44.8194231,19.6149609 L50,25.7566172 L55.1803654,19.6149609 C58.8063462,15.3164766 64.2714423,12.75 69.8,12.75 C74.5814038,12.75 78.9898654,14.5313672 82.2143462,17.7656719 C85.4491923,21.0111562 87.2307692,25.4545547 87.2307692,30.2778516 C87.2307692,36.402 84.5935192,42.3981094 78.6799615,49.7201719 C72.5910385,57.2590781 63.3804423,65.6900391 52.7153077,75.4526484 Z"
+                                id="Shape" fill="#A2A4A6" fill-rule="nonzero"></path>
+                        </g>
+                    </g>
+                </svg>
+
+                <span *ngIf="take.count > 0" [class.liked]="take?.likedByUser"
+                    class="post-actions__text">{{take?.count}}</span>
+                <span *ngIf="take.count == 0" class="post-actions__text cero-likes">Like</span>
+            </button>
+        </div>
+        <div class="post-actions__action comment-div">
+            <a class="icon-div comments-div">
+                <svg class="take-actions-icon" viewBox="0 0 79 78" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                    <title>comment</title>
+                    <desc>Created with Sketch.</desc>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="comment" transform="translate(-6.000000, -6.000000)">
+                            <rect id="Rectangle-22" x="0" y="0" width="91" height="90"></rect>
+                            <path
+                                d="M8.517,83.161 C8.167,83.161 7.816,83.089 7.485,82.94 C6.581,82.534 6,81.634 6,80.643 L6,28.518 C6,16.102 16.102,6 28.518,6 L62.331,6 C74.747,6 84.849,16.102 84.849,28.518 L84.849,43.518 C84.849,55.934 74.747,66.036 62.331,66.036 L28.764,66.036 L10.189,82.526 C9.718,82.943 9.121,83.161 8.517,83.161 Z M29.0091478,12.036 C19.6491899,12.036 12.035,19.5369093 12.035,28.7554818 L12.035,73.2492727 L26.7351829,60.3954896 C27.2051227,59.9842451 27.8148793,59.7681026 28.4440549,59.789143 C28.5625108,59.7939249 28.6790248,59.801576 28.7965098,59.8092271 C28.8673891,59.8149654 28.9382685,59.82166 29.0101188,59.82166 L61.840851,59.82166 C71.2008089,59.82166 78.8149988,52.3207508 78.8149988,43.1021782 L78.8149988,28.7564382 C78.8149988,19.5369093 71.199838,12.0369564 61.840851,12.0369564 L29.0091478,12.0369564 L29.0091478,12.036 Z"
+                                id="Shape" fill="#A2A4A6" fill-rule="nonzero"
+                                transform="translate(45.424500, 44.580500) scale(-1, 1) translate(-45.424500, -44.580500) ">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+                <span *ngIf="take.replies > 0" class="post-actions__text">{{take?.replies}}</span>
+                <span *ngIf="take.replies == 0" class="post-actions__text">Comment</span>
+            </a>
+
+
+        </div>
+
+        <div class="post-actions__action comment-div">
+            <button class="icon-div comments-div" *ngIf="!take.saved" (click)="saveDiscussion($event)">
+                <svg class="take-actions-icon save-actions-icon--bottom-unfilled" viewBox="0 0 16 16"
+                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 12l5 3V3a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V3a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10.234z" />
+                </svg>
+                <span class="post-actions__text">Save</span>
+            </button>
+
+            <button class="icon-div comments-div" *ngIf="take.saved" (click)="saveDiscussion($event)">
+
+                <svg class="take-actions-icon save-actions-icon--bottom" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3 3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V3z" />
+                </svg>
+                <span class="post-actions__text">Unsave</span>
+            </button>
+        </div>
+        <div class="post-actions__action post-actions__action--share">
+            <button class="icon-div share-div" (click)="toggleSharing($event)">
+                <svg class="take-actions-icon--share" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M9.502 5.013a.144.144 0 0 0-.202.134V6.3a.5.5 0 0 1-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876C3.925 10.515 5.09 9.982 6.11 9.7a8.741 8.741 0 0 1 1.921-.306 7.403 7.403 0 0 1 .798.008h.013l.005.001h.001L8.8 9.9l.05-.498a.5.5 0 0 1 .45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.494.494 0 0 1 .042-.028.147.147 0 0 0 0-.252.494.494 0 0 1-.042-.028L9.502 5.013zM8.3 10.386a7.745 7.745 0 0 0-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 0 1-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.667z" />
+                </svg>
+                <span class="post-actions__text">Share</span>
+            </button>
+
+            <div class="sorting__options--aside" *ngIf="toggleShare">
+                <ul class="sorting__list">
+                    <li class="sorting__item" (click)="sharePost($event, 'link')">
+                        <button class="sorting__button">
+                            <div class="share-icon-container">
+                                <svg class="atom icon svg link" viewBox="0 0 16 16" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                                    <path
+                                        d="M5.712 6.96l.167-.167a1.99 1.99 0 0 1 .896-.518 1.99 1.99 0 0 1 .518-.896l.167-.167A3.004 3.004 0 0 0 6 5.499c-.22.46-.316.963-.288 1.46z" />
+                                    <path
+                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
+                                    <path
+                                        d="M10 9.5a2.99 2.99 0 0 0 .288-1.46l-.167.167a1.99 1.99 0 0 1-.896.518 1.99 1.99 0 0 1-.518.896l-.167.167A3.004 3.004 0 0 0 10 9.501z" />
+                                </svg>
+                            </div>
+                            <span class="sorting__text">Copy link to discussion</span>
+                        </button>
+                    </li>
+                    <li class="sorting__item" (click)="sharePost($event, 'twitter')">
+                        <a [href]="'https://twitter.com/intent/tweet?text=' + cutShareText() + '&url=https://www.discussthegame.com/discussions/' + take._id"
+                            class="sorting__button" target="_blank">
+                            <div class="share-icon-container">
+                                <svg class="atom icon svg twitter" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 16 14">
+                                    <title>Twitter Logo</title>
+                                    <path
+                                        d="M5.042 13.504c6.01 0 9.3-4.985 9.3-9.3 0-.14 0-.28-.006-.42.638-.46 1.192-1.04 1.632-1.697-.586.262-1.217.434-1.88.517.675-.402 1.192-1.046 1.44-1.81-.63.375-1.332.643-2.078.79C12.85.946 12.003.55 11.066.55c-1.804 0-3.27 1.467-3.27 3.27 0 .256.032.505.083.747-2.717-.134-5.126-1.44-6.74-3.417C.86 1.635.7 2.196.7 2.795c0 1.134.58 2.135 1.455 2.722-.536-.02-1.04-.166-1.48-.408v.043c0 1.58 1.13 2.907 2.62 3.207-.273.076-.56.115-.86.115-.21 0-.414-.02-.612-.058.414 1.3 1.626 2.244 3.053 2.27-1.12.88-2.53 1.402-4.06 1.402-.26 0-.523-.014-.778-.046 1.44.918 3.162 1.46 5.004 1.46">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="sorting__text">Share to Twitter</span>
+                        </a>
+                    </li>
+                    <li class="sorting__item" (click)="sharePost($event, 'facebook')">
+                        <a [href]="'https://www.facebook.com/sharer/sharer.php?u=https://www.discussthegame.com/discussions/' + take._id"
+                            class="sorting__button" target="_blank">
+                            <div class="share-icon-container">
+                                <svg class="atom icon svg facebook" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 10 16">
+                                    <title>Facebook Logo</title>
+                                    <path
+                                        d="M6.24 16V8.7h2.45l.365-2.842H6.24V4.04c0-.822.227-1.384 1.41-1.384h1.5V.112C8.42.035 7.686-.002 6.953 0 4.79 0 3.3 1.325 3.3 3.76v2.098H.846V8.7H3.3V16h2.94z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="sorting__text">Share to Facebook</span>
+                        </a>
+                    </li>
+                    <li class="sorting__item" (click)="toggleSharing($event)">
+                        <button class="sorting__button">
+                            <span class="sorting__text">Cancel</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

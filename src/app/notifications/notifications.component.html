@@ -1,0 +1,15 @@
+<div class="main-container">
+    <div class="notifications-container">
+
+        <div class="sorry" *ngIf="!wait && !authService.visibleNotifications.length">
+            You have no notifications
+        </div>
+     
+        <div>
+            <app-notification-item *ngFor="let notification of authService.visibleNotifications" [notification]="notification"></app-notification-item>
+        </div>
+
+
+    </div>
+
+</div>

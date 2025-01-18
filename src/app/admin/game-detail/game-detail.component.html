@@ -1,0 +1,323 @@
+<li>
+        <div (click)="showDetail = !showDetail" class="main-game">
+            <div class="a-teamName-logo">
+                <b>{{game?.awayTeam?.teamName}}</b>
+                <img class="team-pic" [src]="game?.awayTeam?.logo" alt="Logo">
+            </div>
+            <h3>@</h3>
+            <div class="h-teamName-logo">
+                <img class="team-pic" [src]="game?.homeTeam?.logo" alt="Logo">
+                <b>{{game?.homeTeam?.teamName}}</b>
+            </div>
+            <div class="score" *ngIf="game.homeTeamScore >= 0">
+                <h4>{{game.awayTeamScore}}</h4>
+                <h4>-</h4>
+                <h4>{{game.homeTeamScore}}</h4>
+            </div>
+    
+            <i *ngIf="!showDetail" class="fa fa-angle-down" aria-hidden="true"></i>
+            <i *ngIf="showDetail" class="fa fa-angle-up" aria-hidden="true"></i>
+        </div>
+    
+    
+        <!-- Soccer -->
+        <div *ngIf="showDetail && game.league == 'Soccer'" class="team-form">
+            <form (ngSubmit)="submitSoccer(gameSoccerForm.value)" [formGroup]="gameSoccerForm" novalidate>
+    
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>RT</th>
+                            <th>P</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        <tr>
+                            <th scope="row">{{game?.awayTeam?.abbreviation}}</th>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamScore">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamScorePenalties">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{game?.homeTeam?.abbreviation}}</th>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamScore">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamScorePenalties">
+                            </td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+                <br>
+                <span class="goals">Goals</span>
+                <div class="form-group">
+                    <label class="col-form-label">Player:</label>
+                    <input class="form-control" type="text" id="" formControlName="player" [(ngModel)]="player">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Minute:</label>
+                    <input class="form-control" type="number" id="" formControlName="minute" [(ngModel)]="minute">
+                </div>
+                <div class="form-group">
+                    <label for="seasonType">Team:</label>
+                    <select class="form-control" id="seasonType" formControlName="team" [(ngModel)]="team">
+                        <option>{{game?.awayTeam?.abbreviation}}</option>
+                        <option>{{game?.homeTeam?.abbreviation}}</option>
+                    </select>
+                </div>
+                <span class="add-goal" (click)="addGoal()">Add goal</span>
+                <br>
+                <br>
+                <hr>
+                <div *ngIf="updated" class="alert alert-success" role="alert">
+                    The Game has been updated.
+                </div>
+                <div *ngIf="error" class="alert alert-danger" role="alert">
+                    There was a problem in the server.
+                </div>
+                <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                <button *ngIf="!loading" type="submit" [disabled]="!gameSoccerForm.dirty" class="btn btn-primary block">Update Game</button>
+                <br>
+    
+            </form>
+            <button *ngIf="!loading" class="btn btn-danger block mt-3" (click)="delete()">Delete Game</button>
+        </div>
+    
+    
+    
+        <!-- NHL -->
+    
+        <div *ngIf="showDetail && game.league == 'NHL'" class="team-form">
+            <form (ngSubmit)="submitNHL(gameNHLForm.value)" [formGroup]="gameNHLForm" novalidate>
+    
+                <label class="upd">OT/SO:</label>
+                <span class="record rounded-circle" (click)="updateScoreboard()">{{updateScoreboardText}}</span>
+                <br>
+                <br>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th *ngIf="theGameWentToOTSO">OT</th>
+                            <th *ngIf="theGameWentToOTSO">SO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{game?.awayTeam?.abbreviation}}</th>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamPoints1">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamPoints2">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamPoints3">
+                            </td>
+                            <td *ngIf="theGameWentToOTSO">
+                                <input class="form-control" type="number" formControlName="awayTeamPointsOT">
+                            </td>
+                            <td *ngIf="theGameWentToOTSO">
+                                <input class="form-control" type="number" formControlName="awayTeamPointsSO">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{game?.homeTeam?.abbreviation}}</th>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamPoints1">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamPoints2">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamPoints3">
+                            </td>
+                            <td *ngIf="theGameWentToOTSO">
+                                <input class="form-control" type="number" formControlName="homeTeamPointsOT">
+                            </td>
+                            <td *ngIf="theGameWentToOTSO">
+                                <input class="form-control" type="number" formControlName="homeTeamPointsSO">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <label class="upd">Update Record:</label>
+                <span class="record rounded-circle" (click)="updateTeamRecord()">{{updateRecordText}}</span>
+                <br>
+                <br>
+                <label class="upd">Win/Lose Mistake:</label>
+                <span class="record-m rounded-circle" (click)="updateMistake()">{{mistakeText}}</span>
+                <br>
+                <div *ngIf="updated" class="alert alert-success" role="alert">
+                    The Game has been updated.
+                </div>
+                <div *ngIf="error" class="alert alert-danger" role="alert">
+                    There was a problem in the server.
+                </div>
+                <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                <button *ngIf="!loading" type="submit" [disabled]="!gameNHLForm.dirty" class="btn btn-primary block">Update Game</button>
+                <br>
+    
+            </form>
+            <button *ngIf="!loading" class="btn btn-danger block mt-3" (click)="delete()">Delete Game</button>
+        </div>
+    
+    
+        <!-- MLB -->
+    
+        <div *ngIf="showDetail && (game.league == 'MLB')" class="team-form">
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th *ngFor="let run of awayInnings; let i = index;">
+                            {{ i + 1}}
+                        </th>
+                        <th>R</th>
+                        <th>H</th>
+                        <th>E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{game?.awayTeam?.abbreviation}}</th>
+                        <td *ngFor="let run of awayInnings; let i = index; trackBy: customTrackBy">
+                            <input [name]="'input-'+i" [ngModelOptions]="{standalone: true}" class="form-control" type="number" [(ngModel)]="awayInnings[i]">
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" [(ngModel)]="awayTeamPointsR">
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" [(ngModel)]="awayTeamPointsH">
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" [(ngModel)]="awayTeamPointsE">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{game?.homeTeam?.abbreviation}}</th>
+                        <td *ngFor="let run of homeInnings; let i = index; trackBy: customTrackBy">
+                                <input [name]="'inputh-'+i" [ngModelOptions]="{standalone: true}" class="form-control" type="number" [(ngModel)]="homeInnings[i]">
+                            </td>
+                        <td>
+                            <input class="form-control" type="number" [(ngModel)]="homeTeamPointsR">
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" [(ngModel)]="homeTeamPointsH">
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" [(ngModel)]="homeTeamPointsE">
+                        </td>
+    
+                    </tr>
+                </tbody>
+            </table>
+            <button  (click)="addInning()" class="btn btn-info block">+</button>
+            <button  (click)="deleteInning()" class="btn btn-warning block">-</button>
+            <br>
+            <br>
+            <div *ngIf="updated" class="alert alert-success" role="alert">
+                The Game has been updated.
+            </div>
+            <div *ngIf="error" class="alert alert-danger" role="alert">
+                There was a problem in the server.
+            </div>
+            <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+            <button *ngIf="!loading" (click)="submitMLB()" class="btn btn-primary block">Update Game</button>
+            <br>
+            <button *ngIf="!loading" class="btn btn-danger block mt-3" (click)="delete()">Delete Game</button>
+    
+    
+        </div>
+    
+    
+    
+    
+        <!-- NBA and NFL -->
+    
+        <div *ngIf="showDetail && (game.league == 'NBA' || game.league == 'NFL' || game.league == 'NCAAB')" class="team-form">
+            <form (ngSubmit)="submit(gameForm.value)" [formGroup]="gameForm" novalidate>
+    
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>OT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{game?.awayTeam?.abbreviation}}</th>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamPoints1">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamPoints2">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamPoints3">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamPoints4">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="awayTeamPointsOT">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{game?.homeTeam?.abbreviation}}</th>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamPoints1">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamPoints2">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamPoints3">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamPoints4">
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" formControlName="homeTeamPointsOT">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <label class="upd">Update Record:</label>
+                <span class="record rounded-circle" (click)="updateTeamRecord()">{{updateRecordText}}</span>
+                <br>
+                <br>
+                <label class="upd">Win/Lose Mistake:</label>
+                <span class="record-m rounded-circle" (click)="updateMistake()">{{mistakeText}}</span>
+                <br>
+                <div *ngIf="updated" class="alert alert-success" role="alert">
+                    The Game has been updated.
+                </div>
+                <div *ngIf="error" class="alert alert-danger" role="alert">
+                    There was a problem in the server.
+                </div>
+                <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                <button *ngIf="!loading" type="submit" [disabled]="!gameForm.dirty" class="btn btn-primary block">Update Game</button>
+                <br>
+    
+            </form>
+            <button *ngIf="!loading" class="btn btn-danger block mt-3" (click)="delete()">Delete Game</button>
+        </div>
+    </li>

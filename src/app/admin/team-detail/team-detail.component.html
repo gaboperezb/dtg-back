@@ -1,0 +1,48 @@
+<li>
+        <div (click)="showDetail = !showDetail" class="main">
+            <img class="team-pic" [src]="team?.logo" alt="Logo">
+            <b>{{team?.teamName}}</b>
+            <i *ngIf="!showDetail" class="fa fa-angle-down" aria-hidden="true"></i>
+            <i *ngIf="showDetail" class="fa fa-angle-up" aria-hidden="true"></i>
+        </div>
+        
+        <div *ngIf="showDetail" class="team-form">
+            <form (ngSubmit)="submit(teamForm.value)" [formGroup]="teamForm" novalidate>
+                    <div class="form-group">
+                        <label class="col-form-label">Background Color:</label>
+                        <input class="form-control" type="text" id="" formControlName="background">
+                    </div>
+                <div class="form-group" *ngIf="team.league!== 'Soccer'">
+                    <label for="stadium">Stadium:</label>
+                    <input id="stadium" type="text" formControlName="stadium" class="form-control"/>
+                </div>
+                <div class="form-group" *ngIf="team.league != 'Soccer'">
+                    <label for="league">Wins:</label>
+                    <select class="form-control" id="wins" formControlName="wins">
+                        <option *ngFor="let win of wins" [value]="win">{{win}}</option>
+                    </select>
+                </div>
+                <div class="form-group" *ngIf="team.league != 'Soccer'">
+                    <label for="loses">Loses:</label>
+                    <select class="form-control" id="loses" formControlName="loses">
+                        <option *ngFor="let lose of loses" [value]="lose" >{{lose}}</option>
+                    </select>
+                </div>
+                <div class="form-group" *ngIf="team.league == 'NHL'">
+                    <label for="otl">OTL:</label>
+                    <select class="form-control" id="otl" formControlName="otl">
+                        <option *ngFor="let lose of loses" [value]="lose" >{{lose}}</option>
+                    </select>
+                </div>
+                <div *ngIf="updated" class="alert alert-success" role="alert">
+                    {{team?.teamName}} has been updated.
+                </div>
+                <div *ngIf="error" class="alert alert-danger" role="alert">
+                    There was a problem in the server.
+                </div>
+                <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                <button *ngIf="!loading" type="submit" [disabled]="!teamForm.valid" class="btn btn-primary block">Update Team</button>
+            </form>
+        </div>
+        
+</li>

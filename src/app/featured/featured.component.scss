@@ -1,0 +1,91 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.featured-container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 30px 0;
+
+
+    .header-container {
+        border-bottom: 1px solid black;
+        padding-bottom: 15px;
+    }
+
+    .featured-header {
+        
+        font-size: 4rem;
+        color: rgba(0, 0, 0, 0.831);
+    }
+
+
+    .featured-subheader {
+        color: #6b6b6b;
+        margin-top: 5px;
+        font-weight: 400;
+    }
+
+    .threads {
+        width: 610px;
+        margin-top: 20px;
+    }
+
+    .spinner-container {
+        text-align: center;
+        padding: 16px 0 32px 0;
+    
+        .spinner-border {
+            height: 28px;
+            width: 28px;
+            color: #333333;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .featured-container {
+
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 0;
+    
+        .header-container {
+            border-bottom: 1px solid black;
+            padding:  0 20px 20px 20px;
+        }
+    
+        .featured-header {
+            
+            font-size: 4rem;
+            color: rgba(0, 0, 0, 0.831);
+        }
+    
+    
+        .featured-subheader {
+            color: #6b6b6b;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+    
+        .threads {
+            width: 100%;
+            margin-top: 20px;
+        }
+    
+        .spinner-container {
+            text-align: center;
+            padding: 16px 0 32px 0;
+        
+            .spinner-border {
+                height: 28px;
+                width: 28px;
+                color: #333333;
+            }
+        }
+    }
+  }

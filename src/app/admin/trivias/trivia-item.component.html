@@ -1,0 +1,88 @@
+<li>
+    <div (click)="showDetail = !showDetail" class="main">
+        <span class="trivia-league">{{trivia?.league}}</span>
+        <span class="trivia-league">{{trivia?.date | date:'mediumDate'}}</span>
+        <span *ngIf="trivia.active" class="active-text" ><span class="active" ></span>Active</span>
+        <span *ngIf="!trivia.active" class="inactive-text"><span class="inactive" ></span>Inactive</span>
+        <b>{{trivia?.question}}</b>
+        <i *ngIf="!showDetail" class="fa fa-angle-down" aria-hidden="true"></i>
+        <i *ngIf="showDetail" class="fa fa-angle-up" aria-hidden="true"></i>
+    </div>
+    
+    <div *ngIf="showDetail" class="team-form">
+        <form (ngSubmit)="submit(triviaForm.value)" [formGroup]="triviaForm" novalidate>
+            <div class="form-group">
+                <label for="active">Active:</label>
+                <select class="form-control" id="active" formControlName="active">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="revealAnswer">Reveal Answer:</label>
+                <select class="form-control" id="active" formControlName="revealAnswer">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="logo">Question:</label>
+                <input id="logo" type="text" placeholder="Enter a question" formControlName="question"
+                    class="form-control" />
+            </div>
+    
+            <div class="form-group ">
+                <label for="logo">Options:</label>
+                <div formArrayName="options" *ngFor="let option of formData.controls; let i = index;"
+                    class="poll-flex">
+                    <div [formGroupName]="i" class="poll-group">
+                        <label class="col-form-label poll-labels col-sm-2">
+                            <span class="inner-no">{{i + 1}}</span>
+                        </label>
+                        <div class="poll-values col-sm-5">
+                            <input formControlName="option" type="text" autocapitalize="on"
+                                autocomplete="off" class="form-control"  placeholder="Option"
+                                [attr.maxlength]=30>
+                                <input formControlName="picture" type="text"autocapitalize="on"
+                                autocomplete="off" class="form-control" placeholder="Picture"
+                                >
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="correctOption">Correct Option:</label>
+                <select class="form-control" id="correctOption" formControlName="correctOption">
+                    <option *ngFor="let option of formData.controls; let i = index;" [value]="i">Option {{i + 1}}</option>
+    
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="league">League:</label>
+                <select class="form-control" id="league" formControlName="league">
+                    <option>NBA</option>
+                    <option>NFL</option>
+                    <option>Soccer</option>
+                    <option>NHL</option>
+                    <option>MLB</option>
+                    <option>NCAAB</option>
+                    <option>NCAAF</option>
+                    <option>Test</option>
+                </select>
+            </div>
+            <div *ngIf="updated" class="alert alert-success" role="alert">
+                The trivia has been updated;
+            </div>
+            <!-- <div *ngIf="error" class="alert alert-danger" role="alert">
+                    There was a problem when adding the team to the DB.
+            </div> -->
+            <button *ngIf="!loading" type="submit" [disabled]="!triviaForm.valid" class="btn btn-primary block">Update
+                Trivia</button>
+            <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+        </form>
+    </div>
+    
+</li>

@@ -1,0 +1,162 @@
+li {
+    background: white;
+    margin-bottom: 15px;
+    
+}
+
+.score {
+    display: inline-block;
+    padding: 0 20px;
+    width: 150px;
+    font-size: 0.9rem;
+    
+}
+
+h3 {
+    display: inline-block;
+    color: gray;
+    margin: 0px 10px;
+}
+
+.goals {
+    font-weight: 600;
+    font-size: 22px;
+    text-decoration: underline;
+}
+
+.add-goal {
+    display: inline-block;
+    background: #2abf5b;
+    color: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.add-goal:hover {
+    
+    background: #238042;;
+    
+}
+
+h4 {
+    display: inline-block;
+}
+
+.team-form {
+    padding: 20px;
+    overflow: scroll;
+    white-space: nowrap;
+}
+
+.a-teamName-logo, .h-teamName-logo  {
+    width: 200px;
+    display: inline-block;
+    padding: 5px 0px;
+}
+
+.a-teamName-logo {
+    text-align: right;
+}
+
+.h-teamName-logo {
+    text-align: left;
+}
+
+.main-game {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+
+}
+
+.record {
+    display: inline-block;
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    padding-top: 11px;
+    background: #2EFEDA;
+    margin-left: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.record:hover {
+    
+    background: #2ad0b3;
+   
+}
+
+.record-m {
+    display: inline-block;
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    padding-top: 11px;
+    background: #F5525A;
+    margin-left: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.record-m:hover {
+    
+    background: #b94147;
+   
+}
+
+
+
+.upd {
+    width: 140px;
+}
+li:hover {
+    -moz-box-shadow: 0 2px 0  #F5525A;
+    -webkit-box-shadow: 0 2px 0 #F5525A;
+    box-shadow: 0 2px 0px  #F5525A;
+}
+
+.team-pic {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+    margin: 0px 10px;
+}
+
+.fa-angle-down, .fa-angle-up {
+    position: absolute;
+    right: 20px;
+    top: 22px;
+    font-size: 25px;
+    color: #949494;
+    
+}
+
+input[type='number'] {
+    width: 70px;
+    margin: 0;
+}
+
+
+@media screen and (max-width: 767px) {
+
+    input[type='number'] {
+        width: 32px;
+        margin: 0;
+        padding: 2px;
+    }
+
+    b {
+        display: none;
+    }
+
+    .a-teamName-logo, .h-teamName-logo  {
+        width: 100px;
+        display: inline-block;
+        padding: 5px 0px;
+    }
+}

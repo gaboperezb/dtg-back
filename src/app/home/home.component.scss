@@ -1,0 +1,292 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.home-container {
+    height: 100vh;
+    width: 85%;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+
+
+
+    h1 {
+        font-weight: bold;
+
+    }
+    
+}
+
+.logo {
+
+    height: 40px;
+    width: 40px;
+    -o-object-fit: contain;
+       object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.container-c {
+    background-image: url('../../assets/imgs/hero.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #edf2f7;
+    height: calc(100vh + 130px);
+}
+
+.title-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    color: white;
+    padding: 16px;
+
+    p {
+        
+        color: #cccccc;
+    }
+}
+
+.app-container {
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center
+}
+
+.app-iphone {
+    width: 250px;
+}
+
+.download {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.create {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    background: white;
+    padding: 16px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.app-logos {
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+}
+
+.stores {
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    width: 100%;
+    border-bottom: 3px solid #3d60d0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+}
+
+.stores img {
+    height: 50px;
+    margin: 10px 15px 10px 0;
+    cursor: pointer;
+}
+
+
+.get {
+    color: rgb(29, 29, 29);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.editor-btn {
+    border-radius: 50px;
+    border: 2px solid #3050b7;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: 10px 20px 9px 20px;
+    color: #3050b7;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-block;
+    
+    
+
+}
+
+.editor-btn:hover {
+    background: #3050b738;
+}
+
+.footer-distributed{
+	background-color: #21253C;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	font: normal 16px sans-serif;
+
+	padding: 45px 50px;
+
+}
+
+.footer-distributed .footer-left p{
+	color:  #8f9296;
+	font-size: 14px;
+	margin: 0;
+}
+
+/* Footer links */
+
+.footer-distributed p.footer-links{
+	font-size:18px;
+	font-weight: bold;
+	color:  #ffffff;
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+.footer-distributed p.footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer-distributed .footer-right{
+	float: right;
+	margin-top: 6px;
+	max-width: 180px;
+}
+
+.footer-distributed .footer-right a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background-color:  #21253C;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-left: 3px;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-right{
+		text-align: center;
+	}
+
+	.footer-distributed .footer-right{
+		float: none;
+		margin: 0 auto 20px;
+	}
+
+	.footer-distributed .footer-left p.footer-links{
+		line-height: 1.8;
+	}
+}
+
+@media (max-height: 800px) {
+    .home-container {
+        display: block;
+    }
+   
+}
+
+
+
+@media (max-width: 500px) {
+
+    .download {
+        display: none;
+    }
+
+    .app-logos {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        img {
+            margin: 10px 0;
+        }
+    }
+
+    .title-container p {
+        color: #4a4a4a;
+    }
+    
+    }

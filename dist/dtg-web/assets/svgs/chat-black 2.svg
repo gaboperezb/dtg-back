@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="108px" height="96px" viewBox="0 0 108 96" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>chat</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="chat" transform="translate(-2.000000, -2.000000)">
+            <rect id="Rectangle" x="0" y="0" width="112" height="100"></rect>
+            <g id="noun_chat_945229-(1)" transform="translate(6.000000, 6.000000)" fill-rule="nonzero" stroke="#262626" stroke-width="8">
+                <path d="M85.15,0.13 L14.85,0.13 C10.9080675,0.129996425 7.12787775,1.69729063 4.3423869,4.48653298 C1.55689605,7.27577534 -0.00530900006,11.058071 3.2368517e-15,15 L3.2368517e-15,54.12 C-0.00796700651,58.0636602 1.55306425,61.8485274 4.33884345,64.6399345 C7.12462265,67.4313415 10.9063318,69.000008 14.85,69 L20,69 L20,82 C20,88.17 23.71,89.79 28.24,85.6 L46.18,69 L85.18,69 C89.1184674,68.9920515 92.8924669,67.4198744 95.6717578,64.6293314 C98.4510487,61.8387883 100.007965,58.0584673 100,54.12 L100,15 C100.005309,11.058071 98.4431039,7.27577534 95.6576131,4.48653298 C92.8721222,1.69729063 89.0919325,0.129996425 85.15,0.13 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

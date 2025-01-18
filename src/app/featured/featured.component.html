@@ -1,0 +1,23 @@
+<div class="main-container">
+    <div class="featured-container">
+
+        <div class="header-container">
+            <h1 class="featured-header">Featured</h1>
+            <h2 class="featured-subheader">A curated collection of {{threadsService.filterBy == 'TOP' ? 'sports' : threadsService.filterBy}} posts</h2>
+        </div>
+        <div class="threads">
+            <app-thread *ngFor="let thread of featuredThreads" [thread]="thread"  (deleteThread)="deleteThread($event)"></app-thread>
+            <div class="spinner-container" *ngIf="showInfiniteSpinner">
+                <div class="spinner-border" role="status">
+                </div>
+            </div>
+            <div *ngIf="enableInfinite"
+                class="search-results"
+                infiniteScroll
+                [infiniteScrollDistance]="1.5"
+                [infiniteScrollThrottle]="150"
+                (scrolled)="doInfinite()"
+              ></div>
+        </div>
+    </div>
+</div>

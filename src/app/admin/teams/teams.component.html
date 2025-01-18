@@ -1,0 +1,81 @@
+<div class="teams-container min-height">
+       
+        <h4>TEAMS</h4>
+        <button *ngIf="!add" class="btn btn-primary ml-5" (click)="add = true"> Add team</button>
+        <i *ngIf="add" id="close-add" class="fa fa-times-circle" (click)="add = false"></i>
+        <form  *ngIf="add" (ngSubmit)="submit(addForm.value)" [formGroup]="addForm" novalidate >
+            <div class="form-group">
+                <label for="logo">Logo:</label>
+                <input id="logo" type="text" placeholder="Enter logo source (aws)" formControlName="logo" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="teamName">Team Name:</label>
+                <input id="teamName" type="text" placeholder="Enter team name" formControlName="teamName" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="abbreviation">Team Abbreviation:</label>
+                <input id="abbreviation" type="text" placeholder="Enter team abbreviation" formControlName="abbreviation" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="soccerLeague">Soccer League:</label>
+                <select class="form-control" id="league" formControlName="soccerLeague">
+                  <option value="English Premier League">English Premier League</option>
+                  <option value="Serie A">Serie A</option>
+                  <option value="MLS">MLS</option>
+                  <option value="Bundesliga">Bundesliga</option>
+                  <option value="Eredivise">Eredivise</option>
+                  <option value="La Liga">La Liga</option>
+                  <option value="Primeira Liga">Primeira Liga</option>
+                  <option value="Ligue 1">Ligue 1</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="league">League:</label>
+                <select class="form-control" id="league" formControlName="league">
+                  <option>NBA</option>
+                  <option>NFL</option>
+                  <option>Soccer</option>
+                  <option>NHL</option>
+                  <option>MLB</option>
+                  <option>NCAAB</option>
+                  <option>NCAAF</option>
+                </select>
+            </div>
+            <div *ngIf="updated" class="alert alert-success" role="alert">
+                    The team has been added to the DB.
+            </div>
+            <!-- <div *ngIf="error" class="alert alert-danger" role="alert">
+                    There was a problem when adding the team to the DB.
+            </div> -->
+            <button  *ngIf="!loading" type="submit" [disabled]="!addForm.valid" class="btn btn-primary block">Add Team</button>
+            <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i>
+        </form>
+        <ul class="links">
+            <li [class.active]="filterBy==='NFL'" (click)="filterGames('NFL')">
+                NFL        
+            </li>
+            <li [class.active]="filterBy==='NBA'" (click)="filterGames('NBA')">
+                NBA
+            </li>
+            <li [class.active]="filterBy==='NHL'" (click)="filterGames('NHL')">
+                NHL
+            </li>  
+            <li [class.active]="filterBy==='Soccer'" (click)="filterGames('Soccer')">
+                Soccer
+            </li>
+            <li [class.active]="filterBy==='MLB'" (click)="filterGames('MLB')">
+                MLB
+            </li>
+            <li [class.active]="filterBy==='NCAAB'" (click)="filterGames('NCAAB')">
+                NCAAB
+            </li>
+            <li [class.active]="filterBy==='NCAAF'" (click)="filterGames('NCAAF')">
+                NCAAF
+            </li>
+                       
+        </ul>
+        <ul class="t-detail" *ngIf="!add">
+            <team-detail *ngFor="let team of visibleTeams" [team]="team"></team-detail>
+        </ul>
+    </div>
+    

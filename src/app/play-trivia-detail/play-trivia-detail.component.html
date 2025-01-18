@@ -1,0 +1,327 @@
+<div class="background-container">
+
+    <div class="take-container">
+
+        <div class="take">
+            <div class="go-back" #back>
+                <button (click)="goBack()">
+                    <svg class="bi bi-arrow-left-short back-icon" width="1em" height="1em" viewBox="0 0 16 16"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z"
+                            clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <span class="league">Trivia</span>
+            </div>
+
+            <div class="go-back sticky" *ngIf="sticky">
+                <button (click)="goBack()">
+                    <svg class="bi bi-arrow-left-short back-icon" width="1em" height="1em" viewBox="0 0 16 16"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z"
+                            clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <span class="league">Trivia</span>
+            </div>
+            
+            <div class="article">
+                <div class="revealed" *ngIf="helper">
+                    The answer of each trivia will be revealed 24 hours after its publication
+                    <span class="got-it" (click)="setTriviaHelper()">GOT IT!</span>
+                </div>
+                
+                    <div class="trivia-container">
+                        <div class="trivia-top">
+                            <div class="countdown-container">
+                                <div id="countdown" *ngIf="!selected">
+                                    <div *ngIf="!userSelection" id="countdown-number">{{countdown}}</div>
+                                    <svg *ngIf="!userSelection" class="svg-circle">
+                                        <circle class="entered" r="18" cx="20" cy="20"></circle>
+                                    </svg>
+                                </div>
+                            </div>
+                           
+                            <div *ngIf="selected && !trivia.correct && !trivia.timesUp && alreadyAnswered" class="timing-info wrong">
+                                Wrong
+                            </div>
+                            <div *ngIf="selected && trivia.timesUp && alreadyAnswered" class="timing-info timeout">
+                                Time's up
+                            </div>
+                            <div *ngIf="selected && trivia.correct && !trivia.timesUp  && alreadyAnswered" class="timing-info correct">
+                                Correct
+                            </div>
+                        
+            
+                            <div *ngIf="selected && !trivia.correct && !trivia.timesUp  && !alreadyAnswered" class="timing-info wrong">
+                                Wrong
+                            </div>
+                            <div *ngIf="selected && trivia.timesUp  && !alreadyAnswered" class="timing-info timeout ">
+                                Time's up
+                            </div>
+                            <div *ngIf="selected && trivia.correct && !trivia.timesUp  && !alreadyAnswered" class="timing-info correct">
+                                Correct
+                            </div>
+            
+                            <div class="question-container">
+                                <span class="trivia-question">{{trivia?.question}}</span>
+                            </div>
+                            <div class="revealed-answer" *ngIf="trivia.revealAnswer && selected">
+                                Answer: {{answer.option}}
+                            </div>
+                        </div>
+            
+                        <div class="options-container" *ngIf="!!triviaAnswered">
+                            <div *ngFor="let option of trivia.options" [class.trivia-option-result]="true" [class.option-selected-after]="option._id == userSelection" [class.correct-option]="option._id == trivia.correctOption && userSelection == trivia.correctOption">
+                                <img class="picture-option" [src]="option.picture" alt="">
+                                <span class="text-trivia-option-result">{{option.option}}</span>
+                                <span class="percentage-option">{{option.flooredPercentage}}%</span>
+                            </div>
+                        </div>
+
+
+                        <div  class="swiper-container" [swiper]="slideOpts" *ngIf="!triviaAnswered">
+                            <div class="swiper-wrapper">
+                              <div class="swiper-slide">
+                                <div class="options-container">
+                                    <div *ngFor="let option of trivia.options" [class.trivia-option]="true" [class.option-selected]="option._id == userSelection" (click)="selection(option)">
+                                        <img class="picture-option" [src]="option.picture" alt="">
+                                        <span class="text-option">{{option.option}}</span>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="swiper-slide">
+                                <div class="options-container">
+                                    <div *ngFor="let option of trivia.options" [class.trivia-option-result]="true" [class.option-selected-after]="option._id == userSelection" [class.correct-option]="option._id == trivia.correctOption && userSelection == trivia.correctOption ">
+                                        <img class="picture-option" [src]="option.picture" alt="">
+                                        <span class="text-trivia-option-result">{{option.option}}</span>
+                                        <span class="percentage-option">{{option.flooredPercentage}}%</span>
+                                    </div>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                    
+                    </div>
+            </div>
+
+     
+          
+        </div>
+
+        <div class="related-take">
+
+            <div *ngIf="addCommentToggled">
+                <div class="add-comment-container">
+
+                    <div class="add-comment-user">
+                        <img [src]="authService?.currentUser?.profilePicture" alt="">
+                    </div>
+                    <div class="add-comment" [class.focused]="textareaFocused">
+                        <div class="add-comment__textarea-container">
+
+                            <div class="mid-textarea">
+                                <textarea [(ngModel)]="comment" (blur)="commentUnfocused()" (focus)="commentFocused()"
+                                    class="add-comment__textarea" placeholder="Add a comment" id="" 
+                                    [ngModelOptions]="{standalone:
+                                    true}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="send-comment">
+                    <button *ngIf="!sendingComment" class="send-comment__button" (click)="sendComment()"><span
+                            [class.disabled]="comment.length == 0">Comment</span></button>
+                    <button *ngIf="sendingComment" class="send-comment__button loading-button" type="button" disabled>
+                        <div class="spinner-border" role="status">
+
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+
+
+            <div class="sorting" *ngIf="addCommentToggled">
+
+                <div class="sorting__container">
+                    <span class="sorting__header" (click)="toggleSort = !toggleSort">SORT</span>
+                    <button class="sorting__button" (click)="toggleSort = !toggleSort">
+
+
+                        <svg *ngIf="hot" class="sorting__icon" viewBox="0 0 66 80" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="noun_Flame_129549" transform="translate(-6.000000, -7.000000)">
+                                    <rect id="Rectangle-25" x="0" y="0" width="78" height="94"></rect>
+                                    <path
+                                        d="M58.47,30.559 L57.385,29.686 C56.107,28.658 54.173,29.05 53.468,30.531 C53.125,31.251 52.883,38.54 52.883,39.768 C52.883,40.016 52.831,40.423 52.837,40.466 C52.837,41.502 51.91,42.324 50.842,42.148 C50.002,42.01 49.428,41.213 49.424,40.362 C49.37,27.896 45.561,19.203 38.57,12.711 C34.295,8.741 29.24,5.235 27.693,7.972 C27.298,8.67 27.951,10.239 28.609,12.249 C30.071,16.72 25.61,23.86 19.304,30.995 C13.377,37.702 6,46.05 6,58.349 C6,70.389 14.296,81.646 25.444,86.889 C26.444,87.359 27.411,86.115 26.703,85.267 C24.255,82.334 22.847,78.504 23.047,74.34 C23.435,66.275 30.075,59.647 38.14,59.275 C47.244,58.854 54.758,66.111 54.758,75.123 C54.758,78.975 53.383,82.503 51.099,85.249 C50.38,86.114 51.313,87.374 52.331,86.896 C63.485,81.655 71.787,70.395 71.787,58.35 C71.787,47.898 66.808,37.509 58.47,30.559 Z"
+                                        id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <svg *ngIf="new" class="sorting__icon" viewBox="0 0 87 88" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="noun_new_258297" transform="translate(-6.000000, -6.000000)">
+                                    <rect id="Rectangle-26" x="0" y="0" width="99" height="99"></rect>
+                                    <path
+                                        d="M93,49.475 C93,48.875 92.7,48.375 92.3,48.075 L82,40.775 L87.3,29.275 C87.5,28.775 87.5,28.175 87.2,27.675 C86.9,27.175 86.4,26.875 85.8,26.775 L73.2,25.675 L72.1,13.075 C72,12.475 71.7,11.975 71.2,11.675 C70.7,11.375 70.1,11.375 69.6,11.575 L58.1,16.875 L50.9,6.675 C50.2,5.775 48.7,5.775 48.1,6.675 L40.8,16.975 L29.3,11.675 C28.8,11.475 28.2,11.475 27.7,11.775 C27.2,12.075 26.9,12.575 26.8,13.175 L25.7,25.775 L13.1,26.875 C12.5,26.975 12,27.275 11.7,27.775 C11.4,28.275 11.4,28.875 11.6,29.375 L16.9,40.875 L6.7,48.075 C6.2,48.375 6,48.975 6,49.475 C6,49.975 6.3,50.575 6.7,50.875 L17,58.175 L11.7,69.675 C11.5,70.175 11.5,70.775 11.8,71.275 C12.1,71.775 12.6,72.075 13.2,72.175 L25.8,73.275 L26.9,85.875 C27,86.475 27.3,86.975 27.8,87.275 C28.3,87.575 28.9,87.575 29.4,87.375 L40.9,82.075 L48.2,92.375 C48.5,92.875 49.1,93.075 49.6,93.075 C50.2,93.075 50.7,92.775 51,92.375 L58.3,82.075 L69.8,87.375 C70.3,87.575 70.9,87.575 71.4,87.275 C71.9,86.975 72.2,86.475 72.3,85.875 L73.4,73.275 L86,72.175 C86.6,72.075 87.1,71.775 87.4,71.275 C87.7,70.775 87.7,70.175 87.5,69.675 L82.2,58.175 L92.5,50.875 C92.8,50.575 93,49.975 93,49.475 Z"
+                                        id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <svg *ngIf="top" class="sorting__icon" viewBox="0 0 64 75" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Group-29" transform="translate(-6.000000, -6.000000)">
+                                    <rect id="Rectangle-27" x="0" y="0" width="76" height="88"></rect>
+                                    <rect id="Rectangle-15" fill="#4264d0" x="6" y="51" width="18" height="30" rx="3">
+                                    </rect>
+                                    <rect id="Rectangle-15" fill="#4264d0" x="52" y="41" width="18" height="40" rx="3">
+                                    </rect>
+                                    <g id="Group-30" transform="translate(22.000000, 6.000000)" fill="#B5B7B9">
+                                        <path
+                                            d="M25,25.622289 L25,72 C25,73.6568542 23.6568542,75 22,75 L10,75 C8.34314575,75 7,73.6568542 7,72 L7,25.622289 L2.36204465,25.622289 C1.49020407,25.622289 0.689053271,25.1551552 0.288477869,24.3843844 C-0.135660791,23.6369703 -0.0885342735,22.7027027 0.406294164,22.002002 L14.5442495,0.980980981 C15.4160901,-0.32699366 17.5839099,-0.32699366 18.4557505,0.980980981 L32.5937058,22.002002 C33.0885343,22.7027027 33.1356608,23.6369703 32.7115221,24.3843844 C32.3109467,25.1551552 31.5097959,25.622289 30.6379553,25.622289 L25,25.622289 Z"
+                                            id="Combined-Shape"></path>
+                                    </g>
+                                    <g id="noun_Arrow_1966946" transform="translate(22.000000, 6.000000)"></g>
+                                </g>
+                            </g>
+                        </svg>
+
+                        <span class="sorting__text">{{sortBy}}</span>
+                        <svg class="bi bi-caret-down-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z" />
+                        </svg>
+                    </button>
+
+                    <div *ngIf="loadingDiscussions" class="spinner-border sort-spinner" role="status">
+
+                    </div>
+
+                    <div class="sorting__options" *ngIf="toggleSort">
+                        <ul class="sorting__list">
+                            <li class="sorting__item" (click)="sortDiscussions('HOT')">
+                                <button class="sorting__button">
+                                    <svg class="sorting__icon" viewBox="0 0 66 80" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                                        <title>noun_Flame_129549</title>
+                                        <desc>Created with Sketch.</desc>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="noun_Flame_129549" transform="translate(-6.000000, -7.000000)">
+                                                <rect id="Rectangle-25" x="0" y="0" width="78" height="94"></rect>
+                                                <path
+                                                    d="M58.47,30.559 L57.385,29.686 C56.107,28.658 54.173,29.05 53.468,30.531 C53.125,31.251 52.883,38.54 52.883,39.768 C52.883,40.016 52.831,40.423 52.837,40.466 C52.837,41.502 51.91,42.324 50.842,42.148 C50.002,42.01 49.428,41.213 49.424,40.362 C49.37,27.896 45.561,19.203 38.57,12.711 C34.295,8.741 29.24,5.235 27.693,7.972 C27.298,8.67 27.951,10.239 28.609,12.249 C30.071,16.72 25.61,23.86 19.304,30.995 C13.377,37.702 6,46.05 6,58.349 C6,70.389 14.296,81.646 25.444,86.889 C26.444,87.359 27.411,86.115 26.703,85.267 C24.255,82.334 22.847,78.504 23.047,74.34 C23.435,66.275 30.075,59.647 38.14,59.275 C47.244,58.854 54.758,66.111 54.758,75.123 C54.758,78.975 53.383,82.503 51.099,85.249 C50.38,86.114 51.313,87.374 52.331,86.896 C63.485,81.655 71.787,70.395 71.787,58.35 C71.787,47.898 66.808,37.509 58.47,30.559 Z"
+                                                    id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span [class.sort-active]="hot" class="sorting__text">HOT</span>
+
+                                </button>
+                            </li>
+                            <li class="sorting__item" (click)="sortDiscussions('NEW')">
+                                <button class="sorting__button">
+                                    <svg class="sorting__icon" viewBox="0 0 87 88" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="noun_new_258297" transform="translate(-6.000000, -6.000000)">
+                                                <rect id="Rectangle-26" x="0" y="0" width="99" height="99"></rect>
+                                                <path
+                                                    d="M93,49.475 C93,48.875 92.7,48.375 92.3,48.075 L82,40.775 L87.3,29.275 C87.5,28.775 87.5,28.175 87.2,27.675 C86.9,27.175 86.4,26.875 85.8,26.775 L73.2,25.675 L72.1,13.075 C72,12.475 71.7,11.975 71.2,11.675 C70.7,11.375 70.1,11.375 69.6,11.575 L58.1,16.875 L50.9,6.675 C50.2,5.775 48.7,5.775 48.1,6.675 L40.8,16.975 L29.3,11.675 C28.8,11.475 28.2,11.475 27.7,11.775 C27.2,12.075 26.9,12.575 26.8,13.175 L25.7,25.775 L13.1,26.875 C12.5,26.975 12,27.275 11.7,27.775 C11.4,28.275 11.4,28.875 11.6,29.375 L16.9,40.875 L6.7,48.075 C6.2,48.375 6,48.975 6,49.475 C6,49.975 6.3,50.575 6.7,50.875 L17,58.175 L11.7,69.675 C11.5,70.175 11.5,70.775 11.8,71.275 C12.1,71.775 12.6,72.075 13.2,72.175 L25.8,73.275 L26.9,85.875 C27,86.475 27.3,86.975 27.8,87.275 C28.3,87.575 28.9,87.575 29.4,87.375 L40.9,82.075 L48.2,92.375 C48.5,92.875 49.1,93.075 49.6,93.075 C50.2,93.075 50.7,92.775 51,92.375 L58.3,82.075 L69.8,87.375 C70.3,87.575 70.9,87.575 71.4,87.275 C71.9,86.975 72.2,86.475 72.3,85.875 L73.4,73.275 L86,72.175 C86.6,72.075 87.1,71.775 87.4,71.275 C87.7,70.775 87.7,70.175 87.5,69.675 L82.2,58.175 L92.5,50.875 C92.8,50.575 93,49.975 93,49.475 Z"
+                                                    id="Shape" fill="#B5B7B9" fill-rule="nonzero"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span [class.sort-active]="new" class="sorting__text">NEW</span>
+
+                                </button>
+                            </li>
+                            <li class="sorting__item" (click)="sortDiscussions('TOP')">
+                                <button class="sorting__button">
+                                    <svg class="sorting__icon" viewBox="0 0 64 75" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="Group-29" transform="translate(-6.000000, -6.000000)">
+                                                <rect id="Rectangle-27" x="0" y="0" width="76" height="88"></rect>
+                                                <rect id="Rectangle-15" fill="#4264d0" x="6" y="51" width="18"
+                                                    height="30" rx="3"></rect>
+                                                <rect id="Rectangle-15" fill="#4264d0" x="52" y="41" width="18"
+                                                    height="40" rx="3"></rect>
+                                                <g id="Group-30" transform="translate(22.000000, 6.000000)"
+                                                    fill="#B5B7B9">
+                                                    <path
+                                                        d="M25,25.622289 L25,72 C25,73.6568542 23.6568542,75 22,75 L10,75 C8.34314575,75 7,73.6568542 7,72 L7,25.622289 L2.36204465,25.622289 C1.49020407,25.622289 0.689053271,25.1551552 0.288477869,24.3843844 C-0.135660791,23.6369703 -0.0885342735,22.7027027 0.406294164,22.002002 L14.5442495,0.980980981 C15.4160901,-0.32699366 17.5839099,-0.32699366 18.4557505,0.980980981 L32.5937058,22.002002 C33.0885343,22.7027027 33.1356608,23.6369703 32.7115221,24.3843844 C32.3109467,25.1551552 31.5097959,25.622289 30.6379553,25.622289 L25,25.622289 Z"
+                                                        id="Combined-Shape"></path>
+                                                </g>
+                                                <g id="noun_Arrow_1966946" transform="translate(22.000000, 6.000000)">
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <span [class.sort-active]="top" class="sorting__text">TOP</span>
+
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="timeline-list" *ngIf="addCommentToggled">
+                <app-play-trivia-timeline-item *ngFor="let timeline of timelines" [timeline]="timeline" [trivia]="trivia"
+                    (deleteComment)="deleteComment($event)" [hideReplies]="false"></app-play-trivia-timeline-item> 
+            </div>
+
+            <div class="no-comments" *ngIf="timelines.length == 0 && !loadingDiscussions">
+                <svg class="no-comments__icon" width="79px" height="78px" viewBox="0 0 79 78" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+                    <title>comment</title>
+                    <desc>Created with Sketch.</desc>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="comment" transform="translate(-6.000000, -6.000000)">
+                            <rect id="Rectangle-22" x="0" y="0" width="91" height="90"></rect>
+                            <path
+                                d="M8.517,83.161 C8.167,83.161 7.816,83.089 7.485,82.94 C6.581,82.534 6,81.634 6,80.643 L6,28.518 C6,16.102 16.102,6 28.518,6 L62.331,6 C74.747,6 84.849,16.102 84.849,28.518 L84.849,43.518 C84.849,55.934 74.747,66.036 62.331,66.036 L28.764,66.036 L10.189,82.526 C9.718,82.943 9.121,83.161 8.517,83.161 Z M29.0091478,12.036 C19.6491899,12.036 12.035,19.5369093 12.035,28.7554818 L12.035,73.2492727 L26.7351829,60.3954896 C27.2051227,59.9842451 27.8148793,59.7681026 28.4440549,59.789143 C28.5625108,59.7939249 28.6790248,59.801576 28.7965098,59.8092271 C28.8673891,59.8149654 28.9382685,59.82166 29.0101188,59.82166 L61.840851,59.82166 C71.2008089,59.82166 78.8149988,52.3207508 78.8149988,43.1021782 L78.8149988,28.7564382 C78.8149988,19.5369093 71.199838,12.0369564 61.840851,12.0369564 L29.0091478,12.0369564 L29.0091478,12.036 Z"
+                                id="Shape" fill="#A2A4A6" fill-rule="nonzero"
+                                transform="translate(45.424500, 44.580500) scale(-1, 1) translate(-45.424500, -44.580500) ">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+                <span class="no-comments__header">No Comments Yet</span>
+                <span class="no-comments__opinion">Be the first to leave an opinion!</span>
+            </div>
+
+            <div class="spinner-container" *ngIf="showInfiniteSpinner">
+                <div class="spinner-border" role="status">
+                </div>
+            </div>
+
+            <div *ngIf="enableInfinite" class="search-results" infiniteScroll [infiniteScrollDistance]="1.5"
+                [infiniteScrollThrottle]="150" (scrolled)="doInfinite()"></div>
+
+
+        </div>

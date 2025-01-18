@@ -1,0 +1,13 @@
+<div class="foll-item">
+    <img class="profile-pic" [src]="user?.profilePictureThumbnail" alt="" (click)="goToUser($event)">
+    <div class="user-text">
+        <span class="foll-username" (click)="goToUser($event)">{{user?.username}}</span>
+        <span class="bio">{{user.bio}}</span>
+    </div>
+   
+    <button [class.follow]="!user.provFollowing" [class.following]="user.provFollowing" (click)="followUser($event)">
+        <span *ngIf="!user.provFollowing && !user.loadingFollow">Follow</span>
+        <span *ngIf="user.provFollowing && !user.loadingFollow">Following</span>
+        <span *ngIf="user.loadingFollow">Loading..</span>
+    </button> 
+</div>

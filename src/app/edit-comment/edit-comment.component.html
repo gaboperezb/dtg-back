@@ -1,0 +1,29 @@
+<div class="edit-container" (click)="$event.stopPropagation()">
+    <div class="edit">
+        <div class="add-comment-container">
+            <div class="add-comment" [class.focused]="textareaFocused">
+                <div class="add-comment__textarea-container">
+    
+                    <div class="mid-textarea">
+                        <textarea autofocus [(ngModel)]="comment"
+                            class="add-comment__textarea" placeholder="Add a comment" id="" rows="10" [ngModelOptions]="{standalone:
+                                true}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="send-comment">
+            <button class="cancel-comment__button" (click)="destroy($event)"><span
+                >Cancel</span></button>
+            <button *ngIf="!editingComment" class="send-comment__button" (click)="editDiscussion($event)"><span
+                    [class.disabled]="comment.length == 0">Save changes</span></button>
+            <button *ngIf="editingComment" class="send-comment__button loading-button" type="button" disabled>
+                <div class="spinner-border" role="status">
+    
+                </div>
+            </button>
+        </div>
+    </div>
+
+</div>

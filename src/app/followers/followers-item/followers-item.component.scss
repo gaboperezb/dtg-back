@@ -1,0 +1,105 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+
+.profile-pic {
+    -o-object-fit: cover;
+       object-fit: cover;
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-right: 15px;
+    cursor: pointer;
+
+}
+
+.user-text {
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+}
+
+.follow {
+    color: #4061d3;
+    border-radius: 50px;
+    border: 1px solid #4061d3;
+    padding: 5px 12px;
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.follow:hover {
+    background: rgba(64, 97, 211, 0.31);
+}
+
+.bio {
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: #696868;
+    margin-right: 16px;
+    word-break: break-word;
+}
+
+.following {
+    
+    color: white;
+    border-radius: 50px;
+    background: #4061d3;
+    border: 1px solid #4061d3;
+    padding: 5px 12px;
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.foll-username {
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.foll-username:hover {
+    text-decoration: underline;
+}
+
+.foll-item {
+    border-bottom: 1px solid #edeff1;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    /* height: 60px; */
+    padding: 10px 0;
+
+    width: 100%;
+}
+
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+

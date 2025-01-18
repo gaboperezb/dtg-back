@@ -1,0 +1,361 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+$base-blue: #4264d0;
+$base-gray: #7c7c7c;
+$base-black:#121111;
+
+h1 {
+    margin-bottom: 50px;
+}
+
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+ }
+
+
+.main-container {
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    padding-top: 30px;
+}
+
+.info-header {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.info {
+    background: white;
+    width: 20%;
+    padding: 16px;
+    border-radius: 5px;
+}
+
+.info-li {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+.settings-container {
+
+
+    width: 40%;
+    padding-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    
+
+    .settings-item {
+        display: -webkit-box;
+display: -ms-flexbox; display: flex;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        font-size: 1.6rem;
+        margin-bottom: 40px;
+
+        .settings-item__text {
+            display: -webkit-box;
+display: -ms-flexbox; display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+        }
+
+        .settings-item__header {
+          
+            font-size: 1.7rem;
+            font-weight: bold;
+
+        }
+
+        .settings-item__description {
+           
+            font-size: 1.5rem;
+            color: rgb(157, 157, 157);
+           
+        }
+
+        .settings-item__pfp {
+            height: 70px;
+            width: 70px;
+            -o-object-fit: cover;
+               object-fit: cover;
+            border-radius: 50px;
+            margin-top: 10px;
+        }
+
+        .settings-item__cover {
+            height: 100px;
+            width: 250px;
+            -o-object-fit: cover;
+               object-fit: cover;
+            margin-top: 10px;
+            border-radius: 5px;
+            object-position: top;
+        }
+
+    }
+    
+}
+
+.logout {
+    margin-top: 90px;
+}
+
+
+
+.change__button {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    line-height: 32px;
+    text-transform: uppercase;
+    padding: 2px 16px;
+    text-align: center;
+    background: $base-blue;
+    border-radius: 5px;
+    color: white !important;
+    height: 38px;
+    margin-left: 45px;
+
+}
+
+.change__button--red {
+   
+    background: rgb(240, 70, 70);
+   
+
+}
+
+.change__button:hover {
+    opacity: .6;
+
+}
+
+button {
+    background: none;
+color: inherit;
+border: none;
+padding: 0;
+font: inherit;
+cursor: pointer;
+outline: inherit;
+}
+
+
+
+
+//modify
+
+.count-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.form-control {
+    margin-top: 15px;
+    font-size: 1.5rem;
+}
+
+#user-pic {
+    height: 82px;
+    width: 82px;
+    -o-object-fit: cover;
+       object-fit: cover;
+    border-radius: 50px;
+}
+
+.inputfile {
+    display: none;
+}
+
+
+#label-profile-picture:hover {
+    background: #93a8ec;
+}
+
+#label-profile-picture {
+
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    line-height: 32px;
+    text-transform: uppercase;
+    padding: 2px 16px;
+    text-align: center;
+    background: $base-blue;
+    border-radius: 5px;
+    color: white !important;
+    height: 38px;
+    cursor: pointer;
+    width: 180px;
+    margin-top: 20px;
+    margin: 20px auto;
+}
+
+.back-icon {
+    font-size: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .go-back {
+   
+    height: 30px;
+    font-size: 1.5rem;
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    padding: 0 10px;
+    border-bottom: 1px solid #EDEFF1; ;
+  
+    margin-bottom: 16px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+
+
+  .back-container {
+      display: -webkit-box;
+display: -ms-flexbox; display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+  }
+
+.done {
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.league {
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+
+.actions {
+    display: -webkit-box;
+display: -ms-flexbox; display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.photo-container {
+    text-align: center;
+    padding: 16px;
+
+}
+
+.line {
+    height: 1px;
+    background: #e4e4e4;
+    margin-top: 16px;
+}
+
+
+.cover-photo {
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    padding-top: 40%;
+    border: 1px dashed #d8d8d8;
+ 
+}
+
+
+
+.tell, .dont {
+    margin: 0 16px;
+    display: inline-block;
+}
+
+.dont {
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+
+.current-username-helper {
+    font-weight: 600;
+    margin-bottom: 7px;
+    display: inline-block;
+}
+
+.old {
+    padding: 16px 0;
+    font-size: 1.4rem;
+}
+
+
+@media (max-width: 800px) { 
+
+    .main-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0px;
+        flex-direction: column;
+    }
+
+    .settings-container, .info {
+        width: 100%;
+        border-radius: 0px;
+
+    }
+
+    .settings-item {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .change__button {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    
+}
+
+
+

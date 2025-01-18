@@ -1,0 +1,215 @@
+<div class="main-container">
+
+    <div class="settings-container" *ngIf="!selection">
+        <h1>Account Settings</h1>
+        <ul class="settings-ul">
+            <li class="settings-item">
+                <div class="settings-item__text">
+                    <span class="settings-item__header">Avatar</span>
+                    <img class="settings-item__pfp" [src]="authService.currentUser.profilePicture" alt="">
+                    <div class="photo-container" *ngIf="action == 'profile'">
+                        <img [src]="profilePicture" alt="" id="user-pic">
+                        <input (change)="onChange($event)" id="file" type="file" class="form-control-file inputfile" />
+                        <label id="label-profile-picture" for="file">
+                            <span>Select profile picture</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button class="change__button" (click)="change('profile')">
+                    Edit
+                </button>
+            </li>
+            <li class="settings-item">
+                <div class="settings-item__text">
+                    <span class="settings-item__header">Cover photo</span>
+                    <img class="settings-item__cover" [src]="authService.currentUser.coverPhoto" alt="">
+                </div>
+                
+                <button class="change__button" (click)="change('cover')">
+                    Edit
+                </button>
+            </li>  
+            <li class="settings-item">
+                <div class="settings-item__text">
+                    <span class="settings-item__header">My leagues/sports</span>
+                    <span class="settings-item__description">Choose your favorite leagues so we can know what to show you</span>
+                </div>
+                
+                <button class="change__button" (click)="goAccess()">
+                    Edit
+                </button>
+            </li>  
+            <li class="settings-item">
+                <div class="settings-item__text">
+                    <span class="settings-item__header">Bio/Page description</span>
+                    <span class="settings-item__description">{{authService.currentUser.bio}}</span>
+                </div>
+                
+                <button class="change__button" (click)="change('bio')">
+                    Edit
+                </button>
+            </li>
+            
+            <li class="settings-item">
+                <div class="settings-item__text">
+                    <span class="settings-item__header">Username</span>
+                    <span class="settings-item__description">{{authService.currentUser.username}}</span>
+                </div>
+                
+                <button class="change__button" (click)="change('username')">
+                    Edit
+                </button>
+            </li>  
+            <li class="settings-item">
+                <div class="settings-item__text">
+                    <span class="settings-item__header">Password</span>
+                    <span class="settings-item__description">Password must be at least 6 characters long
+
+                    </span>
+                </div>
+                
+                <button class="change__button" (click)="change('password')">
+                    Edit
+                </button>
+            </li> 
+            
+            <li class="settings-item logout">
+                <div class="settings-item__text">
+                    <span class="settings-item__header">Sign out</span>
+                 
+                </div>
+                
+                <button class="change__button change__button--red" (click)="signout()">
+                    Sign out
+                </button>
+            </li>  
+        </ul>
+    </div>
+
+
+    <div class="settings-container" *ngIf="selection">
+
+        <div class="actions">
+            <div class="back-container">
+                <button (click)="goBack()">
+                    <svg class="bi bi-arrow-left-short back-icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                      </svg>
+                </button>
+                
+                
+            </div>
+            
+            <span *ngIf="!waiting" class="done" (click)="submit()">DONE</span>
+            <div *ngIf="waiting"  class="spinner-border" role="status">
+
+            </div>
+        </div>
+        <!-- Profile Picture -->
+
+        <div class="photo-container" *ngIf="action == 'profile'">
+            <img [src]="profilePicture" alt="" id="user-pic">
+            <input (change)="onChange($event)" id="file" type="file" class="form-control-file inputfile" />
+            <label id="label-profile-picture" for="file">
+                <span>Choose</span>
+            </label>
+        </div>
+
+        <!-- Cover Photo -->
+
+	<div class="photo-container" *ngIf="action == 'cover'">
+		<div class="cover-photo" [ngStyle]="coverPhoto"></div>
+		<input (change)="onChange($event)" id="cover-file" type="file" accept="image/*" class="form-control-file inputfile" />
+		<label id="label-profile-picture" for="cover-file">
+			<span>Choose</span>
+		</label>
+    </div>
+    
+    <!-- Bio -->
+
+    <div class="bio-div" *ngIf="action == 'bio'">
+		<div class="bio-list">
+			<div class="form-group">
+				<label color="primary" position="stacked" class="count-title">{{count}}</label>
+				<input autocapitalize="on" (keyup)="wordCount()" class="form-control" (keydown)="wordCount()" [ngModelOptions]="{standalone: true}"
+					placeholder="Bio/Page description" [(ngModel)]="bio" [attr.maxlength]=150>
+            </div>
+			
+		</div>
+    </div>
+    
+
+    <!-- Bio -->
+
+    <div class="" *ngIf="action == 'username'">
+        <div  class="username-list">
+            <div class="old">
+                    <span class="current-username-helper">Current</span>
+                    <br>
+                    <span class="current-username">{{this.authService.currentUser.username}}</span>
+            </div>
+            
+            <div class="form-group">
+                <label color="primary" position="stacked" class="count-title">New (You can only change it once every two months)</label>
+                <input type="email" placeholder="New username" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="username" [attr.maxlength]=20 class="form-control">
+            </div>
+            
+        </div>
+</div>
+
+
+<!-- Change Password -->
+
+<div class="" *ngIf="action == 'password'">
+    <div>
+        <div class="form-group">
+            <input [ngModelOptions]="{standalone: true}" type="password" placeholder="Current password"
+                [(ngModel)]="currentPassword" class="form-control">
+        </div>
+        <div class="form-group">
+            <input [ngModelOptions]="{standalone: true}" type="password" placeholder="New password"
+                [(ngModel)]="newPassword" class="form-control">
+        </div>
+        <div class="form-group">
+            <input [ngModelOptions]="{standalone: true}" type="password" placeholder="Confirm password"
+                [(ngModel)]="confirmPassword" class="form-control">
+        </div>
+    </div>
+</div>
+
+
+
+    </div>
+
+    <section class="info">
+
+        <span class="info-header">Information</span>
+        <ul class="info-ul">
+            <li class="info-li">
+                <a (click)="levelsInfo()" class="info-a">Levels</a>
+            </li>
+            <li class="info-li">
+                <a routerLink="/legal/guidelines" class="info-a">Community guidelines</a>
+            </li>
+            <li class="info-li">
+                <a routerLink="/legal/rules" class="info-a">Posting Rules</a>
+            </li>
+            <li class="info-li">
+                <a routerLink="/legal/terms-of-use" class="info-a">Terms of use</a>
+            </li>
+            <li class="info-li">
+                <a routerLink="/legal/privacy-policy" class="info-a">Privacy Policy</a>
+            </li>
+            <li class="info-li">
+                <a href="mailto:support@discussthegame.com?Subject=Contact" target="_top" class="info-a">Contact</a>
+            </li>
+            <li class="info-li">
+                <a href="mailto:support@discussthegame.com?Subject=Bug" target="_top" class="info-a">Report a bug</a>
+            </li>
+        </ul>
+    </section>
+
+</div>

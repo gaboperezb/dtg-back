@@ -1,0 +1,97 @@
+li {
+    background: white;
+    margin-bottom: 15px;
+    
+}
+
+.team-form {
+    padding: 20px;
+}
+
+.main {
+    position: relative;
+    cursor: pointer;
+    padding: 20px 0;
+    font-size: 20px;
+
+}
+
+li:hover {
+    -moz-box-shadow: 0 2px 0  #18399B;
+    -webkit-box-shadow: 0 2px 0 #18399B;
+    box-shadow: 0 2px 0px  #18399B;
+}
+
+.team-pic {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+    margin: 5px 20px 5px 8px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.fa-angle-down, .fa-angle-up {
+    position: absolute;
+    right: 20px;
+    top: 22px;
+    font-size: 25px;
+    color: #949494;
+    
+}
+
+.inner-no {
+    background: #4264d0;
+    width: 20px;
+    height: 20px;
+    display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox; display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    padding: 13px;
+    font-size: 14px;
+    color: white;
+
+}
+
+.active {
+    background: #19b82b;
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-right: 5px;
+
+}
+
+.trivia-league, .active-text, .inactive-text {
+    display: block;
+    font-size: 14px;
+}
+
+.trivia-league {
+    color: rgb(147, 147, 147);
+}
+
+.active-text {
+    color: #19b82b;
+}
+
+.inactive-text {
+    color: #e6302d;
+}
+
+
+.inactive {
+    display: inline-block;
+    background: #e6302d;
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    margin-right: 5px;
+
+}

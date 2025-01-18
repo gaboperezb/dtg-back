@@ -1,0 +1,45 @@
+<div class="user">
+        <div class="user__picture">
+            <img alt="" [src]="user.profilePicture">
+            <span class="username">{{user.username}}</span>
+            <div class="block">
+                <button id="account" [class.block-btn]="true" [class.blocked]="user.blocked" (click)="blockAccount()">
+                    <span *ngIf="!loadingAccount">{{blockedAccount}}</span>
+                    <i *ngIf="loadingAccount" class="fa fa-spinner fa-pulse fa-fw"></i>
+                </button>
+                <button [class.block-btn]="true" [class.blocked]="user.blockedIP" (click)="posts()">
+                    <span >Posts</span>
+                
+                </button>
+                <button [class.block-btn]="true" (click)="comments()">
+                    <span>Comments</span>
+                
+                </button>
+                <button [class.block-btn]="true"(click)="replies()">
+                    <span>Replies</span>
+                </button>
+            </div>
+        </div>
+        <div class="user__info">
+            <div class="user__leagues user__info__item">
+                <span class="user__league" *ngIf="user.leagues.length == 0">-</span>
+                <span *ngFor="let league of user.leagues" class="user__league">{{league}}</span>
+            </div>
+            <div class="user__info__item">
+                {{user.totalPoints}} PTS
+            </div>
+            <div class="user__info__item">
+                Level {{user.badge.level}}
+            </div>
+            <div class="user__info__item">
+                {{user.timeSpent.timeSpent}} hours spent on the app.
+            </div>
+            <div class="user__info__item">
+                {{user.versionNumber}} app version.
+            </div>
+            <div class="user__info__item">
+                {{user.email}}
+            </div>
+        </div>
+    
+    </div>

@@ -1,0 +1,1 @@
+web: node dist/dtg-web/server/main.js

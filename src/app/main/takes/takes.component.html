@@ -1,0 +1,139 @@
+<div  *ngIf="takeService.loaderActive" class="placeholders">    
+    <div class="placeholder-item">
+        <div class="placeholder-flex">
+            <div class="skeleton-image">
+
+            </div>
+            <div class="skeleton-image-right">
+                <div class="skeleton-username skeleton-username-1">
+                </div>
+                <div class="skeleton-username skeleton-username-2">
+                </div>
+            </div>
+        </div>
+        <div class="container-title">
+            <div class="placeholder-title placeholder-title-1">
+            </div>
+
+            <div class="placeholder-title placeholder-title-2">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="placeholder-item">
+        <div class="placeholder-flex">
+            <div class="skeleton-image">
+
+            </div>
+            <div class="skeleton-image-right">
+                <div class="skeleton-username skeleton-username-1">
+                </div>
+                <div class="skeleton-username skeleton-username-2">
+                </div>
+            </div>
+        </div>
+        <div class="container-title">
+            <div class="placeholder-title placeholder-title-1">
+            </div>
+
+            <div class="placeholder-title placeholder-title-2">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="placeholder-item">
+        <div class="placeholder-flex">
+            <div class="skeleton-image">
+
+            </div>
+            <div class="skeleton-image-right">
+                <div class="skeleton-username skeleton-username-1">
+                </div>
+                <div class="skeleton-username skeleton-username-2">
+                </div>
+            </div>
+        </div>
+        <div class="container-title">
+            <div class="placeholder-title placeholder-title-1">
+            </div>
+
+            <div class="placeholder-title placeholder-title-2">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="placeholder-item">
+        <div class="placeholder-flex">
+            <div class="skeleton-image">
+            </div>
+            <div class="skeleton-image-right">
+                <div class="skeleton-username skeleton-username-1">
+                </div>
+                <div class="skeleton-username skeleton-username-2">
+                </div>
+            </div>
+        </div>
+        <div class="container-title">
+            <div class="placeholder-title placeholder-title-1">
+            </div>
+
+            <div class="placeholder-title placeholder-title-2">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="placeholder-item">
+        <div class="placeholder-flex">
+            <div class="skeleton-image">
+
+            </div>
+            <div class="skeleton-image-right">
+                <div class="skeleton-username skeleton-username-1">
+                </div>
+                <div class="skeleton-username skeleton-username-2">
+                </div>
+            </div>
+        </div>
+        <div class="container-title">
+            <div class="placeholder-title placeholder-title-1">
+            </div>
+
+            <div class="placeholder-title placeholder-title-2">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="placeholder-item">
+        <div class="placeholder-flex">
+            <div class="skeleton-image">
+
+            </div>
+            <div class="skeleton-image-right">
+                <div class="skeleton-username skeleton-username-1">
+                </div>
+                <div class="skeleton-username skeleton-username-2">
+                </div>
+            </div>
+        </div>
+        <div class="container-title">
+            <div class="placeholder-title placeholder-title-1">
+            </div>
+
+            <div class="placeholder-title placeholder-title-2">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="!takeService.loaderActive && takeService.takesToggled" class="takes-container">
+    <app-take *ngFor="let take of takeService.takes; let i = index" [take]="take" [i]="i" (deleteTakeEmitter)="deleteTake($event)"></app-take>
+</div>
+
+
